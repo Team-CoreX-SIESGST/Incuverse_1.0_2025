@@ -128,7 +128,7 @@ export function Navbar() {
     { href: "/contact", label: "Contact" },
     ...(isAuthenticated
       ? [
-          { href: "/chat", label: "Agent" },
+          { href: "/chat", label: "Agent", newTab: true }, // Added newTab property
           { href: "/subscriptions", label: "Subscriptions" },
         ]
       : []),
@@ -166,36 +166,74 @@ export function Navbar() {
 
   const createDesktopNavLinks = () =>
     navLinks.map((link) =>
-      React.createElement(
-        Link,
-        {
-          key: link.href,
-          href: link.href,
-          className: `px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-            pathname === link.href
-              ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
-              : "text-slate-600 dark:text-slate-300 hover:bg-slate-900/5 dark:hover:bg-slate-100/5 hover:text-slate-900 dark:hover:text-slate-100"
-          }`,
-        },
-        link.label
-      )
+      link.newTab
+        ? // For links that should open in new tab, use regular <a> tag
+          React.createElement(
+            "a",
+            {
+              key: link.href,
+              href: link.href,
+              target: "_blank",
+              rel: "noopener noreferrer",
+              className: `px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                pathname === link.href
+                  ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+                  : "text-slate-600 dark:text-slate-300 hover:bg-slate-900/5 dark:hover:bg-slate-100/5 hover:text-slate-900 dark:hover:text-slate-100"
+              }`,
+            },
+            link.label
+          )
+        : // For regular links, use Next.js Link
+          React.createElement(
+            Link,
+            {
+              key: link.href,
+              href: link.href,
+              className: `px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                pathname === link.href
+                  ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+                  : "text-slate-600 dark:text-slate-300 hover:bg-slate-900/5 dark:hover:bg-slate-100/5 hover:text-slate-900 dark:hover:text-slate-100"
+              }`,
+            },
+            link.label
+          )
     );
 
   const createMobileNavLinks = () =>
     navLinks.map((link) =>
-      React.createElement(
-        Link,
-        {
-          key: link.href,
-          href: link.href,
-          className: `block px-3 py-2 rounded-md text-base font-medium transition-colors ${
-            pathname === link.href
-              ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
-              : "text-slate-600 dark:text-slate-300 hover:bg-slate-900/5 dark:hover:bg-slate-100/5"
-          }`,
-        },
-        link.label
-      )
+      link.newTab
+        ? // For mobile links that should open in new tab
+          React.createElement(
+            "a",
+            {
+              key: link.href,
+              href: link.href,
+              target: "_blank",
+              rel: "noopener noreferrer",
+              className: `block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                pathname === link.href
+                  ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+                  : "text-slate-600 dark:text-slate-300 hover:bg-slate-900/5 dark:hover:bg-slate-100/5"
+              }`,
+              onClick: () => setIsMobileMenuOpen(false),
+            },
+            link.label
+          )
+        : // For regular mobile links
+          React.createElement(
+            Link,
+            {
+              key: link.href,
+              href: link.href,
+              className: `block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                pathname === link.href
+                  ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+                  : "text-slate-600 dark:text-slate-300 hover:bg-slate-900/5 dark:hover:bg-slate-100/5"
+              }`,
+              onClick: () => setIsMobileMenuOpen(false),
+            },
+            link.label
+          )
     );
 
   const handleLogout = () => {
