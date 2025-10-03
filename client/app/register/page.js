@@ -178,7 +178,7 @@ export default function RegisterPage() {
       <div className="relative min-h-screen overflow-hidden bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-4 pt-16">
         <Navbar />
         <div
-          className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_45rem_at_50%_50%,_theme(colors.indigo.100),_transparent_80%)] dark:bg-[radial-gradient(45rem_45rem_at_50%_50%,_theme(colors.indigo.950/40%),_transparent_80%)]"
+          className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_45rem_at_50%_50%,_theme(colors.emerald.100),_transparent_80%)] dark:bg-[radial-gradient(45rem_45rem_at_50%_50%,_theme(colors.emerald.950/40%),_transparent_80%)]"
           aria-hidden="true"
         />
 
@@ -190,7 +190,7 @@ export default function RegisterPage() {
         >
           <motion.div variants={FADE_IN_UP_VARIANTS} className="text-center">
             <div className="inline-flex justify-center mb-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-cyan-500 rounded-2xl flex items-center justify-center shadow-lg">
+              <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-green-500 rounded-2xl flex items-center justify-center shadow-lg">
                 <Sparkles className="w-8 h-8 text-white" />
               </div>
             </div>
@@ -312,7 +312,7 @@ export default function RegisterPage() {
               <button
                 type="submit"
                 disabled={isLoading || !isFormValid}
-                className="group relative w-full inline-flex items-center justify-center px-6 py-3 mt-4 text-base font-semibold text-white bg-slate-900 rounded-full hover:bg-slate-800 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-200 transition-all duration-300 shadow-lg disabled:bg-slate-400 dark:disabled:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-60"
+                className="group relative w-full inline-flex items-center justify-center px-6 py-3 mt-4 text-base font-semibold text-white bg-emerald-600 rounded-full hover:bg-emerald-700 dark:bg-emerald-500 dark:text-white dark:hover:bg-emerald-600 transition-all duration-300 shadow-lg disabled:bg-emerald-400 dark:disabled:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {isLoading ? (
                   <>
@@ -349,7 +349,6 @@ export default function RegisterPage() {
                 className="w-full inline-flex justify-center items-center py-2.5 px-4 rounded-lg shadow-sm bg-white dark:bg-slate-800 text-sm font-medium text-slate-600 dark:text-slate-300 ring-1 ring-inset ring-slate-900/10 dark:ring-slate-100/10 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors duration-200"
               >
                 <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
-                  {/* Google SVG paths */}
                   <path
                     fill="currentColor"
                     d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -377,7 +376,7 @@ export default function RegisterPage() {
               Already have an account?{" "}
               <Link
                 href="/login"
-                className="font-semibold text-indigo-600 dark:text-indigo-400 hover:text-emerald-500 dark:hover:text-indigo-300 transition-colors duration-200"
+                className="font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 dark:hover:text-emerald-300 transition-colors duration-200"
               >
                 Sign in
               </Link>
