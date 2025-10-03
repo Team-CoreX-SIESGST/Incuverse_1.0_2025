@@ -38,7 +38,7 @@ export default function FeaturesPage() {
           className="max-w-7xl mx-auto px-6 lg:px-8 space-y-20 sm:space-y-24"
         >
           {/* Hero Section */}
-          <motion.div variants={FADE_IN_UP_VARIANTS} className="text-center">
+          {/* <motion.div variants={FADE_IN_UP_VARIANTS} className="text-center">
             <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-slate-100/5 ring-1 ring-inset ring-slate-100/10 mb-8 backdrop-blur-lg">
               <Sparkles className="w-4 h-4 text-indigo-400 mr-2" />
               <span className="text-sm font-medium text-slate-300">
@@ -52,7 +52,7 @@ export default function FeaturesPage() {
               Everything you need to build amazing applications and streamline
               your workflow with next-generation technology.
             </p>
-          </motion.div>
+          </motion.div> */}
 
           {/* Features Component Section */}
           <motion.div variants={FADE_IN_UP_VARIANTS}>

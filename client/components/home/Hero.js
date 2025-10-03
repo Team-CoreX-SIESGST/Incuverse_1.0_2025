@@ -14,8 +14,10 @@ import {
   Video,
   Database,
   Rocket,
+  Scale,
+  Gavel,
+  BookOpen,
 } from "lucide-react";
-import { useAuth } from "@/components/auth/AuthProvider";
 
 // Animation variants for Framer Motion
 const FADE_IN_STAGGER_VARIANTS = {
@@ -39,23 +41,23 @@ export function Hero() {
   const features = [
     {
       icon: Search,
-      title: "Multi-Modal Search",
-      description: "Search across text, images, and documents simultaneously.",
+      title: "Legal Document Search",
+      description: "Find relevant case laws and precedents in seconds.",
     },
     {
       icon: Zap,
-      title: "Lightning Fast Analysis",
-      description: "Get insights from your data in seconds, not hours.",
+      title: "AI-Powered Analysis",
+      description: "Get instant insights from complex legal documents.",
     },
     {
       icon: Shield,
-      title: "Secure & Private",
-      description: "Your data remains yours with on-device processing.",
+      title: "Confidential & Secure",
+      description: "Enterprise-grade security for sensitive legal data.",
     },
     {
       icon: Database,
-      title: "Google Drive Integration",
-      description: "Connect your drive for seamless document analysis.",
+      title: "Case Law Database",
+      description: "Access millions of legal documents and rulings.",
     },
   ];
 
@@ -72,7 +74,7 @@ export function Hero() {
     <div className="relative overflow-hidden bg-slate-50 dark:bg-slate-950">
       {/* Background decorative elements */}
       <div
-        className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_45rem_at_50%_50%,_theme(colors.indigo.100),_transparent_80%)] dark:bg-[radial-gradient(45rem_45rem_at_50%_50%,_theme(colors.indigo.950/40%),_transparent_80%)]"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_45rem_at_50%_50%,_theme(colors.emerald.100),_transparent_80%)] dark:bg-[radial-gradient(45rem_45rem_at_50%_50%,_theme(colors.emerald.950/40%),_transparent_80%)]"
         aria-hidden="true"
       />
 
@@ -86,9 +88,9 @@ export function Hero() {
           {/* Badge */}
           <motion.div variants={FADE_IN_UP_VARIANTS}>
             <div className="inline-flex items-center px-3 py-1.5 rounded-full bg-slate-900/5 dark:bg-slate-100/5 ring-1 ring-inset ring-slate-900/10 dark:ring-slate-100/10 mb-8 backdrop-blur-lg">
-              <Sparkles className="w-4 h-4 text-indigo-500 mr-2" />
+              <Scale className="w-4 h-4 text-emerald-500 mr-2" />
               <span className="text-sm font-medium text-slate-800 dark:text-slate-200">
-                AI-Powered Multi-Modal Search
+                AI-Powered Legal Research Platform
               </span>
             </div>
           </motion.div>
@@ -98,10 +100,10 @@ export function Hero() {
             variants={FADE_IN_UP_VARIANTS}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 dark:text-slate-50 mb-6"
           >
-            Search Across Everything
+            Revolutionize Your
             <br />
-            <span className="bg-gradient-to-r from-indigo-500 to-cyan-500 bg-clip-text text-transparent">
-              Text, Images, PDFs & More
+            <span className="bg-gradient-to-r from-emerald-500 to-green-500 bg-clip-text text-transparent">
+              Legal Research
             </span>
           </motion.h1>
 
@@ -110,15 +112,14 @@ export function Hero() {
             variants={FADE_IN_UP_VARIANTS}
             className="text-lg sm:text-xl text-slate-600 dark:text-slate-400 mb-8 max-w-3xl mx-auto"
           >
-            Connect your Google Drive and unlock powerful AI search across all
-            your documents, images, and files. Get instant answers, summaries,
-            and insights from your multi-format data.
+            Leverage cutting-edge AI to analyze case laws, statutes, and legal documents. 
+            Get instant insights, precedents, and arguments to strengthen your legal strategy.
           </motion.p>
 
           {/* Feature Carousel */}
           <motion.div variants={FADE_IN_UP_VARIANTS} className="mb-10 h-16">
             <div className="inline-flex items-center px-4 py-2.5 rounded-xl bg-white/60 dark:bg-slate-900/60 backdrop-blur-lg ring-1 ring-slate-900/5 dark:ring-slate-100/10 shadow-lg">
-              <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-cyan-500 rounded-lg flex items-center justify-center mr-3 shrink-0">
+              <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-green-500 rounded-lg flex items-center justify-center mr-3 shrink-0">
                 <CurrentFeatureIcon className="w-4 h-4 text-white" />
               </div>
               <div className="text-left">
@@ -132,12 +133,12 @@ export function Hero() {
             </div>
           </motion.div>
 
-          {/* File Type Icons */}
+          {/* Legal Document Icons */}
           <motion.div
             variants={FADE_IN_UP_VARIANTS}
             className="flex justify-center items-center mb-10 gap-4 sm:gap-6"
           >
-            {[FileText, Image, Video, Database].map((Icon, i) => (
+            {[Gavel, BookOpen, FileText, Scale].map((Icon, i) => (
               <div
                 key={i}
                 className="p-3 bg-slate-200/50 dark:bg-slate-800/50 rounded-lg ring-1 ring-inset ring-slate-900/5 dark:ring-slate-100/10"
@@ -151,10 +152,10 @@ export function Hero() {
           <motion.div variants={FADE_IN_UP_VARIANTS} className="mb-16">
             <Link
               href="/register"
-              className="group relative inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white bg-slate-900 rounded-full hover:bg-slate-800 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-200 transition-all duration-300 shadow-lg"
+              className="group relative inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white bg-emerald-600 rounded-full hover:bg-emerald-700 dark:bg-emerald-500 dark:text-white dark:hover:bg-emerald-600 transition-all duration-300 shadow-lg"
             >
               <Rocket className="w-4 h-4 mr-2" />
-              Connect Your Drive
+              Start Free Trial
               <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform duration-200" />
             </Link>
           </motion.div>
@@ -165,10 +166,10 @@ export function Hero() {
             className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto w-full"
           >
             {[
-              { value: "10x", label: "Faster Research" },
-              { value: "100+", label: "File Formats" },
+              { value: "10M+", label: "Case Laws" },
+              { value: "50x", label: "Faster Research" },
               { value: "AI", label: "Powered Analysis" },
-              { value: "0", label: "Setup Hassle" },
+              { value: "99.9%", label: "Accuracy Rate" },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
                 <div className="text-3xl font-semibold text-slate-900 dark:text-white mb-1">

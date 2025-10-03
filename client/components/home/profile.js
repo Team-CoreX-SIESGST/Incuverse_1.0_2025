@@ -25,6 +25,9 @@ import {
   Upload,
   Check,
   AlertCircle,
+  Gavel,
+  Scale,
+  BookOpen,
 } from "lucide-react";
 
 export default function ProfilePage() {
@@ -34,30 +37,35 @@ export default function ProfilePage() {
     username: "",
     email: "",
     avatar: "",
+    barNumber: "",
+    practiceArea: "general",
+    firmName: "",
 
-    // Chat Settings
-    model: "gpt-4",
-    temperature: 0.7,
-    maxTokens: 2048,
-    systemPrompt: "You are a helpful AI assistant.",
-    conversationMemory: true,
+    // Research Settings
+    model: "legal-ai-pro",
+    jurisdiction: "federal",
+    citationStyle: "bluebook",
+    caseDepth: "comprehensive",
     autoSave: true,
+    legalUpdates: true,
 
     // Appearance
     theme: "system",
     fontSize: "medium",
-    chatBubbleStyle: "modern",
-    showTimestamps: true,
+    researchView: "detailed",
+    showCitations: true,
 
     // Privacy & Security
     dataRetention: "30days",
     analyticsEnabled: false,
-    shareConversations: false,
+    shareResearch: false,
+    clientDataProtection: true,
 
     // Notifications
     soundEnabled: true,
     desktopNotifications: false,
     emailNotifications: true,
+    caseAlerts: true,
   });
 
   const [activeSection, setActiveSection] = useState("profile");
@@ -68,11 +76,10 @@ export default function ProfilePage() {
   const [saveSuccess, setSaveSuccess] = useState(false);
   const fileInputRef = useRef(null);
 
-  // Client-side initialization - matching navbar pattern
+  // Client-side initialization
   useEffect(() => {
     setIsClient(true);
 
-    // Restore local user + token
     try {
       const userData = localStorage.getItem("user");
       if (userData) {
@@ -89,7 +96,6 @@ export default function ProfilePage() {
     }
     setHasToken(!!localStorage.getItem("token"));
 
-    // Sync across tabs
     const onStorage = (e) => {
       if (e.key === "user") {
         try {
@@ -116,7 +122,6 @@ export default function ProfilePage() {
     return () => window.removeEventListener("storage", onStorage);
   }, []);
 
-  // When auth context user changes, mirror to localStorage - matching navbar pattern
   useEffect(() => {
     if (!isClient) return;
     if (user) {
@@ -129,27 +134,27 @@ export default function ProfilePage() {
       try {
         localStorage.setItem("user", JSON.stringify(user));
       } catch {
-        // If storage full or blocked, at least keep in state
+        // Handle storage error
       }
       setHasToken(!!localStorage.getItem("token"));
     } else {
-      setLocalUser((prev) => prev); // keep whatever we restored until token says otherwise
+      setLocalUser((prev) => prev);
       setHasToken(!!localStorage.getItem("token"));
     }
   }, [user, isClient]);
 
-  // Auth state - matching navbar pattern
+  // Auth state
   const isAuthenticated = isClient && (hasToken || !!user || !!localUser);
   const userInfo = user || localUser;
 
-  // Get user initial for avatar - matching navbar pattern
+  // Get user initial for avatar
   const getUserInitial = () => {
-    if (!userInfo && !settings.username) return "U";
+    if (!userInfo && !settings.username) return "A";
     const displayName = userInfo?.name || settings.username;
     const displayEmail = userInfo?.email || settings.email;
     if (displayName) return displayName.charAt(0).toUpperCase();
     if (displayEmail) return displayEmail.charAt(0).toUpperCase();
-    return "U";
+    return "A";
   };
 
   const handleSettingChange = (key, value) => {
@@ -162,10 +167,8 @@ export default function ProfilePage() {
   const handleSave = async () => {
     setIsSaving(true);
     try {
-      // Save settings logic here - you can integrate with your backend
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      // Update localStorage user data if profile settings changed
       if (userInfo || isAuthenticated) {
         try {
           const updatedUser = {
@@ -195,22 +198,27 @@ export default function ProfilePage() {
         username: userInfo?.name || "",
         email: userInfo?.email || "",
         avatar: "",
-        model: "gpt-4",
-        temperature: 0.7,
-        maxTokens: 2048,
-        systemPrompt: "You are a helpful AI assistant.",
-        conversationMemory: true,
+        barNumber: "",
+        practiceArea: "general",
+        firmName: "",
+        model: "legal-ai-pro",
+        jurisdiction: "federal",
+        citationStyle: "bluebook",
+        caseDepth: "comprehensive",
         autoSave: true,
+        legalUpdates: true,
         theme: "system",
         fontSize: "medium",
-        chatBubbleStyle: "modern",
-        showTimestamps: true,
+        researchView: "detailed",
+        showCitations: true,
         dataRetention: "30days",
         analyticsEnabled: false,
-        shareConversations: false,
+        shareResearch: false,
+        clientDataProtection: true,
         soundEnabled: true,
         desktopNotifications: false,
         emailNotifications: true,
+        caseAlerts: true,
       });
     }
   };
@@ -222,20 +230,19 @@ export default function ProfilePage() {
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
     if (file) {
-      // Handle file upload logic here
       console.log("Uploading file:", file);
     }
   };
 
   const sections = [
-    { id: "profile", label: "Profile", icon: User },
-    { id: "chat", label: "Chat Settings", icon: MessageSquare },
+    { id: "profile", label: "Attorney Profile", icon: User },
+    { id: "research", label: "Research Settings", icon: BookOpen },
     { id: "appearance", label: "Appearance", icon: Palette },
     { id: "privacy", label: "Privacy & Security", icon: Shield },
     { id: "notifications", label: "Notifications", icon: Bell },
   ];
 
-  // Animation variants matching navbar style
+  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -262,27 +269,73 @@ export default function ProfilePage() {
     >
       <motion.div variants={itemVariants}>
         <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-          Username
+          Full Name
         </label>
         <input
           type="text"
           value={settings.username}
           onChange={(e) => handleSettingChange("username", e.target.value)}
-          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 placeholder-slate-500 dark:placeholder-slate-400"
-          placeholder="Enter your username"
+          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200 placeholder-slate-500 dark:placeholder-slate-400"
+          placeholder="Enter your full name"
         />
       </motion.div>
 
       <motion.div variants={itemVariants}>
         <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-          Email
+          Email Address
         </label>
         <input
           type="email"
           value={settings.email}
           onChange={(e) => handleSettingChange("email", e.target.value)}
-          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 placeholder-slate-500 dark:placeholder-slate-400"
+          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200 placeholder-slate-500 dark:placeholder-slate-400"
           placeholder="Enter your email"
+        />
+      </motion.div>
+
+      <motion.div variants={itemVariants}>
+        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+          Bar Number
+        </label>
+        <input
+          type="text"
+          value={settings.barNumber}
+          onChange={(e) => handleSettingChange("barNumber", e.target.value)}
+          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200 placeholder-slate-500 dark:placeholder-slate-400"
+          placeholder="Enter your bar number"
+        />
+      </motion.div>
+
+      <motion.div variants={itemVariants}>
+        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+          Practice Area
+        </label>
+        <select
+          value={settings.practiceArea}
+          onChange={(e) => handleSettingChange("practiceArea", e.target.value)}
+          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
+        >
+          <option value="general">General Practice</option>
+          <option value="corporate">Corporate Law</option>
+          <option value="criminal">Criminal Law</option>
+          <option value="family">Family Law</option>
+          <option value="intellectual">Intellectual Property</option>
+          <option value="realestate">Real Estate</option>
+          <option value="tax">Tax Law</option>
+          <option value="immigration">Immigration Law</option>
+        </select>
+      </motion.div>
+
+      <motion.div variants={itemVariants}>
+        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+          Law Firm / Organization
+        </label>
+        <input
+          type="text"
+          value={settings.firmName}
+          onChange={(e) => handleSettingChange("firmName", e.target.value)}
+          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200 placeholder-slate-500 dark:placeholder-slate-400"
+          placeholder="Enter your firm name"
         />
       </motion.div>
 
@@ -291,13 +344,13 @@ export default function ProfilePage() {
           Profile Picture
         </label>
         <div className="flex items-center space-x-4">
-          <div className="w-20 h-20 bg-gradient-to-br from-indigo-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-medium text-2xl ring-4 ring-white dark:ring-slate-900 shadow-lg">
+          <div className="w-20 h-20 bg-gradient-to-br from-emerald-500 to-green-500 rounded-full flex items-center justify-center text-white font-medium text-2xl ring-4 ring-white dark:ring-slate-900 shadow-lg">
             {getUserInitial()}
           </div>
           <div className="flex flex-col space-y-2">
             <button
               onClick={handleAvatarUpload}
-              className="flex items-center space-x-2 px-4 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg hover:bg-slate-800 dark:hover:bg-slate-200 transition-colors duration-200 font-medium"
+              className="flex items-center space-x-2 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors duration-200 font-medium"
             >
               <Upload className="w-4 h-4" />
               <span>Upload Image</span>
@@ -318,7 +371,7 @@ export default function ProfilePage() {
     </motion.div>
   );
 
-  const renderChatSettings = () => (
+  const renderResearchSettings = () => (
     <motion.div
       variants={containerVariants}
       initial="hidden"
@@ -327,110 +380,77 @@ export default function ProfilePage() {
     >
       <motion.div variants={itemVariants}>
         <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-          AI Model
+          AI Research Model
         </label>
         <select
           value={settings.model}
           onChange={(e) => handleSettingChange("model", e.target.value)}
-          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
         >
-          <option value="gpt-4">GPT-4</option>
-          <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
-          <option value="claude-3">Claude 3</option>
-          <option value="gemini-pro">Gemini Pro</option>
+          <option value="legal-ai-pro">Legal AI Pro</option>
+          <option value="legal-ai-standard">Legal AI Standard</option>
+          <option value="case-law-expert">Case Law Expert</option>
+          <option value="statute-specialist">Statute Specialist</option>
         </select>
       </motion.div>
 
       <motion.div variants={itemVariants}>
-        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">
-          Temperature:{" "}
-          <span className="font-mono text-indigo-600 dark:text-indigo-400">
-            {settings.temperature}
-          </span>
+        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+          Primary Jurisdiction
         </label>
-        <input
-          type="range"
-          min="0"
-          max="2"
-          step="0.1"
-          value={settings.temperature}
-          onChange={(e) =>
-            handleSettingChange("temperature", parseFloat(e.target.value))
-          }
-          className="w-full h-2 bg-slate-200 dark:bg-slate-600 rounded-lg appearance-none cursor-pointer"
-          style={{
-            background: `linear-gradient(to right, #4f46e5 0%, #4f46e5 ${
-              (settings.temperature / 2) * 100
-            }%, rgb(226 232 240) ${
-              (settings.temperature / 2) * 100
-            }%, rgb(226 232 240) 100%)`,
-          }}
-        />
-        <div className="flex justify-between text-xs text-slate-500 dark:text-slate-400 mt-1">
-          <span>Conservative</span>
-          <span>Creative</span>
-        </div>
+        <select
+          value={settings.jurisdiction}
+          onChange={(e) => handleSettingChange("jurisdiction", e.target.value)}
+          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
+        >
+          <option value="federal">Federal</option>
+          <option value="state">State Level</option>
+          <option value="international">International</option>
+          <option value="multiple">Multiple Jurisdictions</option>
+        </select>
       </motion.div>
 
       <motion.div variants={itemVariants}>
         <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-          Max Tokens
+          Citation Style
         </label>
-        <input
-          type="number"
-          value={settings.maxTokens}
-          onChange={(e) =>
-            handleSettingChange("maxTokens", parseInt(e.target.value))
-          }
-          min="100"
-          max="4096"
-          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
-        />
+        <select
+          value={settings.citationStyle}
+          onChange={(e) => handleSettingChange("citationStyle", e.target.value)}
+          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
+        >
+          <option value="bluebook">Bluebook</option>
+          <option value="alwd">ALWD</option>
+          <option value="oscola">OSCOLA</option>
+          <option value="chicago">Chicago</option>
+          <option value="apa">APA</option>
+        </select>
       </motion.div>
 
       <motion.div variants={itemVariants}>
         <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-          System Prompt
+          Case Research Depth
         </label>
-        <textarea
-          value={settings.systemPrompt}
-          onChange={(e) => handleSettingChange("systemPrompt", e.target.value)}
-          rows={4}
-          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 resize-none"
-          placeholder="Define how the AI should behave..."
-        />
+        <select
+          value={settings.caseDepth}
+          onChange={(e) => handleSettingChange("caseDepth", e.target.value)}
+          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
+        >
+          <option value="basic">Basic Overview</option>
+          <option value="standard">Standard Analysis</option>
+          <option value="comprehensive">Comprehensive Research</option>
+          <option value="exhaustive">Exhaustive Review</option>
+        </select>
       </motion.div>
 
       <motion.div variants={itemVariants} className="space-y-4">
         <div className="flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
           <div>
             <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
-              Conversation Memory
+              Auto-save Research
             </label>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              Remember context from previous messages
-            </p>
-          </div>
-          <label className="relative inline-flex items-center cursor-pointer">
-            <input
-              type="checkbox"
-              checked={settings.conversationMemory}
-              onChange={(e) =>
-                handleSettingChange("conversationMemory", e.target.checked)
-              }
-              className="sr-only peer"
-            />
-            <div className="w-11 h-6 bg-slate-200 dark:bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
-          </label>
-        </div>
-
-        <div className="flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
-          <div>
-            <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
-              Auto-save Conversations
-            </label>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              Automatically save chat history
+              Automatically save research progress
             </p>
           </div>
           <label className="relative inline-flex items-center cursor-pointer">
@@ -442,7 +462,29 @@ export default function ProfilePage() {
               }
               className="sr-only peer"
             />
-            <div className="w-11 h-6 bg-slate-200 dark:bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+            <div className="w-11 h-6 bg-slate-200 dark:bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-emerald-300 dark:peer-focus:ring-emerald-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+          </label>
+        </div>
+
+        <div className="flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
+          <div>
+            <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
+              Legal Updates
+            </label>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              Receive updates on relevant case laws
+            </p>
+          </div>
+          <label className="relative inline-flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              checked={settings.legalUpdates}
+              onChange={(e) =>
+                handleSettingChange("legalUpdates", e.target.checked)
+              }
+              className="sr-only peer"
+            />
+            <div className="w-11 h-6 bg-slate-200 dark:bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-emerald-300 dark:peer-focus:ring-emerald-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
           </label>
         </div>
       </motion.div>
@@ -471,7 +513,7 @@ export default function ProfilePage() {
               onClick={() => handleSettingChange("theme", theme.value)}
               className={`p-4 rounded-lg border-2 flex flex-col items-center space-y-2 transition-all duration-200 hover:scale-105 ${
                 settings.theme === theme.value
-                  ? "border-indigo-500 bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 shadow-lg shadow-indigo-500/20"
+                  ? "border-emerald-500 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 shadow-lg shadow-emerald-500/20"
                   : "border-slate-200 dark:border-slate-600 hover:border-slate-300 dark:hover:border-slate-500 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50"
               }`}
             >
@@ -489,7 +531,7 @@ export default function ProfilePage() {
         <select
           value={settings.fontSize}
           onChange={(e) => handleSettingChange("fontSize", e.target.value)}
-          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
         >
           <option value="small">Small</option>
           <option value="medium">Medium</option>
@@ -499,18 +541,16 @@ export default function ProfilePage() {
 
       <motion.div variants={itemVariants}>
         <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-          Chat Bubble Style
+          Research View
         </label>
         <select
-          value={settings.chatBubbleStyle}
-          onChange={(e) =>
-            handleSettingChange("chatBubbleStyle", e.target.value)
-          }
-          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+          value={settings.researchView}
+          onChange={(e) => handleSettingChange("researchView", e.target.value)}
+          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
         >
-          <option value="modern">Modern</option>
-          <option value="classic">Classic</option>
-          <option value="minimal">Minimal</option>
+          <option value="detailed">Detailed View</option>
+          <option value="compact">Compact View</option>
+          <option value="timeline">Timeline View</option>
         </select>
       </motion.div>
 
@@ -518,22 +558,22 @@ export default function ProfilePage() {
         <div className="flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
           <div>
             <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
-              Show Timestamps
+              Show Citations
             </label>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              Display message timestamps
+              Display full legal citations in research
             </p>
           </div>
           <label className="relative inline-flex items-center cursor-pointer">
             <input
               type="checkbox"
-              checked={settings.showTimestamps}
+              checked={settings.showCitations}
               onChange={(e) =>
-                handleSettingChange("showTimestamps", e.target.checked)
+                handleSettingChange("showCitations", e.target.checked)
               }
               className="sr-only peer"
             />
-            <div className="w-11 h-6 bg-slate-200 dark:bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+            <div className="w-11 h-6 bg-slate-200 dark:bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-emerald-300 dark:peer-focus:ring-emerald-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
           </label>
         </div>
       </motion.div>
@@ -554,7 +594,7 @@ export default function ProfilePage() {
         <select
           value={settings.dataRetention}
           onChange={(e) => handleSettingChange("dataRetention", e.target.value)}
-          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
         >
           <option value="7days">7 days</option>
           <option value="30days">30 days</option>
@@ -568,44 +608,44 @@ export default function ProfilePage() {
         <div className="flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
           <div>
             <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
-              Analytics
+              Client Data Protection
             </label>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              Help improve our service with usage analytics
+              Enhanced security for client-related data
             </p>
           </div>
           <label className="relative inline-flex items-center cursor-pointer">
             <input
               type="checkbox"
-              checked={settings.analyticsEnabled}
+              checked={settings.clientDataProtection}
               onChange={(e) =>
-                handleSettingChange("analyticsEnabled", e.target.checked)
+                handleSettingChange("clientDataProtection", e.target.checked)
               }
               className="sr-only peer"
             />
-            <div className="w-11 h-6 bg-slate-200 dark:bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+            <div className="w-11 h-6 bg-slate-200 dark:bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-emerald-300 dark:peer-focus:ring-emerald-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
           </label>
         </div>
 
         <div className="flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
           <div>
             <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
-              Share Conversations
+              Share Research
             </label>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              Allow sharing conversations with others
+              Allow sharing research with team members
             </p>
           </div>
           <label className="relative inline-flex items-center cursor-pointer">
             <input
               type="checkbox"
-              checked={settings.shareConversations}
+              checked={settings.shareResearch}
               onChange={(e) =>
-                handleSettingChange("shareConversations", e.target.checked)
+                handleSettingChange("shareResearch", e.target.checked)
               }
               className="sr-only peer"
             />
-            <div className="w-11 h-6 bg-slate-200 dark:bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+            <div className="w-11 h-6 bg-slate-200 dark:bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-emerald-300 dark:peer-focus:ring-emerald-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
           </label>
         </div>
       </motion.div>
@@ -616,13 +656,13 @@ export default function ProfilePage() {
             <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 mt-0.5" />
             <div className="flex-1">
               <h4 className="font-medium text-amber-800 dark:text-amber-300 mb-1">
-                Data Export
+                Research Data Export
               </h4>
               <p className="text-sm text-amber-700 dark:text-amber-400 mb-3">
-                Download all your conversation data and settings
+                Download all your legal research and case data
               </p>
               <button className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors text-sm font-medium">
-                Export Data
+                Export Research Data
               </button>
             </div>
           </div>
@@ -638,7 +678,7 @@ export default function ProfilePage() {
                 Delete Account
               </h4>
               <p className="text-sm text-red-700 dark:text-red-400 mb-3">
-                Permanently delete your account and all associated data
+                Permanently delete your account and all research data
               </p>
               <button className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm font-medium">
                 Delete Account
@@ -666,7 +706,7 @@ export default function ProfilePage() {
                 Sound Effects
               </label>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                Play sounds for new messages
+                Play sounds for research completions
               </p>
             </div>
           </div>
@@ -679,7 +719,7 @@ export default function ProfilePage() {
               }
               className="sr-only peer"
             />
-            <div className="w-11 h-6 bg-slate-200 dark:bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+            <div className="w-11 h-6 bg-slate-200 dark:bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-emerald-300 dark:peer-focus:ring-emerald-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
           </label>
         </div>
 
@@ -691,7 +731,7 @@ export default function ProfilePage() {
                 Desktop Notifications
               </label>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                Show browser notifications for new messages
+                Show browser notifications for case updates
               </p>
             </div>
           </div>
@@ -704,7 +744,7 @@ export default function ProfilePage() {
               }
               className="sr-only peer"
             />
-            <div className="w-11 h-6 bg-slate-200 dark:bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+            <div className="w-11 h-6 bg-slate-200 dark:bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-emerald-300 dark:peer-focus:ring-emerald-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
           </label>
         </div>
 
@@ -716,7 +756,7 @@ export default function ProfilePage() {
                 Email Notifications
               </label>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                Receive updates via email
+                Receive legal research updates via email
               </p>
             </div>
           </div>
@@ -729,7 +769,32 @@ export default function ProfilePage() {
               }
               className="sr-only peer"
             />
-            <div className="w-11 h-6 bg-slate-200 dark:bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+            <div className="w-11 h-6 bg-slate-200 dark:bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-emerald-300 dark:peer-focus:ring-emerald-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+          </label>
+        </div>
+
+        <div className="flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700">
+          <div className="flex items-center space-x-3">
+            <Scale className="w-5 h-5 text-slate-500 dark:text-slate-400" />
+            <div>
+              <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                Case Alerts
+              </label>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                Get alerts for relevant new case laws
+              </p>
+            </div>
+          </div>
+          <label className="relative inline-flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              checked={settings.caseAlerts}
+              onChange={(e) =>
+                handleSettingChange("caseAlerts", e.target.checked)
+              }
+              className="sr-only peer"
+            />
+            <div className="w-11 h-6 bg-slate-200 dark:bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-emerald-300 dark:peer-focus:ring-emerald-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
           </label>
         </div>
       </motion.div>
@@ -740,8 +805,8 @@ export default function ProfilePage() {
     switch (activeSection) {
       case "profile":
         return renderProfileSettings();
-      case "chat":
-        return renderChatSettings();
+      case "research":
+        return renderResearchSettings();
       case "appearance":
         return renderAppearanceSettings();
       case "privacy":
@@ -757,7 +822,7 @@ export default function ProfilePage() {
   if (!isClient) {
     return (
       <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-600"></div>
       </div>
     );
   }
@@ -767,18 +832,18 @@ export default function ProfilePage() {
     return (
       <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Sparkles className="w-8 h-8 text-white" />
+          <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Gavel className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-2">
-            Authentication Required
+            Attorney Login Required
           </h1>
           <p className="text-slate-600 dark:text-slate-400 mb-6">
-            You need to be logged in to access your profile settings.
+            You need to be logged in to access your legal research profile.
           </p>
           <Link
             href="/login"
-            className="inline-flex items-center px-4 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg hover:bg-slate-800 dark:hover:bg-slate-200 transition-colors font-medium"
+            className="inline-flex items-center px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors font-medium"
           >
             Go to Login
           </Link>
@@ -789,7 +854,7 @@ export default function ProfilePage() {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
-      {/* Header - matching navbar style */}
+      {/* Header */}
       <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg shadow-sm border-b border-slate-200/50 dark:border-slate-800/50 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-4">
@@ -800,15 +865,15 @@ export default function ProfilePage() {
               >
                 <ArrowLeft className="w-5 h-5" />
               </Link>
-              <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-cyan-500 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-green-500 rounded-lg flex items-center justify-center">
                 <Settings className="w-4 h-4 text-white" />
               </div>
               <div>
                 <h1 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
-                  Profile Settings
+                  Attorney Profile
                 </h1>
                 <p className="text-sm text-slate-600 dark:text-slate-400">
-                  Manage your account and preferences
+                  Manage your legal research preferences
                 </p>
               </div>
             </div>
@@ -839,7 +904,7 @@ export default function ProfilePage() {
               <button
                 onClick={handleSave}
                 disabled={isSaving}
-                className="flex items-center space-x-2 px-6 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg hover:bg-slate-800 dark:hover:bg-slate-200 transition-colors shadow-sm disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+                className="flex items-center space-x-2 px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors shadow-sm disabled:opacity-50 disabled:cursor-not-allowed font-medium"
               >
                 {isSaving ? (
                   <>
@@ -860,18 +925,18 @@ export default function ProfilePage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex gap-8">
-          {/* Sidebar - matching navbar dropdown style */}
+          {/* Sidebar */}
           <div className="w-72 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-lg shadow-sm border border-slate-200/80 dark:border-slate-800/80 p-6 h-fit sticky top-24">
             <div className="flex items-center space-x-3 mb-6 pb-4 border-b border-slate-200 dark:border-slate-700">
-              <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-medium text-lg ring-2 ring-white dark:ring-slate-900">
+              <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-green-500 rounded-full flex items-center justify-center text-white font-medium text-lg ring-2 ring-white dark:ring-slate-900">
                 {getUserInitial()}
               </div>
               <div className="flex-1 min-w-0">
                 <p className="font-medium text-slate-900 dark:text-slate-100 truncate">
-                  {userInfo?.name || settings.username || "User"}
+                  {userInfo?.name || settings.username || "Attorney"}
                 </p>
                 <p className="text-sm text-slate-500 dark:text-slate-400 truncate">
-                  {userInfo?.email || settings.email || ""}
+                  {settings.practiceArea || "Legal Professional"}
                 </p>
               </div>
             </div>
@@ -886,7 +951,7 @@ export default function ProfilePage() {
                   onClick={() => setActiveSection(section.id)}
                   className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-left transition-all duration-200 group ${
                     activeSection === section.id
-                      ? "bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 shadow-sm border-l-4 border-indigo-500"
+                      ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 shadow-sm border-l-4 border-emerald-500"
                       : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-slate-900 dark:hover:text-slate-100"
                   }`}
                 >
@@ -903,7 +968,7 @@ export default function ProfilePage() {
                   <ChevronRight
                     className={`w-4 h-4 transition-all duration-200 ${
                       activeSection === section.id
-                        ? "rotate-90 text-indigo-500"
+                        ? "rotate-90 text-emerald-500"
                         : "group-hover:translate-x-0.5"
                     }`}
                   />
@@ -920,7 +985,8 @@ export default function ProfilePage() {
                   React.createElement(
                     sections.find((s) => s.id === activeSection).icon,
                     {
-                      className: "w-6 h-6 text-indigo-600 dark:text-indigo-400",
+                      className:
+                        "w-6 h-6 text-emerald-600 dark:text-emerald-400",
                     }
                   )}
                 <h2 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">
@@ -929,15 +995,15 @@ export default function ProfilePage() {
               </div>
               <p className="text-slate-600 dark:text-slate-400">
                 {activeSection === "profile" &&
-                  "Manage your personal information and profile settings"}
-                {activeSection === "chat" &&
-                  "Configure AI model settings and conversation preferences"}
+                  "Manage your attorney profile and professional information"}
+                {activeSection === "research" &&
+                  "Configure legal research preferences and AI settings"}
                 {activeSection === "appearance" &&
-                  "Customize the look and feel of your interface"}
+                  "Customize the look and feel of your research interface"}
                 {activeSection === "privacy" &&
                   "Control your data privacy and security settings"}
                 {activeSection === "notifications" &&
-                  "Manage your notification preferences"}
+                  "Manage your legal research notifications"}
               </p>
             </div>
 

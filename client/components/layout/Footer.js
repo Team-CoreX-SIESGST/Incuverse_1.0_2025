@@ -12,6 +12,10 @@ import {
   Video,
   Database,
   Zap,
+  Gavel,
+  Scale,
+  BookOpen,
+  Shield,
 } from "lucide-react";
 
 export function Footer() {
@@ -24,7 +28,7 @@ export function Footer() {
   const linkedinUrl =
     process.env.NEXT_PUBLIC_LINKEDIN_URL || "https://linkedin.com";
   const emailUrl =
-    process.env.NEXT_PUBLIC_EMAIL || "mailto:contact@omnisaearch.ai";
+    process.env.NEXT_PUBLIC_EMAIL || "mailto:contact@legalai.com";
 
   const socialLinks = [
     { href: githubUrl, icon: Github, label: "GitHub" },
@@ -33,12 +37,12 @@ export function Footer() {
     { href: emailUrl, icon: Mail, label: "Email" },
   ];
 
-  const fileTypes = [
-    { icon: FileText, label: "Documents" },
-    { icon: Image, label: "Images" },
-    { icon: Video, label: "Videos" },
-    { icon: Database, label: "Data Tables" },
-    { icon: Zap, label: "And More..." },
+  const legalFeatures = [
+    { icon: Gavel, label: "Case Law Research" },
+    { icon: BookOpen, label: "Legal Documents" },
+    { icon: Scale, label: "Case Analysis" },
+    { icon: Shield, label: "Client Security" },
+    { icon: Zap, label: "AI-Powered" },
   ];
 
   return (
@@ -48,21 +52,22 @@ export function Footer() {
           {/* Brand Section */}
           <div className="lg:col-span-5">
             <div className="flex items-center space-x-3 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-cyan-500 rounded-xl flex items-center justify-center">
-                <Sparkles className="w-6 h-6 text-white" />
+              <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-green-500 rounded-xl flex items-center justify-center">
+                <Scale className="w-6 h-6 text-white" />
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
-                  OmniSearch AI
+                  LegalAI Research
                 </h3>
                 <p className="text-sm text-slate-500 dark:text-slate-400">
-                  Connect. Search. Discover.
+                  Research. Analyze. Win.
                 </p>
               </div>
             </div>
             <p className="text-slate-600 dark:text-slate-400 text-base mb-6 max-w-md">
-              The next-generation multi-modal search platform to find insights
-              across all your documents, images, and data with advanced AI.
+              The next-generation AI-powered legal research platform that helps
+              attorneys find relevant case laws, analyze documents, and build
+              stronger legal arguments with unprecedented efficiency.
             </p>
             <div className="flex space-x-5">
               {socialLinks.map((social) => (
@@ -72,7 +77,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors duration-200"
+                  className="text-slate-500 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-200"
                 >
                   <social.icon className="w-5 h-5" />
                 </a>
@@ -84,7 +89,7 @@ export function Footer() {
           <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8">
             <div>
               <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">
-                Product
+                Platform
               </h4>
               <ul className="space-y-3">
                 <li>
@@ -93,8 +98,8 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/integrations" className="footer-link">
-                    Integrations
+                  <Link href="/research" className="footer-link">
+                    Legal Research
                   </Link>
                 </li>
                 <li>
@@ -121,7 +126,7 @@ export function Footer() {
                 </li>
                 <li>
                   <a href="/blog" className="footer-link">
-                    Blog
+                    Legal Insights
                   </a>
                 </li>
                 <li>
@@ -151,22 +156,32 @@ export function Footer() {
                     Terms of Service
                   </Link>
                 </li>
+                <li>
+                  <Link href="/compliance" className="footer-link">
+                    Compliance
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/security" className="footer-link">
+                    Security
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
         </div>
 
-        {/* Supported File Types */}
+        {/* Legal Features */}
         <div className="mt-16 pt-8 border-t border-slate-200 dark:border-slate-800">
           <h4 className="text-sm font-semibold text-center text-slate-900 dark:text-white mb-6">
-            Supported File Types
+            AI-Powered Legal Features
           </h4>
-          <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-4">
-            {fileTypes.map((file) => (
-              <div key={file.label} className="flex items-center space-x-2">
-                <file.icon className="w-4 h-4 text-slate-500 dark:text-slate-400" />
+          <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4">
+            {legalFeatures.map((feature) => (
+              <div key={feature.label} className="flex items-center space-x-2">
+                <feature.icon className="w-4 h-4 text-emerald-500 dark:text-emerald-400" />
                 <span className="text-sm text-slate-600 dark:text-slate-300">
-                  {file.label}
+                  {feature.label}
                 </span>
               </div>
             ))}
@@ -176,23 +191,19 @@ export function Footer() {
         {/* Bottom Section */}
         <div className="mt-16 pt-8 border-t border-slate-200 dark:border-slate-800">
           <div className="text-center text-sm text-slate-500 dark:text-slate-400">
-            <p>&copy; {currentYear} OmniSearch AI. All rights reserved.</p>
+            <p>&copy; {currentYear} LegalAI Research. All rights reserved.</p>
+            <p className="mt-1 text-xs">
+              Trusted by attorneys and legal professionals worldwide
+            </p>
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        .footer-link {
+          @apply text-base text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-200;
+        }
+      `}</style>
     </footer>
   );
 }
-
-// Add this to your globals.css or a relevant stylesheet to avoid repetition
-/*
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer components {
-  .footer-link {
-    @apply text-base text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-200;
-  }
-}
-*/

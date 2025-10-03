@@ -10,7 +10,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "OmniSearch AI",
+  title: "LegalAI AI",
   description:
     "Connect your Google Drive and unlock powerful AI search across all your documents",
 };

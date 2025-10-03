@@ -235,7 +235,7 @@ export default function ProfilePage() {
           type="text"
           value={settings.username}
           onChange={(e) => handleSettingChange("username", e.target.value)}
-          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 placeholder-slate-500 dark:placeholder-slate-400"
+          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200 placeholder-slate-500 dark:placeholder-slate-400"
           placeholder="Enter your username"
         />
       </motion.div>
@@ -247,7 +247,7 @@ export default function ProfilePage() {
           type="email"
           value={settings.email}
           onChange={(e) => handleSettingChange("email", e.target.value)}
-          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 placeholder-slate-500 dark:placeholder-slate-400"
+          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200 placeholder-slate-500 dark:placeholder-slate-400"
           placeholder="Enter your email"
         />
       </motion.div>
@@ -297,7 +297,7 @@ export default function ProfilePage() {
         <select
           value={settings.model}
           onChange={(e) => handleSettingChange("model", e.target.value)}
-          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
         >
           <option value="gpt-4">GPT-4</option>
           <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
@@ -347,7 +347,7 @@ export default function ProfilePage() {
           }
           min="100"
           max="4096"
-          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
         />
       </motion.div>
       <motion.div variants={itemVariants}>
@@ -358,7 +358,7 @@ export default function ProfilePage() {
           value={settings.systemPrompt}
           onChange={(e) => handleSettingChange("systemPrompt", e.target.value)}
           rows={4}
-          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 resize-none"
+          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200 resize-none"
           placeholder="Define how the AI should behave..."
         />
       </motion.div>
@@ -424,7 +424,7 @@ export default function ProfilePage() {
         <select
           value={settings.dataRetention}
           onChange={(e) => handleSettingChange("dataRetention", e.target.value)}
-          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+          className="w-full px-3 py-2.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
         >
           <option value="7days">7 days</option>
           <option value="30days">30 days</option>
@@ -724,7 +724,7 @@ export default function ProfilePage() {
                   onClick={() => setActiveSection(section.id)}
                   className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-left transition-all duration-200 group ${
                     activeSection === section.id
-                      ? "bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 shadow-sm border-l-4 border-indigo-500"
+                      ? "bg-emerald-50 dark:bg-emerald-500/10 text-indigo-700 dark:text-indigo-300 shadow-sm border-l-4 border-emerald-500"
                       : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-slate-900 dark:hover:text-slate-100"
                   }`}
                 >
@@ -741,7 +741,7 @@ export default function ProfilePage() {
                   <ChevronRight
                     className={`w-4 h-4 transition-all duration-200 ${
                       activeSection === section.id
-                        ? "rotate-90 text-indigo-500"
+                        ? "rotate-90 text-emerald-500"
                         : "group-hover:translate-x-0.5"
                     }`}
                   />

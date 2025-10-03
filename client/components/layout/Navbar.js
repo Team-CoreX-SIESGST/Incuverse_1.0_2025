@@ -173,7 +173,7 @@ export function Navbar() {
           href: link.href,
           className: `px-3 py-2 rounded-md text-sm font-medium transition-colors ${
             pathname === link.href
-              ? "bg-slate-900/10 dark:bg-slate-100/10 text-slate-900 dark:text-slate-100"
+              ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
               : "text-slate-600 dark:text-slate-300 hover:bg-slate-900/5 dark:hover:bg-slate-100/5 hover:text-slate-900 dark:hover:text-slate-100"
           }`,
         },
@@ -190,7 +190,7 @@ export function Navbar() {
           href: link.href,
           className: `block px-3 py-2 rounded-md text-base font-medium transition-colors ${
             pathname === link.href
-              ? "bg-slate-900/10 dark:bg-slate-100/10 text-slate-900 dark:text-slate-100"
+              ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
               : "text-slate-600 dark:text-slate-300 hover:bg-slate-900/5 dark:hover:bg-slate-100/5"
           }`,
         },
@@ -242,7 +242,7 @@ export function Navbar() {
               "div",
               {
                 className:
-                  "w-9 h-9 bg-gradient-to-br from-indigo-500 to-cyan-500 rounded-lg flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300",
+                  "w-9 h-9 bg-gradient-to-br from-emerald-500 to-green-500 rounded-lg flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300",
               },
               React.createElement(Sparkles, { className: "w-5 h-5 text-white" })
             ),
@@ -252,7 +252,7 @@ export function Navbar() {
                 className:
                   "text-xl font-semibold tracking-tight text-slate-900 dark:text-white",
               },
-              "OmniSearch"
+              "LegalAI"
             )
           )
         ),
@@ -292,7 +292,7 @@ export function Navbar() {
                         "div",
                         {
                           className:
-                            "w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-cyan-500 text-white font-medium text-sm ring-2 ring-white dark:ring-slate-900 group-hover:ring-slate-200 dark:group-hover:ring-slate-700 transition-all",
+                            "w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-br from-emerald-500 to-green-500 text-white font-medium text-sm ring-2 ring-white dark:ring-slate-900 group-hover:ring-slate-200 dark:group-hover:ring-slate-700 transition-all",
                         },
                         getUserInitial()
                       ),
@@ -389,7 +389,7 @@ export function Navbar() {
                       {
                         href: "/register",
                         className:
-                          "px-4 py-2 rounded-md text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 transition-colors",
+                          "px-4 py-2 rounded-md text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 transition-colors",
                       },
                       "Get Started"
                     )
@@ -450,7 +450,7 @@ export function Navbar() {
                             "div",
                             {
                               className:
-                                "w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-cyan-500 text-white font-medium text-sm",
+                                "w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-br from-emerald-500 to-green-500 text-white font-medium text-sm",
                             },
                             getUserInitial()
                           ),
@@ -521,7 +521,7 @@ export function Navbar() {
                           {
                             href: "/register",
                             className:
-                              "block w-full text-center px-3 py-3 rounded-md text-base font-semibold text-white bg-slate-900 hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200",
+                              "block w-full text-center px-3 py-3 rounded-md text-base font-semibold text-white bg-emerald-600 hover:bg-emerald-700 transition-colors",
                           },
                           "Get Started"
                         )

@@ -5,64 +5,57 @@ import {
   ArrowRight,
   Brain,
   FileText,
-  Image,
-  Video,
-  Database,
+  Gavel,
+  Scale,
   Search,
   Cloud,
+  BookOpen,
+  Shield,
 } from "lucide-react";
 
 export function CTA() {
   return (
-    // THEME CHANGE: Light background by default, dark background in dark mode
     <section className="relative overflow-hidden bg-slate-50 dark:bg-slate-950 py-20 sm:py-24">
       {/* Background Decoration */}
       <div
-        // THEME CHANGE: Adapted radial gradient for dark mode
-        className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_45rem_at_50%_50%,_theme(colors.indigo.100/50%),_transparent)] dark:bg-[radial-gradient(45rem_45rem_at_50%_50%,_theme(colors.indigo.950/40%),_theme(colors.slate.950))]"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_45rem_at_50%_50%,_theme(colors.emerald.100/50%),_transparent)] dark:bg-[radial-gradient(45rem_45rem_at_50%_50%,_theme(colors.emerald.950/40%),_theme(colors.slate.950))]"
         aria-hidden="true"
       />
 
       {/* Floating Icons Animation */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        {/* THEME CHANGE: Made icons visible in both themes */}
         <FileText className="absolute top-20 left-10 w-8 h-8 text-slate-300 dark:text-slate-800 animate-float" />
-        <Image className="absolute top-40 right-20 w-6 h-6 text-slate-300 dark:text-slate-800 animate-float animation-delay-1000" />
-        <Video className="absolute bottom-40 left-20 w-7 h-7 text-slate-300 dark:text-slate-800 animate-float animation-delay-2000" />
-        <Database className="absolute top-60 right-40 w-5 h-5 text-slate-300 dark:text-slate-800 animate-float animation-delay-3000" />
+        <Gavel className="absolute top-40 right-20 w-6 h-6 text-slate-300 dark:text-slate-800 animate-float animation-delay-1000" />
+        <Scale className="absolute bottom-40 left-20 w-7 h-7 text-slate-300 dark:text-slate-800 animate-float animation-delay-2000" />
+        <BookOpen className="absolute top-60 right-40 w-5 h-5 text-slate-300 dark:text-slate-800 animate-float animation-delay-3000" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center">
           {/* Badge */}
-          {/* THEME CHANGE: Adapted badge for light/dark modes */}
           <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-slate-200/50 dark:bg-slate-100/5 ring-1 ring-inset ring-slate-900/10 dark:ring-slate-100/10 mb-8 backdrop-blur-lg">
-            <Brain className="w-4 h-4 text-indigo-500 dark:text-indigo-400 mr-2" />
-            {/* THEME CHANGE: Adapted text for light/dark modes */}
+            <Brain className="w-4 h-4 text-emerald-500 dark:text-emerald-400 mr-2" />
             <span className="text-sm font-medium text-slate-800 dark:text-slate-300">
-              AI-Powered Multi-Modal Intelligence
+              AI-Powered Legal Intelligence
             </span>
           </div>
 
           {/* Main Content */}
-          {/* THEME CHANGE: Adapted heading for light/dark modes */}
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 dark:text-white mb-6">
-            Unlock Insights, Instantly
+            Transform Your Legal Practice
             <br />
-            {/* Gradient remains the same, as it looks good on both */}
-            <span className="bg-gradient-to-r from-indigo-500 to-cyan-500 dark:from-indigo-400 dark:to-cyan-400 bg-clip-text text-transparent">
-              Across All Your Data
+            <span className="bg-gradient-to-r from-emerald-500 to-green-500 dark:from-emerald-400 dark:to-green-400 bg-clip-text text-transparent">
+              With AI Innovation
             </span>
           </h2>
 
-          {/* THEME CHANGE: Adapted paragraph for light/dark modes */}
           <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-3xl mx-auto">
-            Our AI agent searches across{" "}
+            Our AI platform analyzes{" "}
             <strong className="text-slate-900 dark:text-slate-200">
-              text, images, videos, and tables
+              case laws, statutes, contracts, and legal documents
             </strong>{" "}
-            simultaneously. Connect your Drive to let AI analyze, summarize, and
-            generate reports from your entire knowledge base.
+            simultaneously. Get instant insights, precedents, and strategic
+            recommendations to win your cases.
           </p>
 
           {/* Use Cases */}
@@ -70,32 +63,30 @@ export function CTA() {
             {[
               {
                 icon: "⚖️",
+                title: "Litigation Support",
+                content:
+                  "Analyze case laws, precedents, and build stronger legal arguments with AI insights.",
+              },
+              {
+                icon: "📝",
+                title: "Contract Review",
+                content:
+                  "Automate contract analysis, identify risks, and ensure compliance with regulations.",
+              },
+              {
+                icon: "🔍",
                 title: "Legal Research",
                 content:
-                  "Search case laws across documents, images, and video depositions simultaneously.",
-              },
-              {
-                icon: "🔬",
-                title: "Medical Research",
-                content:
-                  "Analyze papers with text, medical images, and video consultations.",
-              },
-              {
-                icon: "📚",
-                title: "Academic Study",
-                content:
-                  "Search through textbooks, lecture slides, and videos in one query.",
+                  "Search through millions of legal documents and get relevant results in seconds.",
               },
             ].map((useCase) => (
               <div
                 key={useCase.title}
-                // THEME CHANGE: Adapted card for light/dark modes
                 className="bg-white/50 dark:bg-slate-100/5 rounded-2xl p-6 ring-1 ring-inset ring-slate-900/10 dark:ring-slate-100/10 hover:ring-slate-900/20 dark:hover:ring-slate-100/20 transition-all duration-300 group text-left"
               >
                 <div className="text-3xl mb-4 group-hover:scale-110 transition-transform duration-300 w-fit">
                   {useCase.icon}
                 </div>
-                {/* THEME CHANGE: Adapted card text for light/dark modes */}
                 <h3 className="font-semibold text-slate-900 dark:text-white text-lg mb-2">
                   {useCase.title}
                 </h3>
@@ -106,15 +97,23 @@ export function CTA() {
             ))}
           </div>
 
-          {/* Bottom Text */}
-          <div className="mt-16">
-            {/* THEME CHANGE: Adapted bottom text for light/dark modes */}
-            <p className="text-slate-600 dark:text-slate-400 text-sm"></p>
+          {/* CTA Button */}
+          <div className="mt-12">
+            <Link
+              href="/register"
+              className="group inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-emerald-600 rounded-full hover:bg-emerald-700 dark:bg-emerald-500 dark:hover:bg-emerald-600 transition-all duration-300 shadow-lg hover:shadow-xl"
+            >
+              <span>Start Your Free Trial</span>
+              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <p className="text-sm text-slate-500 dark:text-slate-400 mt-4">
+              No credit card required • 14-day free trial • Cancel anytime
+            </p>
           </div>
         </div>
       </div>
 
-      {/* Custom Styles for animation (no changes needed here) */}
+      {/* Custom Styles for animation */}
       <style jsx>{`
         @keyframes float {
           0%,

@@ -25,17 +25,17 @@ const ChatSkeleton = () => {
           <div className="h-7 w-36 bg-slate-200 dark:bg-slate-700 rounded-md animate-pulse"></div>
           <div className="h-9 w-9 bg-slate-200 dark:bg-slate-700 rounded-full animate-pulse"></div>
         </div>
-        
+
         {/* Search Bar */}
         <div className="mb-6">
           <div className="h-10 bg-slate-200 dark:bg-slate-700 rounded-lg animate-pulse"></div>
         </div>
-        
+
         {/* New Chat Button */}
         <div className="mb-6">
           <div className="h-10 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg animate-pulse"></div>
         </div>
-        
+
         {/* Conversation List */}
         <div className="mb-4">
           <div className="h-5 w-20 bg-slate-300 dark:bg-slate-600 rounded mb-4 animate-pulse"></div>
@@ -50,7 +50,7 @@ const ChatSkeleton = () => {
           ))}
         </div>
       </div>
-      
+
       {/* Main Chat Area Skeleton */}
       <div className="flex-1 flex flex-col">
         {/* Header Skeleton */}
@@ -64,7 +64,7 @@ const ChatSkeleton = () => {
             <div className="h-9 w-9 bg-slate-200 dark:bg-slate-700 rounded-full animate-pulse"></div>
           </div>
         </div>
-        
+
         {/* Messages Skeleton */}
         <div className="flex-1 p-6 overflow-y-auto bg-slate-50 dark:bg-slate-800/30">
           <div className="max-w-3xl mx-auto space-y-4">
@@ -81,11 +81,11 @@ const ChatSkeleton = () => {
                 </div>
               </div>
             </div>
-            
+
             {/* User Message */}
             <div className="flex justify-end">
               <div className="flex items-start space-x-3 max-w-md">
-                <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-2xl p-4 shadow-sm">
+                <div className="bg-emerald-50 dark:bg-indigo-900/20 rounded-2xl p-4 shadow-sm">
                   <div className="space-y-2">
                     <div className="h-4 w-52 bg-indigo-200 dark:bg-indigo-700/50 rounded animate-pulse"></div>
                     <div className="h-4 w-48 bg-indigo-200 dark:bg-indigo-700/50 rounded animate-pulse"></div>
@@ -94,7 +94,7 @@ const ChatSkeleton = () => {
                 <div className="h-8 w-8 bg-slate-300 dark:bg-slate-600 rounded-full animate-pulse flex-shrink-0"></div>
               </div>
             </div>
-            
+
             {/* AI Message */}
             <div className="flex justify-start">
               <div className="flex items-start space-x-3 max-w-md">
@@ -109,7 +109,7 @@ const ChatSkeleton = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Input Area Skeleton */}
         <div className="border-t border-slate-200 dark:border-slate-700 p-4 bg-white dark:bg-slate-900">
           <div className="max-w-3xl mx-auto">

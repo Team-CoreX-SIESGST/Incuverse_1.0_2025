@@ -150,10 +150,8 @@ export default function PricingPage() {
       try {
         const responseData = await getPlans();
         // if (responseData.status && responseData.data) {
-          const sortedPlans = responseData.data.sort(
-            (a, b) => a.price - b.price
-          );
-          setPlans(sortedPlans);
+        const sortedPlans = responseData.data.sort((a, b) => a.price - b.price);
+        setPlans(sortedPlans);
         // }
       } catch (err) {
         console.log("Error fetching plans:", err);
@@ -168,7 +166,7 @@ export default function PricingPage() {
   if (loading) {
     return (
       <div className="bg-slate-950 text-white min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-indigo-500"></div>
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-emerald-500"></div>
       </div>
     );
   }
@@ -218,13 +216,13 @@ export default function PricingPage() {
                   key={plan._id}
                   className={`relative bg-slate-900 p-8 rounded-2xl flex flex-col ${
                     isPopular
-                      ? "border-2 border-indigo-500 shadow-2xl shadow-indigo-500/10"
+                      ? "border-2 border-emerald-500 shadow-2xl shadow-indigo-500/10"
                       : "border border-slate-800"
                   }`}
                 >
                   {isPopular && (
                     <div className="absolute top-0 -translate-y-1/2 w-full left-0 flex justify-center">
-                      <div className="bg-indigo-500 text-white text-xs font-semibold px-4 py-1 rounded-full">
+                      <div className="bg-emerald-500 text-white text-xs font-semibold px-4 py-1 rounded-full">
                         MOST POPULAR
                       </div>
                     </div>
@@ -265,7 +263,7 @@ export default function PricingPage() {
                     <ul className="space-y-3">
                       {/* Add token limit as first feature */}
                       <li className="flex items-center gap-3">
-                        <Check className="w-5 h-5 text-indigo-500 flex-shrink-0" />
+                        <Check className="w-5 h-5 text-emerald-500 flex-shrink-0" />
                         <span
                           className={
                             isPopular ? "text-slate-300" : "text-slate-400"
@@ -280,7 +278,7 @@ export default function PricingPage() {
                           className="flex items-center gap-3"
                           key={featureIndex}
                         >
-                          <Check className="w-5 h-5 text-indigo-500 flex-shrink-0" />
+                          <Check className="w-5 h-5 text-emerald-500 flex-shrink-0" />
                           <span
                             className={
                               isPopular ? "text-slate-300" : "text-slate-400"
@@ -319,7 +317,7 @@ export default function PricingPage() {
                         <button
                           onClick={() => handleSubscription(plan)}
                           disabled={processingPlan === plan._id}
-                          className="flex-1 bg-indigo-500 text-white hover:bg-indigo-600 font-medium px-4 py-2 rounded-md transition-colors disabled:opacity-50"
+                          className="flex-1 bg-emerald-500 text-white hover:bg-indigo-600 font-medium px-4 py-2 rounded-md transition-colors disabled:opacity-50"
                         >
                           {processingPlan === plan._id
                             ? "Processing..."

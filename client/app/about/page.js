@@ -7,9 +7,9 @@ import {
   Brain,
   Search,
   FileText,
-  Image,
-  Video,
-  Database,
+  Gavel,
+  Scale,
+  BookOpen,
   Zap,
   Shield,
   Globe,
@@ -18,6 +18,7 @@ import {
   BarChart3,
   Sparkles,
   ArrowRight,
+  Database,
 } from "lucide-react";
 
 // Animation variants for Framer Motion
@@ -42,7 +43,7 @@ export default function AboutPage() {
       <Navbar />
       <main className="relative overflow-hidden py-16 sm:py-20">
         <div
-          className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_45rem_at_50%_50%,_theme(colors.indigo.950/40%),_theme(colors.slate.950))]"
+          className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_45rem_at_50%_50%,_theme(colors.emerald.950/40%),_theme(colors.slate.950))]"
           aria-hidden="true"
         />
         <motion.div
@@ -54,18 +55,18 @@ export default function AboutPage() {
           {/* Hero Section */}
           <motion.div variants={FADE_IN_UP_VARIANTS} className="text-center">
             <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-slate-100/5 ring-1 ring-inset ring-slate-100/10 mb-8 backdrop-blur-lg">
-              <Brain className="w-4 h-4 text-indigo-400 mr-2" />
+              <Scale className="w-4 h-4 text-emerald-400 mr-2" />
               <span className="text-sm font-medium text-slate-300">
-                Next-Generation AI Technology
+                AI-Powered Legal Intelligence
               </span>
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent mb-6">
-              Revolutionizing Search
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent mb-6">
+              Revolutionizing Legal Research
             </h1>
             <p className="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto">
-              The world's first AI agent that understands and searches across
-              text, images, videos, and tables simultaneously. Transform your
-              Google Drive into an intelligent knowledge base.
+              The world's first AI platform specifically designed for legal
+              professionals. Search across case laws, statutes, contracts, and
+              legal documents with unprecedented speed and accuracy.
             </p>
           </motion.div>
 
@@ -75,28 +76,28 @@ export default function AboutPage() {
               {[
                 {
                   icon: Search,
-                  title: "Multi-Modal Search",
+                  title: "Case Law Research",
                   description:
-                    "Search across different file types with a single query. Our AI understands context in documents, images, and videos.",
+                    "Find relevant precedents and case laws across millions of legal documents with a single query.",
                 },
                 {
                   icon: Brain,
-                  title: "Semantic Understanding",
+                  title: "Legal Analysis",
                   description:
-                    "Advanced AI models that understand meaning, not just keywords. Find relevant content even with different terminology.",
+                    "Advanced AI models that understand legal reasoning, statutes, and judicial interpretations.",
                 },
                 {
                   icon: BarChart3,
-                  title: "Auto-Report Generation",
+                  title: "Case Strategy Insights",
                   description:
-                    "Automatically generate summaries, insights, and citations from your multi-modal search results.",
+                    "Generate legal arguments, identify weaknesses, and build stronger case strategies automatically.",
                 },
               ].map((item) => (
                 <div
                   key={item.title}
                   className="bg-slate-100/5 p-6 rounded-xl ring-1 ring-inset ring-slate-100/10 hover:ring-slate-100/20 transition-all duration-300"
                 >
-                  <item.icon className="w-8 h-8 text-indigo-400 mb-4" />
+                  <item.icon className="w-8 h-8 text-emerald-400 mb-4" />
                   <h2 className="text-xl font-semibold text-slate-100 mb-2">
                     {item.title}
                   </h2>
@@ -112,31 +113,31 @@ export default function AboutPage() {
             className="bg-slate-100/5 p-8 rounded-2xl ring-1 ring-inset ring-slate-100/10"
           >
             <h2 className="text-3xl font-bold text-white mb-8 text-center">
-              Powered by Advanced AI
+              Built for Legal Excellence
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
                 {
                   icon: Cpu,
-                  title: "Large Language Models",
+                  title: "Legal Language Models",
                   description:
-                    "GPT-4, Claude, and custom models for superior text understanding and generation.",
+                    "Specialized AI models trained on legal texts for superior understanding of case law and statutes.",
                 },
                 {
-                  icon: Eye,
-                  title: "Computer Vision",
+                  icon: Shield,
+                  title: "Enterprise Security",
                   description:
-                    "CLIP, BLIP, and custom models for deep image and video content analysis.",
+                    "Bank-level encryption and compliance with legal industry security standards and regulations.",
                 },
                 {
                   icon: Database,
-                  title: "Vector Search",
+                  title: "Legal Database",
                   description:
-                    "Advanced embeddings and vector databases for lightning-fast semantic search.",
+                    "Comprehensive database of case laws, statutes, and legal precedents updated in real-time.",
                 },
               ].map((tech) => (
                 <div key={tech.title} className="text-center">
-                  <tech.icon className="w-10 h-10 text-indigo-400 mx-auto mb-4" />
+                  <tech.icon className="w-10 h-10 text-emerald-400 mx-auto mb-4" />
                   <h3 className="text-lg font-semibold text-slate-100 mb-2">
                     {tech.title}
                   </h3>
@@ -149,33 +150,33 @@ export default function AboutPage() {
           {/* Use Cases */}
           <motion.div variants={FADE_IN_UP_VARIANTS}>
             <h2 className="text-3xl font-bold text-white mb-8 text-center">
-              Transform Your Workflow
+              Trusted by Legal Professionals
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
                 {
                   emoji: "⚖️",
-                  title: "Legal Research",
+                  title: "Law Firms",
                   description:
-                    "Search case files, evidence photos, and video depositions. Generate case summaries automatically.",
+                    "Accelerate case research, reduce billable hours, and deliver better outcomes for clients.",
                 },
                 {
-                  emoji: "🔬",
-                  title: "Medical & R&D",
+                  emoji: "🏛️",
+                  title: "Corporate Legal",
                   description:
-                    "Analyze research papers, medical images, and clinical data. Create comprehensive literature reviews.",
+                    "Streamline contract review, compliance checking, and corporate governance documentation.",
                 },
                 {
-                  emoji: "📚",
-                  title: "Academic Study",
+                  emoji: "🎓",
+                  title: "Legal Education",
                   description:
-                    "Search textbooks, lecture slides, and videos. Generate study guides and learning reports.",
+                    "Enhance legal research training and provide students with cutting-edge AI tools.",
                 },
                 {
-                  emoji: "💼",
-                  title: "Enterprise Knowledge",
+                  emoji: "👨‍⚖️",
+                  title: "Judicial Research",
                   description:
-                    "Turn company documents, presentations, and training videos into an intelligent knowledge base.",
+                    "Access comprehensive case law analysis and precedent research for informed decisions.",
                 },
               ].map((useCase) => (
                 <div
@@ -199,13 +200,13 @@ export default function AboutPage() {
             variants={FADE_IN_UP_VARIANTS}
             className="text-center bg-slate-100/5 p-10 sm:p-12 rounded-2xl ring-1 ring-inset ring-slate-100/10"
           >
-            <Sparkles className="w-12 h-12 text-indigo-400 mx-auto mb-4" />
+            <Gavel className="w-12 h-12 text-emerald-400 mx-auto mb-4" />
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              Ready to Experience the Future?
+              Ready to Transform Your Practice?
             </h2>
             <p className="text-lg text-slate-400 mb-8 max-w-2xl mx-auto">
-              Join thousands of professionals who've transformed their workflow
-              with intelligent multi-modal search.
+              Join thousands of legal professionals who've revolutionized their
+              research workflow with AI-powered legal intelligence.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -219,7 +220,7 @@ export default function AboutPage() {
                 href="/contact"
                 className="group inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white bg-white/5 rounded-full ring-1 ring-inset ring-slate-100/20 hover:bg-white/10 transition-all duration-300"
               >
-                Get Enterprise Demo
+                Get Legal Demo
               </a>
             </div>
           </motion.div>

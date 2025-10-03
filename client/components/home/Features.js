@@ -7,8 +7,7 @@ import {
   Search,
   Shield,
   FileText,
-  Image,
-  Video,
+  Gavel,
   Database,
   Zap,
   Cloud,
@@ -16,6 +15,8 @@ import {
   ArrowRight,
   Brain,
   BarChart3,
+  Scale,
+  BookOpen,
 } from "lucide-react";
 
 // Animation variants for the tab content
@@ -31,62 +32,64 @@ export function Features() {
   const features = [
     {
       id: 0,
-      title: "Multi-Modal Search",
-      description: "One query across text, images, PDFs, videos, and data.",
+      title: "Case Law Research",
+      description:
+        "Advanced search across millions of legal documents and precedents.",
       icon: Search,
-      color: "from-indigo-500 to-cyan-500",
+      color: "from-emerald-500 to-green-500",
       details: [
-        "Unified search across all file types",
-        "AI-powered semantic understanding",
-        "Cross-format content correlation",
-        "Natural language query processing",
-        "Context-aware results ranking",
-        "Real-time indexing and retrieval",
+        "Natural language case law search",
+        "Precedent analysis and citation tracking",
+        "Jurisdiction-specific filtering",
+        "Historical case timeline analysis",
+        "Similar case recommendations",
+        "Real-time legal updates",
       ],
     },
     {
       id: 1,
-      title: "Google Drive Integration",
-      description: "Seamlessly connect and analyze your Drive content.",
-      icon: Cloud,
+      title: "Document Analysis",
+      description: "AI-powered analysis of legal documents and contracts.",
+      icon: FileText,
       color: "from-green-500 to-emerald-500",
       details: [
-        "One-click Google Drive connection",
-        "Automatic file synchronization",
-        "Secure OAuth 2.0 authentication",
-        "Real-time content indexing",
-        "Selective folder & file access",
-        "Permission-aware searching",
+        "Contract clause identification",
+        "Risk assessment and scoring",
+        "Compliance checking",
+        "Document summarization",
+        "Legal reasoning extraction",
+        "Automated citation checking",
       ],
     },
     {
       id: 2,
-      title: "AI-Powered Analysis",
-      description: "Advanced AI algorithms extract insights from content.",
+      title: "Legal Intelligence",
+      description:
+        "Advanced AI algorithms extract legal insights and patterns.",
       icon: Brain,
-      color: "from-purple-500 to-pink-500",
+      color: "from-emerald-600 to-green-600",
       details: [
-        "Natural Language Processing (NLP)",
-        "Computer Vision for images/videos",
-        "Automatic document summarization",
-        "Data extraction from tables & charts",
-        "Sentiment and tone analysis",
-        "Automated content categorization",
+        "Legal argument analysis",
+        "Judge ruling prediction",
+        "Case outcome forecasting",
+        "Legal strategy optimization",
+        "Statutory interpretation",
+        "Doctrine development tracking",
       ],
     },
     {
       id: 3,
-      title: "Advanced Reporting",
-      description: "Generate comprehensive reports and visualizations.",
+      title: "Case Management",
+      description: "Comprehensive case tracking and management tools.",
       icon: BarChart3,
-      color: "from-orange-500 to-red-500",
+      color: "from-green-600 to-emerald-600",
       details: [
-        "Customizable report generation",
-        "Interactive data visualization tools",
-        "Export to PDF, CSV, and PNG",
-        "Scheduled & automated reporting",
-        "Historical trend analysis",
-        "Create comparative insights",
+        "Case timeline visualization",
+        "Document organization",
+        "Deadline tracking",
+        "Team collaboration tools",
+        "Client management portal",
+        "Performance analytics",
       ],
     },
   ];
@@ -97,14 +100,15 @@ export function Features() {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-4">
-            Powerful features for{" "}
-            <span className="bg-gradient-to-r from-indigo-500 to-cyan-500 bg-clip-text text-transparent">
-              next-generation search
+            Powerful tools for{" "}
+            <span className="bg-gradient-to-r from-emerald-500 to-green-500 bg-clip-text text-transparent">
+              modern legal practice
             </span>
           </h2>
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
-            Our platform revolutionizes how you find and analyze information
-            across all your files and data sources.
+            Our AI-powered platform transforms how legal professionals research,
+            analyze, and manage cases with unprecedented efficiency and
+            accuracy.
           </p>
         </div>
 
@@ -120,7 +124,7 @@ export function Features() {
                   onClick={() => setActiveTab(index)}
                   className={`w-full p-5 rounded-xl transition-all duration-300 text-left group ring-1 ring-inset ${
                     activeTab === index
-                      ? "bg-slate-900/5 dark:bg-slate-100/5 ring-indigo-500/50 dark:ring-indigo-500/80 shadow-lg"
+                      ? "bg-slate-900/5 dark:bg-slate-100/5 ring-emerald-500/50 dark:ring-emerald-500/80 shadow-lg"
                       : "ring-slate-900/10 dark:ring-slate-100/10 hover:ring-slate-900/20 dark:hover:ring-slate-100/20"
                   }`}
                 >
@@ -176,7 +180,7 @@ export function Features() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {features[activeTab].details.map((detail, index) => (
                     <div key={index} className="flex items-center space-x-3">
-                      <CheckCircle className="w-5 h-5 text-indigo-500 shrink-0" />
+                      <CheckCircle className="w-5 h-5 text-emerald-500 shrink-0" />
                       <span className="text-sm text-slate-700 dark:text-slate-300">
                         {detail}
                       </span>
@@ -187,9 +191,9 @@ export function Features() {
                 <div className="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800">
                   <Link
                     href="/register"
-                    className="group inline-flex items-center text-base font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors"
+                    className="group inline-flex items-center text-base font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 transition-colors"
                   >
-                    <span>Get Started Now</span>
+                    <span>Start Your Free Trial</span>
                     <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
@@ -201,29 +205,29 @@ export function Features() {
         {/* Additional Features Grid */}
         <div className="mt-20 sm:mt-24">
           <h3 className="text-2xl font-bold text-slate-900 dark:text-white text-center mb-12">
-            And So Much More...
+            Trusted by Legal Professionals
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { icon: FileText, title: "Documents & PDFs" },
-              { icon: Image, title: "Images & Visuals" },
-              { icon: Video, title: "Video & Audio" },
-              { icon: Database, title: "Data & Spreadsheets" },
-              { icon: Zap, title: "Lightning Fast" },
-              { icon: Shield, title: "Enterprise Security" },
+              { icon: Gavel, title: "Law Firms" },
+              { icon: Scale, title: "Corporate Legal" },
+              { icon: BookOpen, title: "Academic Research" },
+              { icon: Shield, title: "Government Agencies" },
+              { icon: Zap, title: "Fast Processing" },
+              { icon: Database, title: "Secure Database" },
             ].map((feature) => {
               const Icon = feature.icon;
               return (
                 <div key={feature.title} className="text-center">
                   <div className="w-14 h-14 rounded-xl bg-white dark:bg-slate-900 ring-1 ring-slate-900/10 dark:ring-slate-100/10 shadow-md flex items-center justify-center mx-auto mb-4">
-                    <Icon className="w-7 h-7 text-indigo-500" />
+                    <Icon className="w-7 h-7 text-emerald-500" />
                   </div>
                   <h4 className="text-lg font-semibold text-slate-900 dark:text-white mb-1">
                     {feature.title}
                   </h4>
                   <p className="text-slate-600 dark:text-slate-400">
-                    Full analysis and search capabilities.
+                    Comprehensive legal solutions.
                   </p>
                 </div>
               );
