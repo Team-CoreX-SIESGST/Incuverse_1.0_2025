@@ -5,12 +5,15 @@ import {
   ArrowRight,
   Brain,
   FileText,
-  Gavel,
+  Users,
   Scale,
   Search,
   Cloud,
   BookOpen,
   Shield,
+  Heart,
+  Microphone,
+  Calendar,
 } from "lucide-react";
 
 export function CTA() {
@@ -25,8 +28,8 @@ export function CTA() {
       {/* Floating Icons Animation */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <FileText className="absolute top-20 left-10 w-8 h-8 text-slate-300 dark:text-slate-800 animate-float" />
-        <Gavel className="absolute top-40 right-20 w-6 h-6 text-slate-300 dark:text-slate-800 animate-float animation-delay-1000" />
-        <Scale className="absolute bottom-40 left-20 w-7 h-7 text-slate-300 dark:text-slate-800 animate-float animation-delay-2000" />
+        <Users className="absolute top-40 right-20 w-6 h-6 text-slate-300 dark:text-slate-800 animate-float animation-delay-1000" />
+        <Heart className="absolute bottom-40 left-20 w-7 h-7 text-slate-300 dark:text-slate-800 animate-float animation-delay-2000" />
         <BookOpen className="absolute top-60 right-40 w-5 h-5 text-slate-300 dark:text-slate-800 animate-float animation-delay-3000" />
       </div>
 
@@ -36,13 +39,13 @@ export function CTA() {
           <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-slate-200/50 dark:bg-slate-100/5 ring-1 ring-inset ring-slate-900/10 dark:ring-slate-100/10 mb-8 backdrop-blur-lg">
             <Brain className="w-4 h-4 text-emerald-500 dark:text-emerald-400 mr-2" />
             <span className="text-sm font-medium text-slate-800 dark:text-slate-300">
-              AI-Powered Legal Intelligence
+              AI-Powered Health Assistant
             </span>
           </div>
 
           {/* Main Content */}
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 dark:text-white mb-6">
-            Transform Your Legal Practice
+            Transform Community Healthcare
             <br />
             <span className="bg-gradient-to-r from-emerald-500 to-green-500 dark:from-emerald-400 dark:to-green-400 bg-clip-text text-transparent">
               With AI Innovation
@@ -50,34 +53,35 @@ export function CTA() {
           </h2>
 
           <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-3xl mx-auto">
-            Our AI platform analyzes{" "}
+            Our AI platform helps ASHA workers with{" "}
             <strong className="text-slate-900 dark:text-slate-200">
-              case laws, statutes, contracts, and legal documents
+              voice-based patient registration, digital health records, and
+              automated follow-ups
             </strong>{" "}
-            simultaneously. Get instant insights, precedents, and strategic
-            recommendations to win your cases.
+            simultaneously. Get instant insights and improve healthcare delivery
+            in rural communities.
           </p>
 
           {/* Use Cases */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {[
               {
-                icon: "⚖️",
-                title: "Litigation Support",
+                icon: "🎤",
+                title: "Voice Data Entry",
                 content:
-                  "Analyze case laws, precedents, and build stronger legal arguments with AI insights.",
+                  "Register patients and update health records using simple voice commands in local language.",
               },
               {
-                icon: "📝",
-                title: "Contract Review",
+                icon: "📅",
+                title: "Smart Follow-ups",
                 content:
-                  "Automate contract analysis, identify risks, and ensure compliance with regulations.",
+                  "Automated appointment scheduling and reminders for better patient care continuity.",
               },
               {
-                icon: "🔍",
-                title: "Legal Research",
+                icon: "🏥",
+                title: "Health Schemes",
                 content:
-                  "Search through millions of legal documents and get relevant results in seconds.",
+                  "Easy access to government health benefits and scheme information for communities.",
               },
             ].map((useCase) => (
               <div

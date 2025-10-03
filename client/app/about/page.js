@@ -7,8 +7,8 @@ import {
   Brain,
   Search,
   FileText,
-  Gavel,
-  Scale,
+  Users,
+  Heart,
   BookOpen,
   Zap,
   Shield,
@@ -19,6 +19,8 @@ import {
   Sparkles,
   ArrowRight,
   Database,
+  Mic,
+  Activity,
 } from "lucide-react";
 
 // Animation variants for Framer Motion
@@ -55,18 +57,18 @@ export default function AboutPage() {
           {/* Hero Section */}
           <motion.div variants={FADE_IN_UP_VARIANTS} className="text-center">
             <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-slate-100/5 ring-1 ring-inset ring-slate-100/10 mb-8 backdrop-blur-lg">
-              <Scale className="w-4 h-4 text-emerald-400 mr-2" />
+              <Heart className="w-4 h-4 text-emerald-400 mr-2" />
               <span className="text-sm font-medium text-slate-300">
-                AI-Powered Legal Intelligence
+                AI-Powered Health Assistant
               </span>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent mb-6">
-              Revolutionizing Legal Research
+              Revolutionizing Community Healthcare
             </h1>
             <p className="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto">
-              The world's first AI platform specifically designed for legal
-              professionals. Search across case laws, statutes, contracts, and
-              legal documents with unprecedented speed and accuracy.
+              The world's first AI platform specifically designed for ASHA
+              workers. Manage patient data, schedule follow-ups, and access
+              health schemes with voice commands in local languages.
             </p>
           </motion.div>
 
@@ -75,22 +77,22 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 {
-                  icon: Search,
-                  title: "Case Law Research",
+                  icon: Mic,
+                  title: "Voice-Based Interface",
                   description:
-                    "Find relevant precedents and case laws across millions of legal documents with a single query.",
+                    "Register patients and update records using simple voice commands in vernacular languages.",
                 },
                 {
                   icon: Brain,
-                  title: "Legal Analysis",
+                  title: "Health Intelligence",
                   description:
-                    "Advanced AI models that understand legal reasoning, statutes, and judicial interpretations.",
+                    "AI models that understand healthcare workflows and provide intelligent recommendations.",
                 },
                 {
                   icon: BarChart3,
-                  title: "Case Strategy Insights",
+                  title: "Community Analytics",
                   description:
-                    "Generate legal arguments, identify weaknesses, and build stronger case strategies automatically.",
+                    "Track health trends, vaccination rates, and community health outcomes automatically.",
                 },
               ].map((item) => (
                 <div
@@ -113,27 +115,27 @@ export default function AboutPage() {
             className="bg-slate-100/5 p-8 rounded-2xl ring-1 ring-inset ring-slate-100/10"
           >
             <h2 className="text-3xl font-bold text-white mb-8 text-center">
-              Built for Legal Excellence
+              Built for Healthcare Excellence
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
                 {
                   icon: Cpu,
-                  title: "Legal Language Models",
+                  title: "Vernacular AI Models",
                   description:
-                    "Specialized AI models trained on legal texts for superior understanding of case law and statutes.",
+                    "Specialized AI models trained on healthcare data and local languages for superior understanding.",
                 },
                 {
                   icon: Shield,
-                  title: "Enterprise Security",
+                  title: "Healthcare Security",
                   description:
-                    "Bank-level encryption and compliance with legal industry security standards and regulations.",
+                    "Bank-level encryption and compliance with healthcare data protection standards and regulations.",
                 },
                 {
                   icon: Database,
-                  title: "Legal Database",
+                  title: "Health Database",
                   description:
-                    "Comprehensive database of case laws, statutes, and legal precedents updated in real-time.",
+                    "Comprehensive database of health schemes, protocols, and community health records.",
                 },
               ].map((tech) => (
                 <div key={tech.title} className="text-center">
@@ -150,33 +152,33 @@ export default function AboutPage() {
           {/* Use Cases */}
           <motion.div variants={FADE_IN_UP_VARIANTS}>
             <h2 className="text-3xl font-bold text-white mb-8 text-center">
-              Trusted by Legal Professionals
+              Trusted by Healthcare Professionals
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
                 {
-                  emoji: "⚖️",
-                  title: "Law Firms",
+                  emoji: "👩‍⚕️",
+                  title: "ASHA Workers",
                   description:
-                    "Accelerate case research, reduce billable hours, and deliver better outcomes for clients.",
+                    "Streamline patient registration, reduce paperwork, and improve healthcare delivery efficiency.",
                 },
                 {
-                  emoji: "🏛️",
-                  title: "Corporate Legal",
+                  emoji: "🏥",
+                  title: "Health Centers",
                   description:
-                    "Streamline contract review, compliance checking, and corporate governance documentation.",
+                    "Access comprehensive community health data and track public health programs effectively.",
                 },
                 {
-                  emoji: "🎓",
-                  title: "Legal Education",
+                  emoji: "🤰",
+                  title: "Maternal Healthcare",
                   description:
-                    "Enhance legal research training and provide students with cutting-edge AI tools.",
+                    "Monitor pregnancy progress, schedule antenatal checks, and reduce maternal mortality.",
                 },
                 {
-                  emoji: "👨‍⚖️",
-                  title: "Judicial Research",
+                  emoji: "👶",
+                  title: "Child Healthcare",
                   description:
-                    "Access comprehensive case law analysis and precedent research for informed decisions.",
+                    "Track immunization schedules, nutrition status, and child development milestones.",
                 },
               ].map((useCase) => (
                 <div
@@ -200,13 +202,13 @@ export default function AboutPage() {
             variants={FADE_IN_UP_VARIANTS}
             className="text-center bg-slate-100/5 p-10 sm:p-12 rounded-2xl ring-1 ring-inset ring-slate-100/10"
           >
-            <Gavel className="w-12 h-12 text-emerald-400 mx-auto mb-4" />
+            <Activity className="w-12 h-12 text-emerald-400 mx-auto mb-4" />
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              Ready to Transform Your Practice?
+              Ready to Transform Community Health?
             </h2>
             <p className="text-lg text-slate-400 mb-8 max-w-2xl mx-auto">
-              Join thousands of legal professionals who've revolutionized their
-              research workflow with AI-powered legal intelligence.
+              Join thousands of ASHA workers and healthcare professionals who've
+              revolutionized their workflow with AI-powered health assistance.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -220,7 +222,7 @@ export default function AboutPage() {
                 href="/contact"
                 className="group inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white bg-white/5 rounded-full ring-1 ring-inset ring-slate-100/20 hover:bg-white/10 transition-all duration-300"
               >
-                Get Legal Demo
+                Get Health Demo
               </a>
             </div>
           </motion.div>

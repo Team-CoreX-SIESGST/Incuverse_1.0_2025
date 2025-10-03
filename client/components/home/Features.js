@@ -7,7 +7,7 @@ import {
   Search,
   Shield,
   FileText,
-  Gavel,
+  Users,
   Database,
   Zap,
   Cloud,
@@ -17,6 +17,10 @@ import {
   BarChart3,
   Scale,
   BookOpen,
+  Mic,
+  Calendar,
+  Heart,
+  Activity,
 } from "lucide-react";
 
 // Animation variants for the tab content
@@ -32,64 +36,63 @@ export function Features() {
   const features = [
     {
       id: 0,
-      title: "Case Law Research",
+      title: "Voice Patient Registration",
       description:
-        "Advanced search across millions of legal documents and precedents.",
-      icon: Search,
+        "Register patients using simple voice commands in local language.",
+      icon: Mic,
       color: "from-emerald-500 to-green-500",
       details: [
-        "Natural language case law search",
-        "Precedent analysis and citation tracking",
-        "Jurisdiction-specific filtering",
-        "Historical case timeline analysis",
-        "Similar case recommendations",
-        "Real-time legal updates",
+        "Vernacular voice recognition",
+        "Auto-fill patient forms",
+        "QR health card generation",
+        "Offline voice processing",
+        "Multiple language support",
+        "Real-time validation",
       ],
     },
     {
       id: 1,
-      title: "Document Analysis",
-      description: "AI-powered analysis of legal documents and contracts.",
-      icon: FileText,
+      title: "Smart Follow-up Scheduling",
+      description: "Automated appointment tracking and reminder system.",
+      icon: Calendar,
       color: "from-green-500 to-emerald-500",
       details: [
-        "Contract clause identification",
-        "Risk assessment and scoring",
-        "Compliance checking",
-        "Document summarization",
-        "Legal reasoning extraction",
-        "Automated citation checking",
+        "Automated visit reminders",
+        "Priority-based scheduling",
+        "Missed visit alerts",
+        "Progress tracking",
+        "Performance analytics",
+        "Community health trends",
       ],
     },
     {
       id: 2,
-      title: "Legal Intelligence",
-      description:
-        "Advanced AI algorithms extract legal insights and patterns.",
-      icon: Brain,
+      title: "Health Scheme Access",
+      description: "Easy access to government health schemes and benefits.",
+      icon: Heart,
       color: "from-emerald-600 to-green-600",
       details: [
-        "Legal argument analysis",
-        "Judge ruling prediction",
-        "Case outcome forecasting",
-        "Legal strategy optimization",
-        "Statutory interpretation",
-        "Doctrine development tracking",
+        "Scheme eligibility checking",
+        "Application guidance",
+        "Benefit explanations",
+        "Document requirements",
+        "Status tracking",
+        "Local language support",
       ],
     },
     {
       id: 3,
-      title: "Case Management",
-      description: "Comprehensive case tracking and management tools.",
+      title: "Community Health Dashboard",
+      description: "Track community health metrics and outcomes.",
       icon: BarChart3,
       color: "from-green-600 to-emerald-600",
       details: [
-        "Case timeline visualization",
-        "Document organization",
-        "Deadline tracking",
-        "Team collaboration tools",
-        "Client management portal",
-        "Performance analytics",
+        "Health trend analysis",
+        "Vaccination tracking",
+        "Maternal health monitoring",
+        "Child nutrition status",
+        "Outbreak alerts",
+        "Performance reports",
       ],
     },
   ];
@@ -100,15 +103,15 @@ export function Features() {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-4">
-            Powerful tools for{" "}
+            Comprehensive tools for{" "}
             <span className="bg-gradient-to-r from-emerald-500 to-green-500 bg-clip-text text-transparent">
-              modern legal practice
+              community healthcare
             </span>
           </h2>
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
-            Our AI-powered platform transforms how legal professionals research,
-            analyze, and manage cases with unprecedented efficiency and
-            accuracy.
+            Our AI-powered platform transforms how ASHA workers serve their
+            communities with efficient data management and intelligent health
+            insights.
           </p>
         </div>
 
@@ -205,17 +208,17 @@ export function Features() {
         {/* Additional Features Grid */}
         <div className="mt-20 sm:mt-24">
           <h3 className="text-2xl font-bold text-slate-900 dark:text-white text-center mb-12">
-            Trusted by Legal Professionals
+            Trusted by Healthcare Professionals
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { icon: Gavel, title: "Law Firms" },
-              { icon: Scale, title: "Corporate Legal" },
-              { icon: BookOpen, title: "Academic Research" },
+              { icon: Users, title: "ASHA Workers" },
+              { icon: Activity, title: "Health Centers" },
+              { icon: Heart, title: "Maternal Care" },
               { icon: Shield, title: "Government Agencies" },
               { icon: Zap, title: "Fast Processing" },
-              { icon: Database, title: "Secure Database" },
+              { icon: Database, title: "Secure Data" },
             ].map((feature) => {
               const Icon = feature.icon;
               return (
@@ -227,7 +230,7 @@ export function Features() {
                     {feature.title}
                   </h4>
                   <p className="text-slate-600 dark:text-slate-400">
-                    Comprehensive legal solutions.
+                    Comprehensive health solutions.
                   </p>
                 </div>
               );

@@ -10,8 +10,9 @@ import {
   MapPin,
   Send,
   Loader2,
-  Scale,
-  Building,
+  Heart,
+  Users,
+  Stethoscope,
 } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -50,8 +51,8 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    firm: "",
-    practiceArea: "",
+    organization: "",
+    role: "",
     message: "",
   });
   const [loading, setLoading] = useState(false);
@@ -71,13 +72,13 @@ export default function ContactPage() {
     // Simulate form submission
     setTimeout(() => {
       toast.success(
-        "Message sent successfully! Our legal team will contact you soon."
+        "Message sent successfully! Our health team will contact you soon."
       );
       setFormData({
         name: "",
         email: "",
-        firm: "",
-        practiceArea: "",
+        organization: "",
+        role: "",
         message: "",
       });
       setLoading(false);
@@ -87,30 +88,28 @@ export default function ContactPage() {
   const contactInfo = [
     {
       icon: Mail,
-      title: "Legal Support",
-      content: "support@legalairesearch.com",
+      title: "Health Support",
+      content: "support@incuverse.com",
     },
     {
       icon: Phone,
-      title: "Sales & Demos",
-      content: "+1 (555) 123-LEGAL",
+      title: "Implementation & Demos",
+      content: "+91 (XXX) XXX-HEALTH",
     },
     {
-      icon: Building,
+      icon: Users,
       title: "Headquarters",
-      content: "123 Justice Avenue, Legal District, USA",
+      content: "Healthcare Innovation District, India",
     },
   ];
 
-  const practiceAreas = [
-    "General Practice",
-    "Corporate Law",
-    "Criminal Law",
-    "Family Law",
-    "Intellectual Property",
-    "Real Estate",
-    "Tax Law",
-    "Immigration Law",
+  const roles = [
+    "ASHA Worker",
+    "Health Supervisor",
+    "Government Official",
+    "NGO Worker",
+    "Healthcare Professional",
+    "Technology Partner",
     "Other",
   ];
 
@@ -131,18 +130,18 @@ export default function ContactPage() {
           {/* Hero Section */}
           <motion.div variants={FADE_IN_UP_VARIANTS} className="text-center">
             <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-slate-100/5 ring-1 ring-inset ring-slate-100/10 mb-8 backdrop-blur-lg">
-              <Scale className="w-4 h-4 text-emerald-400 mr-2" />
+              <Heart className="w-4 h-4 text-emerald-400 mr-2" />
               <span className="text-sm font-medium text-slate-300">
-                Legal Support & Demos
+                Health Support & Implementation
               </span>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent mb-6">
-              Contact Our Legal Team
+              Contact Our Health Team
             </h1>
             <p className="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto">
-              Interested in transforming your legal practice with AI? Schedule a
-              personalized demo or get answers to your questions from our legal
-              technology specialists.
+              Interested in transforming community healthcare with AI? Schedule
+              a personalized demo or get answers to your questions from our
+              health technology specialists.
             </p>
           </motion.div>
 
@@ -169,17 +168,17 @@ export default function ContactPage() {
                 </div>
               ))}
 
-              {/* Additional Legal Info */}
+              {/* Additional Health Info */}
               <div className="bg-slate-100/5 p-6 rounded-xl ring-1 ring-inset ring-slate-100/10 mt-8">
                 <h4 className="text-lg font-semibold text-slate-100 mb-3">
-                  Why Legal Professionals Choose Us
+                  Why Healthcare Professionals Choose Us
                 </h4>
                 <ul className="space-y-2 text-slate-400 text-sm">
-                  <li>• 10M+ case law database</li>
-                  <li>• 50x faster legal research</li>
+                  <li>• 10K+ ASHA workers supported</li>
+                  <li>• 50x faster data entry</li>
                   <li>• Enterprise-grade security</li>
-                  <li>• Bar association compliant</li>
-                  <li>• Dedicated legal support team</li>
+                  <li>• Healthcare compliant</li>
+                  <li>• Dedicated health support team</li>
                 </ul>
               </div>
             </div>
@@ -187,7 +186,7 @@ export default function ContactPage() {
             {/* Contact Form */}
             <div className="bg-slate-100/5 p-8 rounded-2xl ring-1 ring-inset ring-slate-100/10">
               <h2 className="text-2xl font-bold text-white mb-6">
-                Request a Legal Demo
+                Request a Health Demo
               </h2>
               <form onSubmit={handleSubmit} className="space-y-5">
                 <FormInput
@@ -204,28 +203,28 @@ export default function ContactPage() {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="your.email@lawfirm.com"
+                  placeholder="your.email@health.org"
                 />
                 <FormInput
                   type="text"
-                  name="firm"
+                  name="organization"
                   required
-                  value={formData.firm}
+                  value={formData.organization}
                   onChange={handleChange}
-                  placeholder="Law firm or organization"
+                  placeholder="Health organization or NGO"
                 />
 
                 <select
-                  name="practiceArea"
+                  name="role"
                   required
-                  value={formData.practiceArea}
+                  value={formData.role}
                   onChange={handleChange}
                   className="w-full bg-slate-900/50 border-0 rounded-md px-4 py-3 text-slate-300 placeholder-slate-500 ring-1 ring-inset ring-slate-100/10 focus:ring-2 focus:ring-inset focus:ring-emerald-500 transition"
                 >
-                  <option value="">Select your practice area</option>
-                  {practiceAreas.map((area) => (
-                    <option key={area} value={area}>
-                      {area}
+                  <option value="">Select your role</option>
+                  {roles.map((role) => (
+                    <option key={role} value={role}>
+                      {role}
                     </option>
                   ))}
                 </select>
@@ -236,7 +235,7 @@ export default function ContactPage() {
                   required
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Tell us about your legal research needs, case volume, and specific challenges you're facing..."
+                  placeholder="Tell us about your healthcare needs, community size, and specific challenges you're facing..."
                 />
 
                 <button
@@ -249,7 +248,7 @@ export default function ContactPage() {
                   ) : (
                     <>
                       <Send className="w-4 h-4 mr-2" />
-                      Request Legal Demo
+                      Request Health Demo
                     </>
                   )}
                 </button>
