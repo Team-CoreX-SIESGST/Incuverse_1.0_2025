@@ -5,7 +5,7 @@ export default function LoadingMessage() {
     <div className="flex justify-start">
       <div className="flex max-w-[80%]">
         <div className="mr-3">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-r from-emerald-500 to-green-500 flex items-center justify-center">
             <Bot className="w-4 h-4 text-white" />
           </div>
         </div>

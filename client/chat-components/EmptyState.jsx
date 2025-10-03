@@ -31,7 +31,7 @@ export default function EmptyState({ setMessage }) {
   return (
     <div className="flex items-center justify-center h-full p-8">
       <div className="text-center max-w-2xl">
-        <div className="w-20 h-20 bg-gradient-to-r from-indigo-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-8">
+        <div className="w-20 h-20 bg-gradient-to-r from-emerald-500 to-green-500 rounded-full flex items-center justify-center mx-auto mb-8">
           <Sparkles className="w-10 h-10 text-white" />
         </div>
         <h1 className="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-4">

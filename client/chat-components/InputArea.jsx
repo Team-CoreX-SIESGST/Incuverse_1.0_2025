@@ -149,31 +149,33 @@ export default function InputArea({
 
     setIsCorrectingPrompt(true);
     try {
-      const response = await fetch('/api/ai/improve', {
-        method: 'POST',
+      const response = await fetch("/api/ai/improve", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        credentials: 'include',
+        credentials: "include",
         body: JSON.stringify({ prompt: message }),
       });
 
       const data = await response.json();
-      
+
       if (response.ok && data.success) {
         setMessage(data.data.improvedPrompt);
       } else {
         // Handle error cases
-        console.error('Failed to improve prompt:', data.message);
+        console.error("Failed to improve prompt:", data.message);
         if (response.status === 429) {
-          alert(`Token limit exceeded: ${data.message}\n\nPlease upgrade your plan to continue.`);
+          alert(
+            `Token limit exceeded: ${data.message}\n\nPlease upgrade your plan to continue.`
+          );
         } else {
-          alert(data.message || 'Failed to improve prompt. Please try again.');
+          alert(data.message || "Failed to improve prompt. Please try again.");
         }
       }
     } catch (error) {
-      console.error('Error improving prompt:', error);
-      alert('Network error. Please check your connection and try again.');
+      console.error("Error improving prompt:", error);
+      alert("Network error. Please check your connection and try again.");
     } finally {
       setIsCorrectingPrompt(false);
     }
@@ -269,7 +271,7 @@ export default function InputArea({
             <button
               onClick={handleAutoCorrect}
               disabled={!message.trim() || isCorrectingPrompt || isLoading}
-              className="flex-shrink-0 w-8 h-8 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 rounded-full hover:bg-slate-800 dark:hover:bg-slate-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center disabled:hover:bg-slate-900 dark:disabled:hover:bg-slate-100"
+              className="flex-shrink-0 w-8 h-8 bg-emerald-600 text-white rounded-full hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center disabled:hover:bg-emerald-600"
               title="Improve prompt with AI"
             >
               {isCorrectingPrompt ? (
@@ -283,7 +285,7 @@ export default function InputArea({
               disabled={
                 (!message.trim() && selectedFiles?.length === 0) || isLoading
               }
-              className="flex-shrink-0 w-8 h-8 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 rounded-full hover:bg-slate-800 dark:hover:bg-slate-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center disabled:hover:bg-slate-900 dark:disabled:hover:bg-slate-100"
+              className="flex-shrink-0 w-8 h-8 bg-emerald-600 text-white rounded-full hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center disabled:hover:bg-emerald-600"
               title="Send message"
             >
               {isLoading ? (
@@ -298,7 +300,9 @@ export default function InputArea({
           AI can search across text, images, PDFs, and more from your connected
           drives
           {isGoogleAuthenticated && (
-            <span className="text-blue-500 ml-1">• Google Drive connected</span>
+            <span className="text-emerald-500 ml-1">
+              • Google Drive connected
+            </span>
           )}
         </p>
       </div>

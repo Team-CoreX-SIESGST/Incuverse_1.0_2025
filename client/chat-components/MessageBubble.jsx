@@ -1,6 +1,6 @@
 import ReactMarkdown from "react-markdown";
 import { User, Bot, Volume2 } from "lucide-react";
-import { useState, useRef,useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export default function MessageBubble({ chat, formatTime }) {
   const [isSpeaking, setIsSpeaking] = useState(false);
@@ -48,7 +48,7 @@ export default function MessageBubble({ chat, formatTime }) {
             className={`w-8 h-8 rounded-full flex items-center justify-center ${
               chat.isUser
                 ? "bg-slate-900 dark:bg-slate-100"
-                : "bg-gradient-to-r from-indigo-500 to-cyan-500"
+                : "bg-gradient-to-r from-emerald-500 to-green-500"
             }`}
           >
             {chat.isUser ? (
@@ -77,7 +77,7 @@ export default function MessageBubble({ chat, formatTime }) {
                 onClick={handleSpeak}
                 className={`flex items-center justify-center w-6 h-6 rounded-full transition-colors ${
                   isSpeaking
-                    ? "bg-indigo-100 text-indigo-600 dark:bg-indigo-900 dark:text-indigo-300"
+                    ? "bg-emerald-100 text-emerald-600 dark:bg-emerald-900 dark:text-emerald-300"
                     : "bg-slate-100 text-slate-500 hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-400 dark:hover:bg-slate-600"
                 }`}
                 title={isSpeaking ? "Stop speaking" : "Speak message"}

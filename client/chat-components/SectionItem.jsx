@@ -18,7 +18,7 @@ export default function SectionItem({
     <div
       className={`group relative flex items-center p-2 rounded-lg cursor-pointer transition-all duration-200 ${
         currentSection?._id === section?._id
-          ? "bg-slate-200 dark:bg-slate-700"
+          ? "bg-emerald-50 dark:bg-emerald-500/10"
           : "hover:bg-slate-100 dark:hover:bg-slate-700/50"
       }`}
       onClick={() => onSelectSection(section)}
