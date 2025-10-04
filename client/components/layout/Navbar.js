@@ -292,7 +292,7 @@ export function Navbar() {
                 className:
                   "text-xl font-semibold tracking-tight text-slate-900 dark:text-white",
               },
-              "LegalAI"
+              "ASHA सखी"
             )
           )
         ),

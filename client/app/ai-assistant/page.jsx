@@ -72,7 +72,7 @@ export default function AIAssistant() {
     setIsLoading(true);
     try {
       const result = await lifestyleRecommendations(userProfile);
-      setLifestyleData(result.recommendations);
+      setLifestyleData(result.data.recommendations);
     } catch (error) {
       console.error("Lifestyle recommendations error:", error);
       alert("Failed to generate recommendations");

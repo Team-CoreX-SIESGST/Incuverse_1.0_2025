@@ -28,7 +28,7 @@ export function Footer() {
   const linkedinUrl =
     process.env.NEXT_PUBLIC_LINKEDIN_URL || "https://linkedin.com";
   const emailUrl =
-    process.env.NEXT_PUBLIC_EMAIL || "mailto:contact@legalai.com";
+    process.env.NEXT_PUBLIC_EMAIL || "mailto:contact@ASHA सखी.com";
 
   const socialLinks = [
     { href: githubUrl, icon: Github, label: "GitHub" },
@@ -57,7 +57,7 @@ export function Footer() {
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
-                  LegalAI Research
+                  ASHA सखी Research
                 </h3>
                 <p className="text-sm text-slate-500 dark:text-slate-400">
                   Research. Analyze. Win.
@@ -191,7 +191,7 @@ export function Footer() {
         {/* Bottom Section */}
         <div className="mt-16 pt-8 border-t border-slate-200 dark:border-slate-800">
           <div className="text-center text-sm text-slate-500 dark:text-slate-400">
-            <p>&copy; {currentYear} LegalAI Research. All rights reserved.</p>
+            <p>&copy; {currentYear} ASHA सखी Research. All rights reserved.</p>
             <p className="mt-1 text-xs">
               Trusted by attorneys and legal professionals worldwide
             </p>
