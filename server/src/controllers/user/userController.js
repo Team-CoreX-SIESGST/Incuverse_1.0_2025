@@ -1,7 +1,9 @@
 import User from "../../models/user.js";
+import AshaWorker from "../../models/ashaWorker.js";
 import Plan from "../../models/plan.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import crypto from "crypto";
 import {
     asyncHandler,
     uploadOnCloudinary,
@@ -10,6 +12,7 @@ import {
     sendResponse
 } from "../../utils/index.js";
 import { verifyGoogleToken } from "../../utils/googleAuth.js";
+import { sendEmail } from "../../utils/emailService.js"; // Adjust the path as needed
 
 // Token generator functions
 const generateAccessToken = (user) => {
@@ -34,7 +37,7 @@ const generateRefreshToken = (user) => {
 
 const cookieOptions = {
     httpOnly: false,
-    secure: true,
+    secure: process.env.NODE_ENV === "production",
     sameSite: "Strict"
 };
 
@@ -57,14 +60,260 @@ const assignFreePlan = async (userId) => {
     }
 };
 
-export const createUser = asyncHandler(async (req, res) => {
-    const { name, email, password, date_of_birth, image, googleToken } = req.body;
-    // Google Auth Flow
-    console.log("hihfei");
+// Generate verification token
+const generateVerificationToken = () => {
+    return crypto.randomBytes(32).toString("hex");
+};
 
+// Generate OTP (6 digits)
+const generateOTP = () => {
+    return Math.floor(100000 + Math.random() * 900000).toString();
+};
+
+// Send OTP for email verification using your sendEmail function
+export const sendEmailOTP = asyncHandler(async (req, res) => {
+    const { email } = req.body;
+
+    if (!email) {
+        return sendResponse(res, false, null, "Email is required", statusType.BAD_REQUEST);
+    }
+
+    // Check if user already exists
+    const existingUser = await User.findOne({ email, isVerified: true });
+    if (existingUser) {
+        return sendResponse(
+            res,
+            false,
+            null,
+            "User already exists with this email",
+            statusType.BAD_REQUEST
+        );
+    }
+
+    // Generate OTP and verification token
+    const otp = generateOTP();
+    const verificationToken = generateVerificationToken();
+    const verificationExpires = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
+
+    // Find or create unverified user
+    let user = await User.findOne({ email, isVerified: false });
+
+    if (user) {
+        user.verificationToken = verificationToken;
+        user.verificationExpires = verificationExpires;
+        user.otp = otp; // Store OTP for verification
+        await user.save();
+    } else {
+        user = await User.create({
+            email,
+            verificationToken,
+            verificationExpires,
+            otp,
+            isVerified: false
+        });
+    }
+
+    // Send OTP email using your sendEmail function
+    const emailSubject = "Your OTP for Email Verification";
+    const emailBody = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <style>
+                .container { max-width: 600px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif; }
+                .header { background: linear-gradient(135deg, #10b981, #059669); padding: 20px; text-align: center; color: white; border-radius: 10px 10px 0 0; }
+                .content { background: #f9fafb; padding: 30px; border-radius: 0 0 10px 10px; }
+                .otp-code { font-size: 32px; font-weight: bold; text-align: center; color: #059669; margin: 20px 0; }
+                .footer { text-align: center; margin-top: 20px; color: #6b7280; font-size: 14px; }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <h1>Email Verification</h1>
+                </div>
+                <div class="content">
+                    <h2>Hello,</h2>
+                    <p>Thank you for registering. Use the OTP below to verify your email address:</p>
+                    <div class="otp-code">${otp}</div>
+                    <p>This OTP will expire in 10 minutes.</p>
+                    <p>If you didn't request this, please ignore this email.</p>
+                </div>
+                <div class="footer">
+                    <p>&copy; ${new Date().getFullYear()} Your App Name. All rights reserved.</p>
+                </div>
+            </div>
+        </body>
+        </html>
+    `;
+
+    try {
+        await sendEmail(
+            process.env.SENDER_EMAIL, // from
+            email, // to
+            emailSubject, // subject
+            emailBody // body
+        );
+
+        return sendResponse(res, true, { verificationToken }, "OTP sent to email", statusType.OK);
+    } catch (error) {
+        console.error("Error sending OTP email:", error);
+        return sendResponse(
+            res,
+            false,
+            null,
+            "Failed to send OTP email",
+            statusType.INTERNAL_SERVER_ERROR
+        );
+    }
+});
+
+// Verify OTP and complete basic registration
+export const verifyEmailOTP = asyncHandler(async (req, res) => {
+    const { email, otp, verificationToken, password, name, date_of_birth } = req.body;
+
+    if (!email || !otp || !verificationToken) {
+        return sendResponse(
+            res,
+            false,
+            null,
+            "Email, OTP and verification token are required",
+            statusType.BAD_REQUEST
+        );
+    }
+
+    // Find unverified user
+    const user = await User.findOne({
+        email,
+        verificationToken,
+        verificationExpires: { $gt: new Date() }
+    });
+
+    if (!user) {
+        return sendResponse(res, false, null, "Invalid or expired OTP", statusType.BAD_REQUEST);
+    }
+    console.log('user',user.otp)
+    // Verify OTP
+    if (user.otp !== otp) {
+        return sendResponse(res, false, null, "Invalid OTP", statusType.BAD_REQUEST);
+    }
+
+    // Update user with basic details
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    user.name = name;
+    user.date_of_birth = date_of_birth;
+    user.password = hashedPassword;
+    user.isVerified = true;
+    user.verificationToken = undefined;
+    user.verificationExpires = undefined;
+    user.otp = undefined;
+
+    await user.save();
+
+    // Assign free plan
+    await assignFreePlan(user._id);
+
+    // Generate tokens
+    const accessToken = generateAccessToken(user);
+    const refreshToken = generateRefreshToken(user);
+
+    user.refresh_token = refreshToken;
+    await user.save();
+
+    const userData = user.toObject();
+    delete userData.password;
+
+    res.cookie("accessToken", accessToken, cookieOptions);
+    res.cookie("refreshToken", refreshToken, cookieOptions);
+
+    return sendResponse(
+        res,
+        true,
+        {
+            ...userData,
+            accessToken,
+            requiresAshaDetails: true // Flag to indicate frontend to collect Asha details
+        },
+        "Email verified and basic registration completed",
+        statusType.OK
+    );
+});
+
+// Complete Asha worker registration
+export const completeAshaRegistration = asyncHandler(async (req, res) => {
+    const {
+        ashaId,
+        phone,
+        address,
+        location,
+        yearsOfExperience,
+        qualifications,
+        languages,
+        governmentId,
+        idDocument
+    } = req.body;
+
+    const userId = req.user._id;
+
+    if (!ashaId || !phone || !governmentId) {
+        return sendResponse(
+            res,
+            false,
+            null,
+            "ASHAA ID, phone and government ID are required",
+            statusType.BAD_REQUEST
+        );
+    }
+
+    // Check if ASHA ID already exists
+    const existingAsha = await AshaWorker.findOne({ ashaId });
+    if (existingAsha) {
+        return sendResponse(res, false, null, "ASHA ID already exists", statusType.BAD_REQUEST);
+    }
+
+    // Create Asha worker details
+    const ashaWorker = await AshaWorker.create({
+        user: userId,
+        ashaId,
+        phone,
+        address,
+        location,
+        yearsOfExperience,
+        qualifications: qualifications || [],
+        languages: languages || ["Hindi", "English"],
+        governmentId,
+        idDocument
+    });
+
+    // Update user role
+    await User.findByIdAndUpdate(userId, {
+        role: "asha_worker",
+        ashaWorkerDetails: ashaWorker._id
+    });
+
+    const user = await User.findById(userId).populate("ashaWorkerDetails");
+
+    const userData = user.toObject();
+    delete userData.password;
+
+    return sendResponse(
+        res,
+        true,
+        userData,
+        "ASHA worker registration completed successfully",
+        statusType.OK
+    );
+});
+
+// Updated createUser for Google registration
+export const createUser = asyncHandler(async (req, res) => {
+    const { name, email, password, date_of_birth, image, googleToken, role } = req.body;
+
+    // Google Auth Flow
     if (googleToken) {
         try {
-            console.log("hihfei");
             const googleUser = await verifyGoogleToken(googleToken);
             let user = await User.findOne({
                 $or: [{ email: googleUser.email }, { googleId: googleUser.sub }]
@@ -86,7 +335,9 @@ export const createUser = asyncHandler(async (req, res) => {
                 email: googleUser.email,
                 googleId: googleUser.sub,
                 image: googleUser.picture,
-                date_of_birth: date_of_birth || null
+                date_of_birth: date_of_birth || null,
+                role: role || "user",
+                isVerified: true
             });
 
             // Assign free plan to new user
@@ -108,7 +359,11 @@ export const createUser = asyncHandler(async (req, res) => {
             return sendResponse(
                 res,
                 true,
-                { ...userData, accessToken },
+                {
+                    ...userData,
+                    accessToken,
+                    requiresAshaDetails: role === "asha_worker"
+                },
                 "User registered with Google",
                 statusType.CREATED
             );
@@ -116,59 +371,13 @@ export const createUser = asyncHandler(async (req, res) => {
             return sendResponse(res, false, null, error.message, statusType.BAD_REQUEST);
         }
     } else {
-        if (!name || !email || !password) {
-            return sendResponse(res, false, null, "Fields cannot be empty", statusType.BAD_REQUEST);
-        }
-        // if (req.files && req.files.image) {
-        //     const avatarLocalPath = req.files.image[0].path;
-        //     const image_temp = await uploadOnCloudinary(avatarLocalPath, { secure: true });
-        //     image = image_temp?.secure_url;
-        // }
-
-        let user = await User.findOne({ email });
-        if (user) {
-            return sendResponse(
-                res,
-                false,
-                null,
-                "User already exists, please login",
-                statusType.BAD_REQUEST
-            );
-        }
-
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-
-        // Save User
-        user = await User.create({ name, email, password: hashedPassword, date_of_birth, image });
-
-        // Assign free plan to new user
-        await assignFreePlan(user._id);
-
-        // Generate Tokens
-        const accessToken = generateAccessToken(user);
-        const refreshToken = generateRefreshToken(user);
-
-        // Store refreshToken in DB
-        user.refresh_token = refreshToken;
-        await user.save();
-
-        // Prepare response
-        const userData = user.toObject();
-        delete userData.password;
-        // delete userData.refresh_token;
-
-        res.cookie("accessToken", accessToken, cookieOptions);
-        res.cookie("refreshToken", refreshToken, {
-            ...cookieOptions,
-            maxAge: 7 * 24 * 60 * 60 * 1000
-        }); // 7 days
+        // Regular email registration - now handled by OTP flow
         return sendResponse(
             res,
-            true,
-            { ...userData, accessToken },
-            "User registered successfully",
-            statusType.CREATED
+            false,
+            null,
+            "Please use OTP verification for email registration",
+            statusType.BAD_REQUEST
         );
     }
 });
@@ -229,7 +438,7 @@ export const loginUser = asyncHandler(async (req, res) => {
             );
         }
 
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email, isVerified: true });
         if (!user) {
             return sendResponse(res, false, null, "User does not exist", statusType.BAD_REQUEST);
         }
@@ -253,7 +462,7 @@ export const loginUser = asyncHandler(async (req, res) => {
 
         const userData = user.toObject();
         delete userData.password;
-        // delete userData.refresh_token;
+
         res.cookie("accessToken", accessToken, cookieOptions);
         res.cookie("refreshToken", refreshToken, cookieOptions);
 

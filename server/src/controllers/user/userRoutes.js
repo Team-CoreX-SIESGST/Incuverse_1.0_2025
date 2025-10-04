@@ -3,19 +3,31 @@ import { upload } from "../../middlewares/multer.middleware.js";
 
 const userRoute = express.Router();
 
-import { loginUser, createUser,getUser,logoutUser } from "./userController.js";
+import {
+    loginUser,
+    createUser,
+    getUser,
+    logoutUser,
+    sendEmailOTP,
+    verifyEmailOTP,
+    completeAshaRegistration
+} from "./userController.js";
 import { verifyJWT } from "../../middlewares/auth.middleware.js";
 
 userRoute.get("/", (req, res) => {
     res.send("User details fetched");
 });
 
-userRoute.post("/create", createUser); // signup
-userRoute.post("/login", loginUser); // login
+userRoute.post("/send-otp", sendEmailOTP);
+userRoute.post("/verify-otp", verifyEmailOTP);
+userRoute.post("/complete-asha", verifyJWT, completeAshaRegistration);
+userRoute.post("/create", createUser); // For Google registration
+userRoute.post("/login", loginUser);
 
 userRoute.patch("/details", (req, res) => {
     res.send("User details updated");
 });
-userRoute.get("/get_user", verifyJWT, getUser); // Protected route
-userRoute.post("/logout", verifyJWT, logoutUser); // Protected route
+userRoute.get("/get_user", verifyJWT, getUser);
+userRoute.post("/logout", verifyJWT, logoutUser);
+
 export { userRoute };
