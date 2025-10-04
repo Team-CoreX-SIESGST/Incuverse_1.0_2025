@@ -56,9 +56,10 @@ export default function LoginPage() {
         email: formData.email,
         password: formData.password,
       });
-
-      localStorage.setItem("user", response.data.data);
-      localStorage.setItem("refresh_token", response.data.data.refresh_token);
+      // console.log('resonse',response)
+      localStorage.setItem("user", JSON.stringify(response.data));
+      localStorage.setItem("refresh_token", response.data.refresh_token);
+      console.log('response',response,"feoiwfhwoi")
       router.push("/");
     } catch (err) {
       setError(err.message || "Login failed. Please try again.");

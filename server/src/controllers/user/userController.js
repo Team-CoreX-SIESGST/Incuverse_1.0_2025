@@ -313,8 +313,10 @@ export const createUser = asyncHandler(async (req, res) => {
 
     // Google Auth Flow
     if (googleToken) {
+        console.log(googleToken)
         try {
             const googleUser = await verifyGoogleToken(googleToken);
+            console.log(googleUser)
             let user = await User.findOne({
                 $or: [{ email: googleUser.email }, { googleId: googleUser.sub }]
             });

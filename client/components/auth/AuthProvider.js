@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { registerUser } from "@/services/auth/authServices";
+import { registerUser, loginUser } from "@/services/auth/authServices";
 
 const AuthContext = createContext();
 
@@ -15,12 +15,14 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     try {
       const storedUser = localStorage.getItem("user");
-      if (storedUser) {
+      const token = localStorage.getItem("token");
+
+      if (storedUser && token) {
         setUser(JSON.parse(storedUser));
       }
-    } catch(err) {
-      // localStorage.removeItem("user");
-      console.log(err)
+    } catch (err) {
+      console.error("Error restoring auth state:", err);
+      clearAuthData();
     }
     checkAuth();
   }, []);
@@ -29,30 +31,48 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const onStorage = (e) => {
       if (e.key === "user" || e.key === "token") {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("accessToken");
         const storedUser = localStorage.getItem("user");
-        if (!token) {
+
+        if (!token || !storedUser) {
           setUser(null);
           return;
         }
+
         try {
-          setUser(storedUser ? JSON.parse(storedUser) : null);
+          setUser(JSON.parse(storedUser));
         } catch {
-          // localStorage.removeItem("user");
+          clearAuthData();
           setUser(null);
         }
       }
     };
+
     window.addEventListener("storage", onStorage);
     return () => window.removeEventListener("storage", onStorage);
   }, []);
 
+  const clearAuthData = () => {
+    // localStorage.removeItem("token");
+    // localStorage.removeItem("user");
+    // localStorage.removeItem("refresh_token");
+  };
+
+  const setAuthData = (userData, token, refreshToken) => {
+    localStorage.setItem("accessToken", token);
+    localStorage.setItem("user", userData);
+    if (refreshToken) {
+      localStorage.setItem("refresh_token", refreshToken);
+    }
+    setUser(userData);
+  };
+
   const checkAuth = async () => {
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("accessToken");
       if (!token) {
         setUser(null);
-        // localStorage.removeItem("user");
+        // clearAuthData();
         return;
       }
 
@@ -60,28 +80,24 @@ export function AuthProvider({ children }) {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      const data = await response.json().catch(() => null);
-
       if (response.ok) {
-        // Some backends return {user: {...}}, others return {...user fields}
+        const data = await response.json();
         const userData = data?.user ?? data;
+
         if (userData) {
           setUser(userData);
           localStorage.setItem("user", JSON.stringify(userData));
         } else {
-          // If response shape is unexpected, keep token-based auth but clear bad user
-          // localStorage.removeItem("user");
+          // clearAuthData();
           setUser(null);
         }
       } else {
-        // localStorage.removeItem("token");
-        // localStorage.removeItem("user");
+        // clearAuthData();
         setUser(null);
       }
     } catch (error) {
       console.error("Auth check failed:", error);
-      localStorage.removeItem("token");
-      // localStorage.removeItem("user");
+      // clearAuthData();
       setUser(null);
     } finally {
       setLoading(false);
@@ -90,47 +106,101 @@ export function AuthProvider({ children }) {
 
   const login = async (email, password) => {
     try {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await loginUser({ email, password });
+      console.log(response,"fweoih")
+      if (response) {
+        // Assuming response structure matches your login page
+        const userData = response.data;
+        const token = response.data.accessToken || response.data.accessToken;
+        const refreshToken = response.data.refresh_token;
 
-      const data = await response.json();
-
-      if (response.ok) {
-        // Support both shapes: { token, user } or { token, userData }
-        const userData = data?.user ?? data?.userData ?? null;
-        localStorage.setItem("token", data.token);
-        if (userData) {
-          setUser(userData);
-          localStorage.setItem("user", JSON.stringify(userData));
-        } else {
-          // If API doesn't return user, fetch it now
-          await checkAuth();
+        if (!token) {
+          return { success: false, error: "No token received" };
         }
+
+        setAuthData(userData, token, refreshToken);
         return { success: true };
       } else {
-        return { success: false, error: data?.message || "Login failed" };
+        return { success: false, error: response?.message || "Login failed" };
       }
     } catch (error) {
-      return { success: false, error: "Login failed" };
+      console.error("Login error:", error);
+      return {
+        success: false,
+        error:
+          error?.response?.data?.message || error?.message || "Login failed",
+      };
+    }
+  };
+
+  const googleLogin = async (googleToken) => {
+    try {
+      const response = await loginUser({ googleToken });
+
+      if (response.data) {
+        const userData = response.data;
+        const token = response.data.accessToken || response.data.accessToken;
+        const refreshToken = response.data.refresh_token;
+
+        if (!token) {
+          return { success: false, error: "No token received" };
+        }
+
+        setAuthData(userData, token, refreshToken);
+        return { success: true };
+      } else {
+        return {
+          success: false,
+          error: response?.message || "Google login failed",
+        };
+      }
+    } catch (error) {
+      console.error("Google login error:", error);
+      return {
+        success: false,
+        error:
+          error?.response?.data?.message ||
+          error?.message ||
+          "Google login failed",
+      };
     }
   };
 
   const register = async (userData) => {
     try {
       const response = await registerUser(userData);
-      console.log(response);
-      return { success: true };
+
+      if (response.data) {
+        // Auto-login after registration if the API returns auth data
+        const authData = response.data;
+        const token = authData.accessToken || authData.accessToken;
+        const refreshToken = authData.refresh_token;
+
+        if (token) {
+          setAuthData(authData, token, refreshToken);
+        }
+
+        return { success: true, data: response.data };
+      } else {
+        return {
+          success: false,
+          error: response?.message || "Registration failed",
+        };
+      }
     } catch (error) {
-      return { success: false, error: "Registration failed" };
+      console.error("Registration error:", error);
+      return {
+        success: false,
+        error:
+          error?.response?.data?.message ||
+          error?.message ||
+          "Registration failed",
+      };
     }
   };
 
   const logout = () => {
-    localStorage.removeItem("token");
-    // localStorage.removeItem("user");
+    clearAuthData();
     setUser(null);
     router.push("/login");
   };
@@ -142,11 +212,14 @@ export function AuthProvider({ children }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
+
       const data = await response.json();
+
       return response.ok
         ? { success: true, message: data.message }
         : { success: false, error: data.message };
-    } catch {
+    } catch (error) {
+      console.error("Send OTP error:", error);
       return { success: false, error: "Failed to send OTP" };
     }
   };
@@ -158,11 +231,14 @@ export function AuthProvider({ children }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, otp }),
       });
+
       const data = await response.json();
+
       return response.ok
         ? { success: true, message: data.message }
         : { success: false, error: data.message };
-    } catch {
+    } catch (error) {
+      console.error("Verify OTP error:", error);
       return { success: false, error: "OTP verification failed" };
     }
   };
@@ -171,6 +247,7 @@ export function AuthProvider({ children }) {
     user,
     loading,
     login,
+    googleLogin,
     register,
     logout,
     sendOTP,

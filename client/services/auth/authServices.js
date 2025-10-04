@@ -28,3 +28,11 @@ export const loginUser = async (data) => {
   const response = await apiClient.post("/users/login", data);
   return response.data;
 };
+export const logoutUser = async (data) => {
+  const response = await apiClient.post("/users/logout");
+  return response.data;
+};
+export const getUser = async (data) => {
+  const response = await apiClient.get("/users/get_user");
+  return response.data;
+};
