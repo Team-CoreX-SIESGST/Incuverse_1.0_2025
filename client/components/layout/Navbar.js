@@ -129,6 +129,7 @@ export function Navbar() {
     ...(isAuthenticated
       ? [
           { href: "/chat", label: "Agent", newTab: true }, // Added newTab property
+          { href: "/dashboard", label: "Dashboard", newTab: true }, // Added newTab property
           { href: "/subscriptions", label: "Subscriptions" },
         ]
       : []),
