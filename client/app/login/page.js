@@ -56,10 +56,10 @@ export default function LoginPage() {
         email: formData.email,
         password: formData.password,
       });
-      // console.log('resonse',response)
+      console.log('resonse',response)
       localStorage.setItem("user", JSON.stringify(response.data));
       localStorage.setItem("refresh_token", response.data.refresh_token);
-      console.log('response',response,"feoiwfhwoi")
+      console.log("response", response, "feoiwfhwoi");
       router.push("/");
     } catch (err) {
       setError(err.message || "Login failed. Please try again.");
@@ -69,19 +69,24 @@ export default function LoginPage() {
   };
 
   const handleGoogleSuccess = async (response) => {
+    console.log("Google login response:", response);
     setIsLoading(true);
     setError("");
     try {
+      console.log("Calling loginUser with Google token...");
       const result = await loginUser({ googleToken: response.access_token });
+      console.log("Backend response:", result);
+
       if (result?.data) {
         localStorage.setItem(
           "refresh_token",
-          JSON.stringify(result.data.data.refresh_token)
+          JSON.stringify(result.data.refresh_token)
         );
-        localStorage.setItem("user", JSON.stringify(result.data.data));
+        localStorage.setItem("user", JSON.stringify(result.data));
       }
       router.push("/");
     } catch (err) {
+      console.error("Google login error:", err);
       setError(err.message || "Google registration failed. Please try again.");
     } finally {
       setIsLoading(false);
