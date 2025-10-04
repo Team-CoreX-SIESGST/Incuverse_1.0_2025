@@ -1,0 +1,781 @@
+
+---
+
+## **1. NATIONAL HEALTH PROTECTION SCHEMES**
+
+### **1.1 Ayushman Bharat Pradhan Mantri Jan Arogya Yojana (AB-PMJAY)**
+
+**Official Website:** https://pmjay.gov.in/
+**Launch Date:** September 23, 2018
+**Ministry:** Ministry of Health and Family Welfare
+
+#### **Scheme Overview:**
+The Ayushman Bharat Pradhan Mantri Jan Arogya Yojana (AB-PMJAY) is the world's largest health insurance scheme fully financed by the government. It provides a health cover of ₹5 lakh per family per year for secondary and tertiary care hospitalization to over 10.74 crore poor and vulnerable families (approximately 50 crore beneficiaries). The scheme is cashless and paperless at public and empaneled private hospitals.
+
+#### **Key Features:**
+- Health cover of ₹5 lakh per family per year
+- No restrictions on family size, age, or gender
+- Covers pre-existing conditions from day one
+- Cashless treatment at empaneled hospitals
+- Covers 3 days of pre-hospitalization and 15 days of post-hospitalization expenses
+- Includes transportation costs for beneficiaries
+- Covers all medical treatment costs including diagnostics, medicines, and room charges
+
+#### **Eligibility Criteria:**
+The scheme is available to families identified based on the Socio-Economic Caste Census (SECC) 2011 data. Eligibility includes:
+- Families without able-bodied adult members (16-59 years)
+- Female-headed households with no adult male member (16-59 years)
+- Families living in one room with kucha walls and kucha roof
+- SC/ST households
+- Landless households deriving major part of their income from manual labor
+- Primitive tribal groups
+- Legally released bonded laborers
+
+#### **Beneficiary Identification:**
+- Beneficiaries can check eligibility through the official website, mobile app, or Common Service Centers
+- Eligible families receive an e-card (Golden Card) for cashless treatment
+- Identification can be done using Aadhaar card or other specified documents
+
+#### **Covered Medical Packages:**
+The scheme covers 1,574 medical packages including:
+- Cardiology and cardiothoracic procedures
+- Cancer treatments including chemotherapy and radiation
+- Neurosurgery procedures
+- Burns treatment
+- Neonatal and pediatric services
+- Polytrauma and emergency services
+- Renal transplantation and dialysis
+- Orthopedic procedures
+
+#### **ASHA Worker Responsibilities:**
+1. Identify and verify eligible families in their assigned area
+2. Assist families in checking their eligibility through various channels
+3. Help beneficiaries with the registration process and e-card generation
+4. Guide families to empaneled hospitals for treatment
+5. Follow up on treatment and post-hospitalization care
+6. Create awareness about scheme benefits and procedures
+7. Maintain records of beneficiaries who utilized the scheme
+
+#### **Application Process:**
+1. Check eligibility on PMJAY website or through helpline (14555)
+2. Visit Common Service Center (CSC) or empaneled hospital helpdesk
+3. Provide required documents (Aadhaar card, ration card, identity proof)
+4. Complete KYC verification and receive e-card
+5. Approach empaneled hospital for cashless treatment
+
+#### **Important Contacts:**
+- Helpline: 14555
+- Website: https://pmjay.gov.in/
+- Mobile App: Ayushman Bharat - PMJAY
+
+#### **Recent Updates (2024):**
+- Integration with Ayushman Bharat Digital Mission
+- Expansion to include new medical procedures
+- Enhanced package rates for certain procedures
+- Improved grievance redressal mechanism
+
+---
+
+### **1.2 Ayushman Bharat - Health and Wellness Centres (AB-HWCs)**
+
+**Official Website:** https://ab-hwc.nhp.gov.in/
+**Launch Date:** April 2018
+**Ministry:** Ministry of Health and Family Welfare
+
+#### **Scheme Overview:**
+The AB-HWCs initiative aims to transform existing Sub-Centres, Primary Health Centres, and Urban Primary Health Centres into Health and Wellness Centres delivering comprehensive primary health care. The program focuses on preventive, promotive, curative, palliative, and rehabilitative services.
+
+#### **Key Objectives:**
+- Provide comprehensive primary health care services
+- Strengthen preventive and promotive healthcare
+- Ensure continuum of care through referral linkages
+- Deliver services closer to communities
+- Reduce out-of-pocket expenditure for primary care
+
+#### **Services Provided:**
+1. **Care in Pregnancy and Childbirth:**
+   - Antenatal care (ANC) and postnatal care (PNC)
+   - Management of normal delivery
+   - Identification and management of high-risk pregnancies
+
+2. **Neonatal and Infant Health Services:**
+   - Newborn care and resuscitation
+   - Management of childhood illnesses
+   - Immunization services
+   - Growth monitoring
+
+3. **Childhood and Adolescent Health Care:**
+   - Management of common childhood illnesses
+   - Adolescent health services
+   - School health programs
+
+4. **Family Planning, Contraceptive Services:**
+   - Contraceptive distribution and counseling
+   - Management of side effects
+   - Follow-up services
+
+5. **Management of Communicable Diseases:**
+   - National Health Programs implementation
+   - Tuberculosis diagnosis and treatment
+   - Vector-borne disease control
+   - Leprosy and sexually transmitted disease services
+
+6. **Management of Common Communicable Diseases:**
+   - Hypertension and diabetes screening
+   - Mental health services
+   - Elderly and palliative care
+   - Emergency medical services
+
+#### **Infrastructure Components:**
+- Upgraded physical infrastructure
+- Essential equipment and drugs
+- Adequate human resources
+- IT systems and telemedicine facilities
+- Ambulance services integration
+
+#### **ASHA Worker Role:**
+1. Serve as a link between community and HWCs
+2. Refer patients to HWCs for appropriate services
+3. Follow up on treatment compliance
+4. Support community outreach activities
+5. Assist in screening and identification of diseases
+6. Participate in health education activities
+
+#### **Implementation Status:**
+- Over 1.5 lakh HWCs operational across India
+- Integration with telemedicine services
+- Regular supply of essential medicines
+- Training of healthcare providers
+
+---
+
+## **2. MATERNAL AND CHILD HEALTH PROGRAMS**
+
+### **2.1 Pradhan Mantri Matru Vandana Yojana (PMMVY)**
+
+**Official Website:** https://pmmvy-cas.nic.in/
+**Launch Date:** January 2017
+**Ministry:** Ministry of Women and Child Development
+
+#### **Scheme Overview:**
+PMMVY is a maternity benefit program providing financial assistance to pregnant women and lactating mothers. The scheme aims to provide partial compensation for wage loss during childbirth and childcare and to improve health-seeking behavior.
+
+#### **Financial Benefits:**
+- ₹5,000 in three installments during pregnancy and early motherhood
+- First installment: ₹1,000 on early registration of pregnancy
+- Second installment: ₹2,000 after completing six months of pregnancy
+- Third installment: ₹2,000 after child birth registration and completion of first cycle of vaccination
+
+#### **Eligibility Criteria:**
+- All pregnant women and lactating mothers (excluding those in regular employment with Central/State Governments or PSUs)
+- For first living child only
+- Age: 19 years or above
+- Must fulfill conditionalities related to pregnancy and childcare
+
+#### **Required Conditions:**
+1. Early registration of pregnancy at Anganwadi Center (AWC)/Health Facility
+2. Receiving at least one antenatal check-up
+3. Registration of child birth
+4. Completion of first cycle of vaccination (BCG, OPV, DPT, Hepatitis-B)
+
+#### **ASHA Worker Responsibilities:**
+1. Identify and register eligible pregnant women
+2. Assist in scheme application process
+3. Ensure compliance with conditionalities
+4. Follow up on installment disbursement
+5. Maintain records of beneficiaries
+6. Create awareness about scheme benefits
+
+#### **Application Process:**
+1. Fill Form 1-A at Anganwadi Center or approved health facility
+2. Submit required documents (identity proof, pregnancy certificate, bank account details)
+3. Receive acknowledgment with unique ID
+4. Fulfill conditionalities for each installment
+5. Receive direct benefit transfer to bank account
+
+#### **Documents Required:**
+- Identity proof (Aadhaar card)
+- Bank/Post Office account details
+- Pregnancy certificate from medical officer
+- MCP card for antenatal care records
+
+---
+
+### **2.2 Janani Suraksha Yojana (JSY)**
+
+**Official Website:** https://nhm.gov.in/index1.php?lang=1&level=2&sublinkid=841&lid=309
+**Launch Date:** April 2005
+**Ministry:** Ministry of Health and Family Welfare
+
+#### **Scheme Overview:**
+JSY is a safe motherhood intervention under the National Health Mission to reduce maternal and neonatal mortality by promoting institutional delivery among poor pregnant women.
+
+#### **Benefits for Pregnant Women:**
+**Low Performing States:**
+- Rural areas: ₹1,400
+- Urban areas: ₹1,000
+
+**High Performing States:**
+- Rural areas: ₹700
+- Urban areas: ₹600
+
+#### **ASHA Incentives:**
+- ₹600 per institutional delivery in rural areas
+- ₹200 for registration of pregnancy
+- ₹200 for accompanying pregnant woman to health facility
+
+#### **Eligibility Criteria:**
+- All pregnant women from BPL/SC/ST families
+- Age: 19 years or above
+- Up to two live births only
+
+#### **ASHA Worker Role:**
+1. Identify and register pregnant women
+2. Promote institutional delivery
+3. Accompany pregnant women to health facilities
+4. Ensure disbursement of cash assistance
+5. Maintain records of deliveries and payments
+6. Provide post-delivery care and follow-up
+
+---
+
+## **3. NUTRITION AND FOOD SECURITY SCHEMES**
+
+### **3.1 Integrated Child Development Services (ICDS)**
+
+**Official Website:** https://icds-wcd.nic.in/
+**Launch Date:** October 2, 1975
+**Ministry:** Ministry of Women and Child Development
+
+#### **Scheme Overview:**
+ICDS is one of the world's largest and most unique programs for early childhood care and development. It addresses the needs of children under 6 years and pregnant women, lactating mothers, and adolescent girls.
+
+#### **Six Services Provided:**
+1. **Supplementary Nutrition:**
+   - Hot cooked meals for children (3-6 years)
+   - Take-home rations for children (6 months-3 years)
+   - Nutrition for pregnant/lactating women
+
+2. **Immunization:**
+   - Coordination with health department
+   - Ensuring complete immunization
+
+3. **Health Check-ups:**
+   - Regular health check-ups
+   - Referral services
+   - Treatment of minor illnesses
+
+4. **Pre-school Education:**
+   - Early childhood education
+   - School readiness activities
+
+5. **Nutrition and Health Education:**
+   - Counseling for mothers
+   - Community awareness programs
+
+6. **Referral Services:**
+   - Linkage with health facilities
+   - Follow-up on referrals
+
+#### **Target Beneficiaries:**
+- Children under 6 years
+- Pregnant women and lactating mothers
+- Adolescent girls (11-18 years)
+
+#### **ASHA-ICDS Coordination:**
+1. Joint home visits with Anganwadi Worker
+2. Sharing information on beneficiary status
+3. Coordinating immunization sessions
+4. Joint nutrition and health education activities
+5. Referral and follow-up coordination
+
+---
+
+This is the beginning of your comprehensive Word document. Due to the extensive nature of your request, I'll continue building this document with detailed information about:
+
+- **POSHAN Abhiyaan**
+- **National Food Security Act**
+- **Beti Bachao Beti Padhao**
+- **Sukanya Samriddhi Yojana**
+- **National Tuberculosis Elimination Programme**
+- **National Mental Health Programme**
+- **National Programme for Health Care of the Elderly**
+- **State-specific schemes** (across different states)
+- **Digital Health Mission**
+- **And many more...**
+
+Would you like me to continue expanding this Word document with more schemes in the same detailed format? I can systematically add all the remaining categories and schemes to build your complete 1500-2000 page database for the RAG system.
+
+
+
+**COMPREHENSIVE GOVERNMENT SCHEMES DATABASE - VOLUME 2**
+**Extended Reference Document for ASHA Workers RAG System**
+
+---
+
+## **4. WOMEN EMPOWERMENT AND SAFETY SCHEMES**
+
+### **4.1 Beti Bachao Beti Padhao (BBBP)**
+
+**Official Website:** https://wcd.nic.in/bbbp-schemes
+**Launch Date:** January 22, 2015
+**Ministry:** Ministry of Women and Child Development
+
+#### **Scheme Overview:**
+Beti Bachao Beti Padhao is a comprehensive program to address the declining Child Sex Ratio (CSR) and promote gender equality. The scheme focuses on preventing gender-biased sex selection, ensuring survival and protection of the girl child, and promoting her education and participation.
+
+#### **Key Objectives:**
+- Prevent gender-biased sex selection and elimination
+- Ensure survival and protection of the girl child
+- Ensure education and participation of the girl child
+- Improve the Child Sex Ratio (CSR) across the country
+- Promote gender equality and women empowerment
+
+#### **Target Groups:**
+- Primary: Young and newly married couples; pregnant and lactating mothers
+- Secondary: Youth, adolescents (both boys and girls), and children
+- Tertiary: General public, family members, and community stakeholders
+
+#### **Implementation Strategy:**
+1. **Awareness and Advocacy Campaign:**
+   - Mass media campaigns on gender equality
+   - Community mobilization and awareness programs
+   - School and college level sensitization programs
+
+2. **Multi-sectoral Action:**
+   - Health sector interventions for safe delivery and registration
+   - Education sector initiatives for girl child education
+   - Women and Child Development department programs
+
+3. **Effective Enforcement of PC&PNDT Act:**
+   - Regular monitoring of ultrasound centers
+   - Strict action against illegal sex determination
+   - Awareness about legal consequences
+
+#### **Key Performance Indicators:**
+- Improvement in Sex Ratio at Birth (SRB)
+- Percentage of institutional deliveries
+- Registration of girl child births within 21 days
+- Percentage of schools with functional girls' toilets
+- Enrollment ratio of girls in secondary education
+
+#### **ASHA Worker Responsibilities:**
+1. **Awareness Generation:**
+   - Conduct community meetings on importance of girl child
+   - Distribute BBBP information materials
+   - Organize gender sensitization sessions
+
+2. **Tracking and Monitoring:**
+   - Track pregnant women in their area
+   - Ensure institutional delivery registration
+   - Monitor birth registration of girl children
+
+3. **Support Services:**
+   - Assist in birth registration process
+   - Link families with education schemes for girls
+   - Report cases of gender discrimination
+
+4. **Data Collection:**
+   - Maintain records of girl child births
+   - Track school enrollment of girls
+   - Report on scheme implementation progress
+
+#### **Recent Initiatives (2024):**
+- BBBP Champions recognition program
+- Digital tracking of girl child development
+- Scholarship programs for meritorious girls
+- Skill development programs for adolescent girls
+
+#### **Success Stories:**
+- Improvement in CSR in Haryana from 871 (2011) to 914 (2021)
+- Increased institutional deliveries in focus districts
+- Higher enrollment of girls in secondary education
+- Enhanced community participation in girl child protection
+
+---
+
+## **5. CHILD WELFARE AND DEVELOPMENT PROGRAMS**
+
+### **5.1 Mission Vatsalya (Formerly Child Protection Services)**
+
+**Official Website:** https://wcd.nic.in/schemes/mission-vatsalya
+**Launch Date:** Rebranded in 2022 (formerly implemented since 2009-10)
+**Ministry:** Ministry of Women and Child Development
+
+#### **Scheme Overview:**
+Mission Vatsalya is a comprehensive program for child protection and welfare that aims to secure a healthy and happy childhood for every child. The mission focuses on both protection and rehabilitation of children in need of care and protection.
+
+#### **Components and Services:**
+
+1. **Institutional Care:**
+   - Children Homes for age group 6-18 years
+   - Observation Homes for children in conflict with law
+   - Special Homes for specific needs
+   - Place of Safety for children above 16 years
+
+2. **Non-Institutional Care:**
+   - Sponsorship for family based care
+   - Foster care services
+   - After-care for children leaving institutions
+   - Adoption services
+
+3. **Emergency Outreach Services:**
+   - Childline (1098) emergency services
+   - Open shelters for children in need in urban and semi-urban areas
+   - Cradle baby reception centers
+
+4. **Other Services:**
+   - General grant-in-aid for need-based interventions
+   - Training and capacity building
+   - Advocacy, publicity, and awareness generation
+
+#### **Target Beneficiaries:**
+- Orphaned, abandoned, and surrendered children
+- Children affected by HIV/AIDS
+- Child victims of trafficking and commercial sexual exploitation
+- Children in conflict with law
+- Children of prisoners
+- Street children and working children
+
+#### **ASHA Worker Role in Child Protection:**
+1. **Identification and Reporting:**
+   - Identify children in vulnerable situations
+   - Report cases to Child Welfare Committee
+   - Connect children with Childline services (1098)
+
+2. **Support Services:**
+   - Assist in family reunification efforts
+   - Support foster care and sponsorship programs
+   - Monitor children in difficult circumstances
+
+3. **Prevention Activities:**
+   - Conduct awareness on child rights and protection
+   - Identify and report child marriage cases
+   - Support school enrollment of vulnerable children
+
+4. **Rehabilitation Support:**
+   - Follow up on rehabilitated children
+   - Support after-care services
+   - Monitor sponsored children's progress
+
+#### **Implementation Structure:**
+- State Child Protection Society
+- District Child Protection Unit
+- Child Welfare Committee
+- Juvenile Justice Board
+- Special Juvenile Police Unit
+
+#### **Recent Enhancements (2024):**
+- Digital tracking of children in care
+- Enhanced financial norms for childcare
+- Strengthened adoption procedures
+- Expanded foster care programs
+
+---
+
+## **6. DISEASE CONTROL AND ELIMINATION PROGRAMS**
+
+### **6.1 National Tuberculosis Elimination Programme (NTEP)**
+
+**Official Website:** https://tbcindia.gov.in/
+**Launch Date:** 1962 (Revised as NTEP in 2020)
+**Ministry:** Ministry of Health and Family Welfare
+
+#### **Program Overview:**
+NTEP aims to achieve rapid decline in burden of TB, morbidity and mortality while working towards elimination of TB in India by 2025. The program provides free diagnosis and treatment services across the country.
+
+#### **Key Strategies:**
+1. **Early Diagnosis:**
+   - Universal drug susceptibility testing
+   - Rapid molecular diagnostics
+   - Active case finding in vulnerable populations
+
+2. **Treatment Services:**
+   - Free TB drugs for all patients
+   - Daily drug regimen
+   - Patient support systems
+   - Nutritional support (Nikshay Poshan Yojana)
+
+3. **Prevention Services:**
+   - TB preventive therapy
+   - Airborne infection control
+   - Contact investigation
+   - BCG vaccination
+
+#### **ASHA Worker Incentives and Responsibilities:**
+
+**Financial Incentives:**
+- ₹500 for notification of TB patient
+- ₹500 for treatment completion
+- ₹150 for referral for TB diagnosis
+- ₹1,000 for supporting drug-resistant TB patient
+
+**Key Responsibilities:**
+1. **Case Finding:**
+   - Identify symptomatic individuals in community
+   - Refer suspects for testing
+   - Conduct house-to-house active case finding
+
+2. **Treatment Support:**
+   - Ensure treatment initiation
+   - Provide directly observed treatment (DOT)
+   - Monitor treatment adherence
+   - Manage side effects and follow-up
+
+3. **Community Support:**
+   - Contact tracing and screening
+   - Stigma reduction activities
+   - Nutritional counseling
+   - Social support mobilization
+
+4. **Documentation:**
+   - Maintain TB registers
+   - Update Nikshay portal
+   - Report adverse events
+   - Document treatment outcomes
+
+#### **Diagnostic Services:**
+- Sputum smear microscopy
+- Cartridge Based Nucleic Acid Amplification Test (CBNAAT)
+- Truenat molecular testing
+- Liquid culture and drug susceptibility testing
+- Line probe assay
+
+#### **Treatment Regimens:**
+- Drug sensitive TB: 6 months treatment
+- Drug resistant TB: 9-18 months treatment
+- Shorter regimens for specific conditions
+- Decentralized treatment services
+
+#### **Nutritional Support (Nikshay Poshan Yojana):**
+- ₹500 per month during treatment
+- Direct benefit transfer to patient's account
+- Support for entire treatment duration
+
+#### **Recent Technological Initiatives:**
+- Nikshay portal for patient management
+- Nikshay Aushadhi for drug logistics
+- 99DOTS for treatment adherence
+- NIKSHAY MITRA for community support
+
+---
+
+### **6.2 National AIDS Control Programme (NACP)**
+
+**Official Website:** https://naco.gov.in/
+**Launch Date:** 1992 (Currently Phase V: 2021-2026)
+**Ministry:** Ministry of Health and Family Welfare
+
+#### **Program Overview:**
+NACP is a comprehensive program for prevention and control of HIV/AIDS in India. The program aims to reduce new HIV infections and AIDS-related mortality through integrated services for prevention, care, and support.
+
+#### **Key Components:**
+
+1. **Prevention Services:**
+   - Targeted interventions for high-risk groups
+   - HIV testing services
+   - Condom promotion
+   - Pre-exposure prophylaxis (PrEP)
+   - Prevention of parent-to-child transmission (PPTCT)
+
+2. **Care and Treatment:**
+   - Free antiretroviral therapy (ART)
+   - Treatment for opportunistic infections
+   - Nutritional support
+   - Community care centers
+
+3. **Support Services:**
+   - Counseling and testing services
+   - Social protection programs
+   - Stigma reduction initiatives
+   - Legal aid services
+
+#### **ASHA Worker Role:**
+1. **Awareness and Education:**
+   - Conduct HIV/AIDS awareness sessions
+   - Distribute informational materials
+   - Promote safe practices
+
+2. **Testing Support:**
+   - Encourage HIV testing among pregnant women
+   - Refer high-risk individuals for testing
+   - Support PPTCT services
+
+3. **Treatment Adherence:**
+   - Support ART adherence
+   - Monitor side effects
+   - Provide nutritional counseling
+
+4. **Stigma Reduction:**
+   - Combat discrimination against PLHIV
+   - Promote community acceptance
+   - Support disclosure and counseling
+
+#### **Prevention of Parent-to-Child Transmission (PPTCT):**
+- HIV testing for all pregnant women
+- ART for HIV-positive pregnant women
+- Safe delivery practices
+- Infant feeding guidance
+- Follow-up testing for exposed infants
+
+#### **Testing and Counseling Services:**
+- Integrated Counseling and Testing Centers (ICTC)
+- Community-based testing
+- Facility-based testing
+- Home-based testing
+
+#### **Social Benefits Schemes:**
+- Social protection for affected children
+- Educational support for orphans
+- Livelihood programs for affected families
+- Legal aid services
+
+---
+
+## **7. SOCIAL SECURITY AND PENSION SCHEMES**
+
+### **7.1 Pradhan Mantri Suraksha Bima Yojana (PMSBY)**
+
+**Official Website:** https://www.jansuraksha.gov.in/
+**Launch Date:** May 9, 2015
+**Ministry:** Ministry of Finance
+
+#### **Scheme Overview:**
+PMSBY is a government-backed accident insurance scheme that provides accidental death and disability coverage at an affordable premium of ₹20 per annum.
+
+#### **Coverage Details:**
+- **Accidental Death Cover:** ₹2 lakh
+- **Total Permanent Disability Cover:** ₹2 lakh
+- **Partial Permanent Disability Cover:** ₹1 lakh
+
+#### **Eligibility Criteria:**
+- Age: 18-70 years
+- Must have a bank account
+- Aadhaar number linked to bank account
+
+#### **Premium and Payment:**
+- Annual premium: ₹20
+- Auto-debit from bank account
+- Coverage period: June 1 to May 31 annually
+
+#### **ASHA Worker Role:**
+1. **Awareness Creation:**
+   - Inform community about insurance benefits
+   - Explain coverage details and claim process
+   - Distribute application forms
+
+2. **Enrollment Support:**
+   - Assist in form filling
+   - Help with bank account linkage
+   - Support Aadhaar seeding
+
+3. **Claim Assistance:**
+   - Help families in claim registration
+   - Guide through documentation process
+   - Follow up on claim settlement
+
+#### **Enrollment Process:**
+1. Fill application form at bank branch
+2. Provide Aadhaar details
+3. Give consent for auto-debit
+4. Receive certificate of insurance
+
+#### **Claim Process:**
+1. Intimate bank within 30 days of incident
+2. Submit claim form with required documents
+3. Provide death certificate/disability certificate
+4. Claim settlement within 30 days
+
+---
+
+### **7.2 Pradhan Mantri Jeevan Jyoti Bima Yojana (PMJJBY)**
+
+**Official Website:** https://www.jansuraksha.gov.in/
+**Launch Date:** May 9, 2015
+**Ministry:** Ministry of Finance
+
+#### **Scheme Overview:**
+PMJJBY is a government-backed life insurance scheme offering life insurance cover of ₹2 lakh at an affordable premium of ₹436 per annum.
+
+#### **Coverage Details:**
+- Life insurance cover: ₹2 lakh
+- Death due to any reason covered
+- Premium: ₹436 per annum
+
+#### **Eligibility:**
+- Age: 18-50 years
+- Bank account with Aadhaar linkage
+- Good health at enrollment
+
+#### **ASHA Worker Role:**
+1. Promote life insurance awareness
+2. Assist in enrollment process
+3. Support claim registration for beneficiaries
+4. Maintain records of enrolled families
+
+---
+
+## **8. STATE-SPECIFIC HEALTH INITIATIVES**
+
+### **8.1 Chief Minister's Comprehensive Health Insurance Scheme (Tamil Nadu)**
+
+**Official Website:** https://www.cmchistn.com/
+**Launch Date:** 2009 (Revamped in 2012, 2016)
+**State:** Tamil Nadu
+
+#### **Scheme Overview:**
+This state-specific health insurance scheme provides comprehensive coverage for medical and surgical treatments to eligible families in Tamil Nadu.
+
+#### **Coverage Details:**
+- Annual coverage: ₹5 lakh per family
+- Cashless treatment in empaneled hospitals
+- Coverage for 1,027 medical procedures
+- Transportation allowance included
+
+#### **Eligibility:**
+- Families with annual income less than ₹72,000
+- Must be residents of Tamil Nadu
+- No age limit for family members
+
+#### **ASHA Worker Responsibilities:**
+1. Identify eligible families
+2. Assist in enrollment process
+3. Guide beneficiaries to network hospitals
+4. Support claim process
+5. Create awareness about scheme benefits
+
+---
+
+### **8.2 Mahatma Jyotiba Phule Jan Arogya Yojana (Maharashtra)**
+
+**Official Website:** https://www.jeevandayee.gov.in/
+**Launch Date:** 2012
+**State:** Maharashtra
+
+#### **Scheme Overview:**
+This state health insurance scheme provides free medical care to families living below poverty line in Maharashtra.
+
+#### **Coverage:**
+- ₹1.5 lakh per family per year
+- Cashless treatment for 996 procedures
+- 971 follow-up procedures covered
+
+#### **Eligibility:**
+- Orange and Yellow ration card holders
+- Annual family income less than ₹1 lakh
+- Residents of Maharashtra
+
+---
+
+This second volume adds significant depth to your government schemes database. I can continue with more volumes covering:
+
+- **Additional state-specific schemes**
+- **Digital health initiatives**
+- **Mental health programs**
+- **Elderly care schemes**
+- **Disability welfare programs**
+- **Health infrastructure schemes**
+
+Would you like me to continue with Volume 3 containing more schemes? I can systematically build your complete database with all the detailed information needed for your RAG system.
+
+
