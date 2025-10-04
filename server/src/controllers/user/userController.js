@@ -70,6 +70,183 @@ const generateOTP = () => {
     return Math.floor(100000 + Math.random() * 900000).toString();
 };
 
+// Get all unverified users (Admin only)
+export const getUnverifiedUsers = asyncHandler(async (req, res) => {
+    const { page = 1, limit = 10, search = "" } = req.query;
+
+    // Check if user is admin
+    if (!req.user.isAdmin) {
+        return sendResponse(
+            res,
+            false,
+            null,
+            "Unauthorized: Admin access required",
+            statusType.UNAUTHORIZED
+        );
+    }
+
+    const pageNum = parseInt(page);
+    const limitNum = parseInt(limit);
+    const skip = (pageNum - 1) * limitNum;
+
+    // Build search query
+    const searchQuery = {
+        isVerified: false,
+        ...(search && {
+            $or: [
+                { name: { $regex: search, $options: "i" } },
+                { email: { $regex: search, $options: "i" } }
+            ]
+        })
+    };
+
+    // Get unverified users with pagination
+    const unverifiedUsers = await User.find(searchQuery)
+        .select("-password -refresh_token -otp -verificationToken")
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limitNum);
+
+    // Get total count for pagination
+    const totalUsers = await User.countDocuments(searchQuery);
+    const totalPages = Math.ceil(totalUsers / limitNum);
+
+    return sendResponse(
+        res,
+        true,
+        {
+            users: unverifiedUsers,
+            pagination: {
+                currentPage: pageNum,
+                totalPages,
+                totalUsers,
+                hasNext: pageNum < totalPages,
+                hasPrev: pageNum > 1
+            }
+        },
+        "Unverified users retrieved successfully",
+        statusType.OK
+    );
+});
+
+// Update user verification status (Admin only)
+export const updateUserVerification = asyncHandler(async (req, res) => {
+    const { userId } = req.params;
+    const { isVerified } = req.body;
+
+    // Check if user is admin
+    if (!req.user.isAdmin) {
+        return sendResponse(
+            res,
+            false,
+            null,
+            "Unauthorized: Admin access required",
+            statusType.UNAUTHORIZED
+        );
+    }
+
+    if (typeof isVerified !== "boolean") {
+        return sendResponse(
+            res,
+            false,
+            null,
+            "isVerified must be a boolean value",
+            statusType.BAD_REQUEST
+        );
+    }
+
+    // Find user by ID
+    const user = await User.findById(userId);
+    if (!user) {
+        return sendResponse(res, false, null, "User not found", statusType.NOT_FOUND);
+    }
+
+    // Update verification status
+    user.isVerified = isVerified;
+
+    // If verifying user, assign free plan and clear verification tokens
+    if (isVerified) {
+        user.verificationToken = undefined;
+        user.verificationExpires = undefined;
+        user.otp = undefined;
+
+        // Assign free plan if not already assigned
+        if (!user.plan) {
+            await assignFreePlan(user._id);
+        }
+    }
+
+    await user.save();
+
+    // Get updated user data without sensitive fields
+    const updatedUser = await User.findById(userId).select(
+        "-password -refresh_token -otp -verificationToken"
+    );
+
+    return sendResponse(
+        res,
+        true,
+        updatedUser,
+        `User verification status updated to ${isVerified}`,
+        statusType.OK
+    );
+});
+
+// Bulk verify users (Admin only)
+export const bulkVerifyUsers = asyncHandler(async (req, res) => {
+    const { userIds } = req.body;
+
+    // Check if user is admin
+    if (!req.user.isAdmin) {
+        return sendResponse(
+            res,
+            false,
+            null,
+            "Unauthorized: Admin access required",
+            statusType.UNAUTHORIZED
+        );
+    }
+
+    if (!Array.isArray(userIds) || userIds.length === 0) {
+        return sendResponse(res, false, null, "User IDs array is required", statusType.BAD_REQUEST);
+    }
+
+    // Update all users to verified
+    const result = await User.updateMany(
+        {
+            _id: { $in: userIds },
+            isVerified: false
+        },
+        {
+            $set: {
+                isVerified: true,
+                verificationToken: undefined,
+                verificationExpires: undefined,
+                otp: undefined
+            }
+        }
+    );
+
+    // Assign free plans to newly verified users
+    for (const userId of userIds) {
+        const user = await User.findById(userId);
+        if (user && !user.plan) {
+            await assignFreePlan(user._id);
+        }
+    }
+
+    return sendResponse(
+        res,
+        true,
+        {
+            matchedCount: result.matchedCount,
+            modifiedCount: result.modifiedCount
+        },
+        `${result.modifiedCount} users verified successfully`,
+        statusType.OK
+    );
+});
+
 // Send OTP for email verification using your sendEmail function
 export const sendEmailOTP = asyncHandler(async (req, res) => {
     const { email } = req.body;
@@ -192,7 +369,7 @@ export const verifyEmailOTP = asyncHandler(async (req, res) => {
     if (!user) {
         return sendResponse(res, false, null, "Invalid or expired OTP", statusType.BAD_REQUEST);
     }
-    console.log('user',user.otp)
+    console.log("user", user.otp);
     // Verify OTP
     if (user.otp !== otp) {
         return sendResponse(res, false, null, "Invalid OTP", statusType.BAD_REQUEST);
@@ -313,10 +490,10 @@ export const createUser = asyncHandler(async (req, res) => {
 
     // Google Auth Flow
     if (googleToken) {
-        console.log(googleToken)
+        console.log(googleToken);
         try {
             const googleUser = await verifyGoogleToken(googleToken);
-            console.log(googleUser)
+            console.log(googleUser);
             let user = await User.findOne({
                 $or: [{ email: googleUser.email }, { googleId: googleUser.sub }]
             });

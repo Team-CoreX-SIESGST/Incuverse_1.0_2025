@@ -4,13 +4,12 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    domains: ['localhost'],
+    domains: ["localhost"],
   },
   env: {
     CUSTOM_KEY: process.env.CUSTOM_KEY,
   },
   webpack: (config, { isServer }) => {
-    // Fix for "Module not found: Can't resolve 'fs'" error
     if (!isServer) {
       config.resolve.fallback = {
         ...config.resolve.fallback,
@@ -21,6 +20,10 @@ const nextConfig = {
     }
     return config;
   },
-}
+  i18n: {
+    locales: ["en", "hi", "mr", "ta"],
+    defaultLocale: "en",
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

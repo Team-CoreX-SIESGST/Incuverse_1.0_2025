@@ -8,21 +8,15 @@ import {
   Sparkles,
   Zap,
   Shield,
-  Search,
-  FileText,
-  Image,
-  Video,
-  Database,
-  Rocket,
-  Scale,
-  Gavel,
-  BookOpen,
   Heart,
   Users,
   Activity,
   Mic,
+  Database,
+  Rocket,
 } from "lucide-react";
 import DoctorCard from "./DoctorCard";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Animation variants for Framer Motion
 const FADE_IN_STAGGER_VARIANTS = {
@@ -42,28 +36,37 @@ const FADE_IN_UP_VARIANTS = {
 
 export function Hero() {
   const [currentFeature, setCurrentFeature] = useState(0);
+  const { messages } = useLanguage();
+
+  const t = (key) => {
+    const keys = key.split(".");
+    let value = messages;
+    for (const k of keys) {
+      value = value?.[k];
+    }
+    return value || key;
+  };
 
   const features = [
     {
       icon: Mic,
-      title: "Voice-Based Data Entry",
-      description:
-        "Register patients and update records using simple voice commands.",
+      title: t("Hero.voiceDataEntry"),
+      description: t("Hero.voiceDataEntryDesc"),
     },
     {
       icon: Zap,
-      title: "AI-Powered Assistance",
-      description: "Get intelligent insights for patient care and follow-ups.",
+      title: t("Hero.aiAssistance"),
+      description: t("Hero.aiAssistanceDesc"),
     },
     {
       icon: Shield,
-      title: "Secure & Private",
-      description: "Patient data protected with enterprise-grade security.",
+      title: t("Hero.securePrivate"),
+      description: t("Hero.securePrivateDesc"),
     },
     {
       icon: Database,
-      title: "Digital Health Records",
-      description: "Access complete patient history with QR code system.",
+      title: t("Hero.digitalRecords"),
+      description: t("Hero.digitalRecordsDesc"),
     },
   ];
 
@@ -94,12 +97,7 @@ export function Hero() {
             className="flex justify-start mt-32 h-full"
           >
             <div className="relative w-full max-w-lg">
-              {/* Replace with WebM video */}
-              <DoctorCard/>
-
-              {/* Floating elements */}
-              {/* <div className="absolute -top-4 -right-4 w-8 h-8 bg-emerald-500 rounded-full animate-pulse"></div>
-              <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-green-500 rounded-full animate-pulse delay-1000"></div> */}
+              <DoctorCard />
             </div>
           </motion.div>
 
@@ -115,7 +113,7 @@ export function Hero() {
               <div className="inline-flex items-center px-3 py-1.5 rounded-full bg-slate-900/5 dark:bg-slate-100/5 ring-1 ring-inset ring-slate-900/10 dark:ring-slate-100/10 mb-8 backdrop-blur-lg">
                 <Heart className="w-4 h-4 text-emerald-500 mr-2" />
                 <span className="text-sm font-medium text-slate-800 dark:text-slate-200">
-                  AI-Powered Health Assistant
+                  {t("Hero.aiPowered")}
                 </span>
               </div>
             </motion.div>
@@ -125,12 +123,12 @@ export function Hero() {
               variants={FADE_IN_UP_VARIANTS}
               className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 dark:text-slate-50 mb-6"
             >
-              Empowering{" "}
+              {t("Hero.empowering")}{" "}
               <span className="bg-gradient-to-r from-emerald-500 to-green-500 bg-clip-text text-transparent">
-                ASHA Workers
+                {t("Hero.ashaWorkers")}
               </span>
               <br />
-              with AI
+              {t("Hero.withAI")}
             </motion.h1>
 
             {/* Subtitle */}
@@ -138,9 +136,7 @@ export function Hero() {
               variants={FADE_IN_UP_VARIANTS}
               className="text-lg sm:text-xl text-slate-600 dark:text-slate-400 mb-8"
             >
-              Vernacular voice assistant that simplifies patient data entry,
-              follow-up scheduling, and health scheme information for ASHA
-              workers in rural communities.
+              {t("Hero.subtitle")}
             </motion.p>
 
             {/* Feature Carousel */}
@@ -182,7 +178,7 @@ export function Hero() {
                 className="group relative inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white bg-emerald-600 rounded-full hover:bg-emerald-700 dark:bg-emerald-500 dark:text-white dark:hover:bg-emerald-600 transition-all duration-300 shadow-lg"
               >
                 <Rocket className="w-4 h-4 mr-2" />
-                Start Free Trial
+                {t("Hero.startFreeTrial")}
                 <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform duration-200" />
               </Link>
             </motion.div>
@@ -193,10 +189,10 @@ export function Hero() {
               className="grid grid-cols-2 md:grid-cols-4 gap-8 w-full"
             >
               {[
-                { value: "10K+", label: "ASHA Workers" },
-                { value: "50x", label: "Faster Data Entry" },
-                { value: "100%", label: "Vernacular" },
-                { value: "24/7", label: "Available" },
+                { value: "10K+", label: t("Hero.ashaWorkersCount") },
+                { value: "50x", label: t("Hero.fasterDataEntry") },
+                { value: "100%", label: t("Hero.vernacular") },
+                { value: "24/7", label: t("Hero.available") },
               ].map((stat) => (
                 <div key={stat.label} className="text-left">
                   <div className="text-3xl font-semibold text-slate-900 dark:text-white mb-1">
@@ -212,7 +208,7 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Scroll Indicator - subtle version */}
+      {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
         <div className="w-px h-10 bg-slate-300 dark:bg-slate-700">
           <motion.div

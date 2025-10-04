@@ -8,11 +8,14 @@ import { useAuth } from "@/components/auth/AuthProvider";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { Menu, X, User, LogOut, Sparkles, ChevronDown } from "lucide-react";
 import { useToast } from "@/components/ui/ToastProvider";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 export function Navbar() {
   const { user, logout, loading } = useAuth();
   const pathname = usePathname();
   const { showToast } = useToast();
+  const { messages } = useLanguage();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [previousAuthState, setPreviousAuthState] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -22,12 +25,20 @@ export function Navbar() {
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const profileDropdownRef = useRef(null);
 
-  // Auth state:
-  // - If token exists, we consider the user "authenticated" for UI purposes.
-  // - Prefer live context user, then local user from storage.
+  // Translation function
+  const t = (key) => {
+    const keys = key.split(".");
+    let value = messages;
+    for (const k of keys) {
+      value = value?.[k];
+    }
+    return value || key;
+  };
+
+  // Auth state
   const isAuthenticated = isClient && (hasToken || !!user || !!localUser);
   const userInfo = user || localUser;
-  // Client-only setup
+
   useEffect(() => {
     setIsClient(true);
 
@@ -59,7 +70,7 @@ export function Navbar() {
     return () => window.removeEventListener("storage", onStorage);
   }, []);
 
-  //toast ke liye 🍞
+  // Toast for login
   useEffect(() => {
     if (!isClient) return;
 
@@ -122,16 +133,20 @@ export function Navbar() {
   }, [user, isClient]);
 
   const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/features", label: "Features" },
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
+    { href: "/", label: t("Navbar.home") },
+    { href: "/features", label: t("Navbar.features") },
+    { href: "/about", label: t("Navbar.about") },
+    { href: "/contact", label: t("Navbar.contact") },
     ...(isAuthenticated
       ? [
-          { href: "/chat", label: "Chat", newTab: true }, // Added newTab property
-          { href: "/dashboard", label: "Dashboard", newTab: true }, // Added newTab property
-          { href: "/ai-assistant", label: "AI Assistant", newTab: true }, // Added newTab property
-          { href: "/subscriptions", label: "Subscriptions" },
+          { href: "/chat", label: t("Navbar.chat"), newTab: true },
+          { href: "/dashboard", label: t("Navbar.dashboard"), newTab: true },
+          {
+            href: "/ai-assistant",
+            label: t("Navbar.aiAssistant"),
+            newTab: true,
+          },
+          { href: "/subscriptions", label: t("Navbar.subscriptions") },
         ]
       : []),
   ];
@@ -292,7 +307,7 @@ export function Navbar() {
                 className:
                   "text-xl font-semibold tracking-tight text-slate-900 dark:text-white",
               },
-              "ASHA सखी"
+              t("Navbar.ashaSakhi")
             )
           )
         ),
@@ -302,11 +317,12 @@ export function Navbar() {
           { className: "hidden md:flex items-center space-x-2" },
           ...createDesktopNavLinks()
         ),
-        // Right side - Auth & Theme
+        // Right side - Auth, Language & Theme
         React.createElement(
           "div",
           { className: "flex items-center space-x-3" },
           React.createElement(ThemeToggle),
+          React.createElement(LanguageSwitcher),
           React.createElement(
             "div",
             { className: "hidden md:flex items-center space-x-3" },
@@ -394,7 +410,7 @@ export function Navbar() {
                               className:
                                 "w-4 h-4 mr-3 text-slate-500 dark:text-slate-400",
                             }),
-                            "Profile"
+                            t("Navbar.profile")
                           ),
                           // Logout Button
                           React.createElement(
@@ -407,7 +423,7 @@ export function Navbar() {
                             React.createElement(LogOut, {
                               className: "w-4 h-4 mr-3",
                             }),
-                            "Logout"
+                            t("Navbar.logout")
                           )
                         )
                     )
@@ -422,7 +438,7 @@ export function Navbar() {
                         className:
                           "px-3 py-2 rounded-md text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-900/5 dark:hover:bg-slate-100/5 hover:text-slate-900 dark:hover:text-slate-100 transition-colors",
                       },
-                      "Login"
+                      t("Navbar.login")
                     ),
                     React.createElement(
                       Link,
@@ -431,7 +447,7 @@ export function Navbar() {
                         className:
                           "px-4 py-2 rounded-md text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 transition-colors",
                       },
-                      "Get Started"
+                      t("Navbar.getStarted")
                     )
                   ))
           ),
@@ -526,7 +542,7 @@ export function Navbar() {
                           React.createElement(User, {
                             className: "w-5 h-5 mr-2",
                           }),
-                          "Profile"
+                          t("Navbar.profile")
                         ),
                         React.createElement(
                           "button",
@@ -541,7 +557,7 @@ export function Navbar() {
                           React.createElement(LogOut, {
                             className: "w-5 h-5 mr-2",
                           }),
-                          "Logout"
+                          t("Navbar.logout")
                         )
                       )
                     : React.createElement(
@@ -554,7 +570,7 @@ export function Navbar() {
                             className:
                               "block px-3 py-2 rounded-md text-base font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-900/5 dark:hover:bg-slate-100/5",
                           },
-                          "Login"
+                          t("Navbar.login")
                         ),
                         React.createElement(
                           Link,
@@ -563,7 +579,7 @@ export function Navbar() {
                             className:
                               "block w-full text-center px-3 py-3 rounded-md text-base font-semibold text-white bg-emerald-600 hover:bg-emerald-700 transition-colors",
                           },
-                          "Get Started"
+                          t("Navbar.getStarted")
                         )
                       ))
               )

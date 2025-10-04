@@ -5,6 +5,7 @@ import { AuthProvider } from "@/components/auth/AuthProvider";
 import { ToastProvider } from "@/components/ui/ToastProvider";
 import { Toaster } from "react-hot-toast";
 import StyleDiagnostic from "@/components/debug/StyleDiagnostic";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
 import { GoogleOAuthProvider } from "@react-oauth/google";
 const inter = Inter({ subsets: ["latin"] });
@@ -14,6 +15,14 @@ export const metadata = {
   description:
     "Connect your Google Drive and unlock powerful AI search across all your documents",
 };
+
+function getInitialLocale() {
+  if (typeof window !== "undefined") {
+    return localStorage.getItem("preferred-language") || "en";
+  }
+  return "en";
+}
+const initialLocale = getInitialLocale();
 
 export default function RootLayout({ children }) {
   return (
@@ -36,30 +45,32 @@ export default function RootLayout({ children }) {
         <GoogleOAuthProvider
           clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}
         >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <AuthProvider>
-              <ToastProvider>
-                {children}
-                <Toaster
-                  position="top-right"
-                  toastOptions={{
-                    duration: 4000,
-                    style: {
-                      background: "var(--background)",
-                      color: "var(--foreground)",
-                      border: "1px solid var(--border)",
-                    },
-                  }}
-                />
-                <StyleDiagnostic />
-              </ToastProvider>
-            </AuthProvider>
-          </ThemeProvider>
+          <LanguageProvider initialLocale={initialLocale}>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <AuthProvider>
+                <ToastProvider>
+                  {children}
+                  <Toaster
+                    position="top-right"
+                    toastOptions={{
+                      duration: 4000,
+                      style: {
+                        background: "var(--background)",
+                        color: "var(--foreground)",
+                        border: "1px solid var(--border)",
+                      },
+                    }}
+                  />
+                  <StyleDiagnostic />
+                </ToastProvider>
+              </AuthProvider>
+            </ThemeProvider>
+          </LanguageProvider>
         </GoogleOAuthProvider>
       </body>
     </html>

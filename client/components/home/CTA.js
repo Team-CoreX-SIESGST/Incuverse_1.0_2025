@@ -15,8 +15,20 @@ import {
   Microphone,
   Calendar,
 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function CTA() {
+  const { messages } = useLanguage();
+
+  const t = (key) => {
+    const keys = key.split(".");
+    let value = messages;
+    for (const k of keys) {
+      value = value?.[k];
+    }
+    return value || key;
+  };
+
   return (
     <section className="relative overflow-hidden bg-slate-50 dark:bg-slate-950 py-20 sm:py-24">
       {/* Background Decoration */}
@@ -39,27 +51,21 @@ export function CTA() {
           <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-slate-200/50 dark:bg-slate-100/5 ring-1 ring-inset ring-slate-900/10 dark:ring-slate-100/10 mb-8 backdrop-blur-lg">
             <Brain className="w-4 h-4 text-emerald-500 dark:text-emerald-400 mr-2" />
             <span className="text-sm font-medium text-slate-800 dark:text-slate-300">
-              AI-Powered Health Assistant
+              {t("CTA.aiPowered")}
             </span>
           </div>
 
           {/* Main Content */}
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 dark:text-white mb-6">
-            Transform Community Healthcare
+            {t("CTA.transform")}
             <br />
             <span className="bg-gradient-to-r from-emerald-500 to-green-500 dark:from-emerald-400 dark:to-green-400 bg-clip-text text-transparent">
-              With AI Innovation
+              {t("CTA.withAI")}
             </span>
           </h2>
 
           <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-3xl mx-auto">
-            Our AI platform helps ASHA workers with{" "}
-            <strong className="text-slate-900 dark:text-slate-200">
-              voice-based patient registration, digital health records, and
-              automated follow-ups
-            </strong>{" "}
-            simultaneously. Get instant insights and improve healthcare delivery
-            in rural communities.
+            {t("CTA.subtitle")}
           </p>
 
           {/* Use Cases */}
@@ -67,21 +73,18 @@ export function CTA() {
             {[
               {
                 icon: "🎤",
-                title: "Voice Data Entry",
-                content:
-                  "Register patients and update health records using simple voice commands in local language.",
+                title: t("CTA.voiceDataEntry"),
+                content: t("CTA.voiceDataEntryDesc"),
               },
               {
                 icon: "📅",
-                title: "Smart Follow-ups",
-                content:
-                  "Automated appointment scheduling and reminders for better patient care continuity.",
+                title: t("CTA.smartFollowups"),
+                content: t("CTA.smartFollowupsDesc"),
               },
               {
                 icon: "🏥",
-                title: "Health Schemes",
-                content:
-                  "Easy access to government health benefits and scheme information for communities.",
+                title: t("CTA.healthSchemes"),
+                content: t("CTA.healthSchemesDesc"),
               },
             ].map((useCase) => (
               <div
@@ -107,11 +110,11 @@ export function CTA() {
               href="/register"
               className="group inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-emerald-600 rounded-full hover:bg-emerald-700 dark:bg-emerald-500 dark:hover:bg-emerald-600 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
-              <span>Start Your Free Trial</span>
+              <span>{t("CTA.startTrial")}</span>
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </Link>
             <p className="text-sm text-slate-500 dark:text-slate-400 mt-4">
-              No credit card required • 14-day free trial • Cancel anytime
+              {t("CTA.noCreditCard")}
             </p>
           </div>
         </div>

@@ -10,7 +10,10 @@ import {
     logoutUser,
     sendEmailOTP,
     verifyEmailOTP,
-    completeAshaRegistration
+    completeAshaRegistration,
+    getUnverifiedUsers,
+    updateUserVerification,
+    bulkVerifyUsers
 } from "./userController.js";
 import { verifyJWT } from "../../middlewares/auth.middleware.js";
 
@@ -30,5 +33,9 @@ userRoute.patch("/details", (req, res) => {
 userRoute.get("/get_user", verifyJWT, getUser);
 userRoute.post("/logout", verifyJWT, logoutUser);
 userRoute.post("/admin_login")
+
+userRoute.get("/admin/unverified", verifyJWT, getUnverifiedUsers);
+userRoute.patch("/admin/verify/:userId", verifyJWT, updateUserVerification);
+userRoute.post("/admin/bulk-verify", verifyJWT, bulkVerifyUsers);
 
 export { userRoute };

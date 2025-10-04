@@ -22,6 +22,7 @@ import {
   Heart,
   Activity,
 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Animation variants for the tab content
 const tabContentVariants = {
@@ -32,67 +33,76 @@ const tabContentVariants = {
 
 export function Features() {
   const [activeTab, setActiveTab] = useState(0);
+  const { messages } = useLanguage();
+
+  const t = (key) => {
+    const keys = key.split(".");
+    let value = messages;
+    for (const k of keys) {
+      value = value?.[k];
+    }
+    return value || key;
+  };
 
   const features = [
     {
       id: 0,
-      title: "Voice Patient Registration",
-      description:
-        "Register patients using simple voice commands in local language.",
+      title: t("Features.voiceRegistration"),
+      description: t("Features.voiceRegistrationDesc"),
       icon: Mic,
       color: "from-emerald-500 to-green-500",
       details: [
-        "Vernacular voice recognition",
-        "Auto-fill patient forms",
-        "QR health card generation",
-        "Offline voice processing",
-        "Multiple language support",
-        "Real-time validation",
+        t("Features.vernacularRecognition"),
+        t("Features.autoFillForms"),
+        t("Features.qrHealthCard"),
+        t("Features.offlineProcessing"),
+        t("Features.multiLanguage"),
+        t("Features.realTimeValidation"),
       ],
     },
     {
       id: 1,
-      title: "Smart Follow-up Scheduling",
-      description: "Automated appointment tracking and reminder system.",
+      title: t("Features.smartFollowup"),
+      description: t("Features.smartFollowupDesc"),
       icon: Calendar,
       color: "from-green-500 to-emerald-500",
       details: [
-        "Automated visit reminders",
-        "Priority-based scheduling",
-        "Missed visit alerts",
-        "Progress tracking",
-        "Performance analytics",
-        "Community health trends",
+        t("Features.automatedReminders"),
+        t("Features.priorityScheduling"),
+        t("Features.missedVisitAlerts"),
+        t("Features.progressTracking"),
+        t("Features.performanceAnalytics"),
+        t("Features.communityTrends"),
       ],
     },
     {
       id: 2,
-      title: "Health Scheme Access",
-      description: "Easy access to government health schemes and benefits.",
+      title: t("Features.healthScheme"),
+      description: t("Features.healthSchemeDesc"),
       icon: Heart,
       color: "from-emerald-600 to-green-600",
       details: [
-        "Scheme eligibility checking",
-        "Application guidance",
-        "Benefit explanations",
-        "Document requirements",
-        "Status tracking",
-        "Local language support",
+        t("Features.schemeEligibility"),
+        t("Features.applicationGuidance"),
+        t("Features.benefitExplanations"),
+        t("Features.documentRequirements"),
+        t("Features.statusTracking"),
+        t("Features.localLanguageSupport"),
       ],
     },
     {
       id: 3,
-      title: "Community Health Dashboard",
-      description: "Track community health metrics and outcomes.",
+      title: t("Features.communityDashboard"),
+      description: t("Features.communityDashboardDesc"),
       icon: BarChart3,
       color: "from-green-600 to-emerald-600",
       details: [
-        "Health trend analysis",
-        "Vaccination tracking",
-        "Maternal health monitoring",
-        "Child nutrition status",
-        "Outbreak alerts",
-        "Performance reports",
+        t("Features.healthTrendAnalysis"),
+        t("Features.vaccinationTracking"),
+        t("Features.maternalMonitoring"),
+        t("Features.childNutrition"),
+        t("Features.outbreakAlerts"),
+        t("Features.performanceReports"),
       ],
     },
   ];
@@ -103,15 +113,13 @@ export function Features() {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-4">
-            Comprehensive tools for{" "}
+            {t("Features.comprehensiveTools")}{" "}
             <span className="bg-gradient-to-r from-emerald-500 to-green-500 bg-clip-text text-transparent">
-              community healthcare
+              {t("Features.communityHealthcare")}
             </span>
           </h2>
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
-            Our AI-powered platform transforms how ASHA workers serve their
-            communities with efficient data management and intelligent health
-            insights.
+            {t("Features.subtitle")}
           </p>
         </div>
 
@@ -196,7 +204,7 @@ export function Features() {
                     href="/register"
                     className="group inline-flex items-center text-base font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 transition-colors"
                   >
-                    <span>Start Your Free Trial</span>
+                    <span>{t("Features.startFreeTrial")}</span>
                     <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
@@ -208,12 +216,12 @@ export function Features() {
         {/* Additional Features Grid */}
         <div className="mt-20 sm:mt-24">
           <h3 className="text-2xl font-bold text-slate-900 dark:text-white text-center mb-12">
-            Trusted by Healthcare Professionals
+            {t("Features.trustedBy")}
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { icon: Users, title: "ASHA Workers" },
+              { icon: Users, title: t("Navbar.ashaWorkers") },
               { icon: Activity, title: "Health Centers" },
               { icon: Heart, title: "Maternal Care" },
               { icon: Shield, title: "Government Agencies" },
