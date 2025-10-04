@@ -13,7 +13,9 @@ import {
   getSections,
   getSection,
 } from "@/services/chat/chatServices";
+import { CreateChat } from "@/services/python_server/pythonServer";
 import { data } from "autoprefixer";
+import { sendMessage } from "@/services/chat/chatServices";
 
 // FastAPI base URL and helpers
 const BASE_URL = "http://localhost:8000";
@@ -226,20 +228,20 @@ export function ChatInterface({ isSidebarOpen, setIsSidebarOpen }) {
     let uploadedFiles = [];
 
     // Upload files to FastAPI if any
-    if (selectedFiles.length > 0) {
-      try {
-        uploadedFiles = await Promise.all(
-          selectedFiles.map(async (file) => {
-            const res = await message_python(file);
-            console.log(res, "user");
-            return res; // contains file_id, filename, status, details
-          })
-        );
-      } catch (error) {
-        console.error("Error uploading files:", error);
-        return;
-      }
-    }
+    // if (selectedFiles.length > 0) {
+    //   try {
+    //     uploadedFiles = await Promise.all(
+    //       selectedFiles.map(async (file) => {
+    //         const res = await message_python(file);
+    //         console.log(res, "user");
+    //         return res; // contains file_id, filename, status, details
+    //       })
+    //     );
+    //   } catch (error) {
+    //     console.error("Error uploading files:", error);
+    //     return;
+    //   }
+    // }
 
     // Create new local section if none exists
     if (!currentSection) {
@@ -270,18 +272,15 @@ export function ChatInterface({ isSidebarOpen, setIsSidebarOpen }) {
     setIsLoading(true);
 
     try {
-      const searchRes = await apiSearch(messageToSend, {
-        workspaceId: DEFAULT_WORKSPACE_ID,
+      const searchRes = await sendMessage(currentSection._id, {
+        message: userMessage.message,
       });
-
+      // console.log(searchRes,"rrrrr")
       const aiMessage = {
         _id: Date.now() + "-ai",
-        message: searchRes.answer || "",
+        message: searchRes.data.data.aiMessage.message || "",
         isUser: false,
         createdAt: new Date(),
-        sources: searchRes.sources || [],
-        confidence: searchRes.confidence,
-        metadata: searchRes.metadata,
       };
       setChats((prev) => [...prev, aiMessage]);
     } catch (error) {

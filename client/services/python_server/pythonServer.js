@@ -1,4 +1,4 @@
-import { apiClient2 } from "@/helper/commonHelper";
+import { apiClient2, apiClient3 } from "@/helper/commonHelper";
 
 export const predictDisease = async (payload) => {
   const response = await apiClient2.post("/predict", payload);
@@ -58,5 +58,7 @@ export const textToSpeech = (payload) => {
 
 export const lifestyleRecommendations = (payload) => {
   return apiClient2.post("/lifestyle-recommendations", payload);
-  // Note: Fixed the endpoint - it's /lifestyle-recommendations, not /ai/lifestyle-recommendations
+};
+export const CreateChat = (payload) => {
+  return apiClient3.post("/chat", payload);
 };

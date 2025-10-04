@@ -6,6 +6,7 @@ import User from "../../models/user.js";
 import TokenUsage from "../../models/tokenUsage.js";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { sample_summary, researchPrompt } from "../../utils/sample.js";
+import axios from "axios";
 
 // Initialize the Google Generative AI with your API key
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -89,7 +90,7 @@ export const sendMessage = asyncHandler(async (req, res) => {
     }
 
     // Get previous messages for context
-    const previousChats = await Chat.find({ section: sectionId }).sort({ createdAt: 1 }).limit(10); // Limit context to last 10 messages
+    const previousChats = await Chat.find({ section: sectionId }).sort({ createdAt: 1 }).limit(10);
 
     // Format previous messages for the AI
     const previousContext = previousChats.map((chat) => ({
@@ -104,60 +105,100 @@ export const sendMessage = asyncHandler(async (req, res) => {
         isUser: true
     });
 
-    // Track token usage for user message
-    const userMessageTokens = approximateTokenCount(message.trim());
-    await TokenUsage.create({
-        user: userId,
-        tokens: userMessageTokens,
-        message: message.trim(),
-        isUserMessage: true,
-        section: sectionId
-    });
-
-    // Update user's token usage
-    user.tokensUsed += userMessageTokens;
-    await user.save();
-
     // Update section's updatedAt timestamp
     await Section.findByIdAndUpdate(sectionId, { updatedAt: new Date() });
 
-    // Get AI response with context
-    const aiResponse = await getAIResponse(message, previousContext, processedFiles);
+    try {
+        // Get AI response with proper context and error handling
+        const aiResponse = await axios.post(
+            "http://localhost:8000/chat",
+            {
+                message: message.trim(),
+            },
+            {
+                timeout: 30000, // 30 second timeout
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }
+        );
 
-    // Save AI response
-    const aiChat = await Chat.create({
-        section: sectionId,
-        message: aiResponse,
-        isUser: false
-    });
+        // Extract response data properly
+        const aiResponseText =
+            aiResponse.data.response || aiResponse.data.message || aiResponse.data;
 
-    // Track token usage for AI response
-    const aiMessageTokens = approximateTokenCount(aiResponse);
-    await TokenUsage.create({
-        user: userId,
-        tokens: aiMessageTokens,
-        message: aiResponse,
-        isUserMessage: false,
-        section: sectionId
-    });
+        // Save AI response
+        const aiChat = await Chat.create({
+            section: sectionId,
+            message: aiResponseText,
+            isUser: false
+        });
 
-    // Update user's token usage with AI response tokens
-    user.tokensUsed += aiMessageTokens;
-    await user.save();
+        // Update user token balance
+        await user.save();
 
-    return sendResponse(
-        res,
-        true,
-        {
-            userMessage: userChat,
-            aiMessage: aiChat,
-            tokensUsed: userMessageTokens + aiMessageTokens,
-            totalTokensUsed: user.tokensUsed
-        },
-        "Message sent and response received",
-        statusType.OK
-    );
+        return sendResponse(
+            res,
+            true,
+            {
+                userMessage: userChat,
+                aiMessage: aiChat,
+            },
+            "Message sent and response received",
+            statusType.OK
+        );
+    } catch (error) {
+        console.error("AI Service Error:", error);
+
+        // Handle specific axios errors
+        if (error.code === "ECONNREFUSED") {
+            return sendResponse(
+                res,
+                false,
+                null,
+                "AI service is unavailable",
+                statusType.SERVICE_UNAVAILABLE
+            );
+        }
+
+        if (error.response) {
+            // AI service responded with error status
+            return sendResponse(
+                res,
+                false,
+                null,
+                `AI service error: ${error.response.data?.message || error.response.status}`,
+                statusType.INTERNAL_SERVER_ERROR
+            );
+        }
+
+        if (error.request) {
+            // Request was made but no response received
+            return sendResponse(
+                res,
+                false,
+                null,
+                "No response from AI service",
+                statusType.REQUEST_TIMEOUT
+            );
+        }
+
+        return sendResponse(
+            res,
+            false,
+            null,
+            "Failed to get AI response",
+            statusType.INTERNAL_SERVER_ERROR
+        );
+    }
 });
+
+// Helper function to calculate tokens (you'll need to implement this properly)
+function calculateTokens(text) {
+    // This is a simple approximation - replace with actual token counting logic
+    // For GPT models, you might use a library like 'gpt-3-encoder'
+    return Math.ceil(text.length / 4);
+}
 
 // Delete a section and all its chats
 export const deleteSection = asyncHandler(async (req, res) => {

@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
 import uuid
@@ -25,14 +26,22 @@ app = FastAPI(
     version="1.0.0"
 )
 
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows your frontend origin
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allows all headers
+)
+
 # Pydantic models
 class ChatRequest(BaseModel):
     message: str
-    session_id: Optional[str] = None
 
 class ChatResponse(BaseModel):
     response: str
-    session_id: str
+    # session_id: str
     timestamp: str
 
 # Global variable for chatbot chain
@@ -51,7 +60,7 @@ def initialize_chatbot():
         # Initialize embeddings
         embeddings = OpenAIEmbeddings(
             model="text-embedding-ada-002",
-            openai_api_key="---"
+            openai_api_key="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"
         )
 
         # Initialize LLM
@@ -208,22 +217,22 @@ async def chat(chat_request: ChatRequest):
     
     try:
         # Generate or use session ID
-        session_id = chat_request.session_id or str(uuid.uuid4())
+        # session_id = chat_request.session_id or str(uuid.uuid4())
         
         # Get response from chatbot
         response = retrieval_chain.invoke({"input": chat_request.message})
         
         # Store session (optional)
-        if session_id not in sessions:
-            sessions[session_id] = {
-                'created_at': datetime.now().isoformat(),
-                'message_count': 0
-            }
-        sessions[session_id]['message_count'] += 1
+        # if session_id not in sessions:
+        #     sessions[session_id] = {
+        #         'created_at': datetime.now().isoformat(),
+        #         'message_count': 0
+        #     }
+        # sessions[session_id]['message_count'] += 1
         
         return ChatResponse(
             response=response["answer"],
-            session_id=session_id,
+            # session_id=session_id,
             timestamp=datetime.now().isoformat()
         )
         

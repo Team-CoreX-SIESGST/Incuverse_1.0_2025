@@ -30,6 +30,7 @@ const handleRequest = async (axiosCall) => {
 };
 const base_url = process.env.NEXT_PUBLIC_API_URL;
 const base_url2 = process.env.NEXT_PUBLIC_PYTHON_PUBLIC_API_URL;
+const base_url3 = process.env.NEXT_PUBLIC_PYTHON2_PUBLIC_API_URL;
 
 export const apiClient = {
   get: async (url, headers = {}) =>
@@ -164,6 +165,75 @@ export const apiClient2 = {
   delete: async (url, headers = {}) =>
     handleRequest(() =>
       axios.delete(`${base_url2}${url}`, {
+        headers,
+        withCredentials: true,
+      })
+    ),
+};
+export const apiClient3 = {
+  get: async (url, headers = {}) =>
+    handleRequest(() =>
+      axios.get(`${base_url3}${url}`, {
+        headers,
+        withCredentials: true,
+      })
+    ),
+
+  post: async (url, data, headers = {}) => {
+    const requestHeaders = { ...headers };
+
+    // Let axios handle content-type for FormData automatically
+    if (data instanceof FormData) {
+      delete requestHeaders["Content-Type"];
+    } else if (!requestHeaders["Content-Type"]) {
+      requestHeaders["Content-Type"] = "application/json";
+    }
+
+    return handleRequest(() =>
+      axios.post(`${base_url3}${url}`, data, {
+        headers: requestHeaders,
+        withCredentials: true,
+      })
+    );
+  },
+
+  put: async (url, data, headers = {}) => {
+    const requestHeaders = { ...headers };
+
+    if (data instanceof FormData) {
+      delete requestHeaders["Content-Type"];
+    } else if (!requestHeaders["Content-Type"]) {
+      requestHeaders["Content-Type"] = "application/json";
+    }
+
+    return handleRequest(() =>
+      axios.put(`${base_url3}${url}`, data, {
+        headers: requestHeaders,
+        withCredentials: true,
+      })
+    );
+  },
+
+  patch: async (url, data, headers = {}) => {
+    const requestHeaders = { ...headers };
+
+    if (data instanceof FormData) {
+      delete requestHeaders["Content-Type"];
+    } else if (!requestHeaders["Content-Type"]) {
+      requestHeaders["Content-Type"] = "application/json";
+    }
+
+    return handleRequest(() =>
+      axios.patch(`${base_url3}${url}`, data, {
+        headers: requestHeaders,
+        withCredentials: true,
+      })
+    );
+  },
+
+  delete: async (url, headers = {}) =>
+    handleRequest(() =>
+      axios.delete(`${base_url3}${url}`, {
         headers,
         withCredentials: true,
       })
