@@ -7,6 +7,7 @@ import chatRouter from "./controllers/chats/chatRoutes.js";
 import subscriptionRouter from "./controllers/subscription/subscriptionRoutes.js";
 import promptRouter from "./controllers/ai/promptRoutes.js";
 import { verifyJWT } from "./middlewares/auth.middleware.js";
+import patientRoute from "./controllers/patient/patientRoute.js"
 const app = express();
 
 app.use(
@@ -29,6 +30,8 @@ app.use(verifyJWT);
 app.use("/api/subscription", subscriptionRouter);
 app.use("/api/sections", chatRouter);
 app.use("/api/ai", promptRouter);
+app.use("/api/patients", patientRoute);
+
 
 // backend route for OAuth callback
 app.get("/oauth2callback", (req, res) => {
