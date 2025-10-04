@@ -39,7 +39,36 @@ DESCRIPTIONS_PATH = os.path.join(os.path.dirname(__file__), 'DATASET', 'symptom_
 PRECAUTIONS_PATH = os.path.join(os.path.dirname(__file__), 'DATASET', 'symptom_precaution.csv')
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "*"}})
+
+# Enhanced CORS configuration
+CORS(app, resources={
+    r"/api/*": {
+        "origins": ["http://localhost:3000", "http://127.0.0.1:3000"],
+        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        "allow_headers": [
+            "Content-Type", 
+            "Authorization", 
+            "Accept",
+            "X-Requested-With"
+        ],
+        "supports_credentials": True,
+        "max_age": 3600
+    }
+})
+
+# Manual CORS handling for file upload routes
+@app.after_request
+def after_request(response):
+    origin = request.headers.get('Origin')
+    allowed_origins = ['http://localhost:3000', 'http://127.0.0.1:3000']
+    
+    if origin in allowed_origins:
+        response.headers.add('Access-Control-Allow-Origin', origin)
+    
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept')
+    response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+    response.headers.add('Access-Control-Allow-Credentials', 'true')
+    return response
 
 # -----------------------------------------------------------------------------
 # Artifact Loading
@@ -686,6 +715,19 @@ def api_disease_info_specific(disease):
     
     result['disease'] = disease
     return jsonify(result)
+
+# OPTIONS handlers for file upload routes
+@app.route('/api/ai/image-analysis', methods=['OPTIONS'])
+def handle_image_analysis_options():
+    return jsonify({'status': 'ok'}), 200
+
+@app.route('/api/ai/transcribe', methods=['OPTIONS'])
+def handle_transcribe_options():
+    return jsonify({'status': 'ok'}), 200
+
+@app.route('/api/ai/full-consultation', methods=['OPTIONS'])
+def handle_full_consultation_options():
+    return jsonify({'status': 'ok'}), 200
 
 @app.route('/api/ai/image-analysis', methods=['POST'])
 def api_ai_image_analysis():

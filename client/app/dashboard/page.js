@@ -7,7 +7,6 @@ import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { ManualRegistration } from "@/components/dashboard/ManualRegistration";
 import { VoiceRegistration } from "@/components/dashboard/VoiceRegistration";
 import { PatientList } from "@/components/dashboard/PatientList";
-
 export default function Dashboard() {
   const { loading } = useAuth();
   const router = useRouter();
@@ -24,7 +23,7 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
       </div>
     );

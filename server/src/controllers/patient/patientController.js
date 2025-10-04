@@ -7,6 +7,8 @@ import {
     sendResponse
 } from "../../utils/index.js";
 import QRCode from "qrcode";
+import fs from "fs";
+import path from "path";
 
 // Generate QR code and upload to Cloudinary
 const generateAndUploadQRCode = async (patientData) => {
@@ -34,16 +36,31 @@ const generateAndUploadQRCode = async (patientData) => {
         const base64Data = qrCodeDataURL.replace(/^data:image\/png;base64,/, "");
         const buffer = Buffer.from(base64Data, "base64");
 
-        // Create file object from buffer
-        const file = {
-            buffer: buffer,
-            originalname: `qr-${patientData._id}.png`,
-            mimetype: "image/png"
-        };
+        // Define temp folder path
+        const tempDir = "./public/temp";
 
-        // Upload to Cloudinary
-        const qrCodeUrl = await uploadOnCloudinary(file);
-        return qrCodeUrl;
+        // Ensure temp directory exists
+        if (!fs.existsSync(tempDir)) {
+            fs.mkdirSync(tempDir, { recursive: true });
+        }
+
+        // Save QR code to temp folder
+        const fileName = `qr-${patientData._id}-${Date.now()}.png`;
+        const filePath = path.join(tempDir, fileName);
+
+        fs.writeFileSync(filePath, buffer);
+
+        // Upload to Cloudinary from temp file
+        const qrCodeUrl = await uploadOnCloudinary(filePath);
+
+        // Delete the temporary file after upload
+        // try {
+        //     fs.unlinkSync(filePath);
+        // } catch (error) {
+        //     console.error("Error deleting temporary QR file:", error);
+        // }
+
+        return qrCodeUrl.secure_url;
     } catch (error) {
         console.error("Error generating QR code:", error);
         return null;
@@ -86,11 +103,11 @@ export const createPatient = asyncHandler(async (req, res) => {
     }
 
     // Handle file upload if present
-    console.log(req.file,"Fewoihfewi")
+    // console.log(req.file,"Fewoihfewi")
     if (req.file) {
-        const profileImageUrl = await uploadOnCloudinary(req.file);
+        const profileImageUrl = await uploadOnCloudinary(req.file.path);
         if (profileImageUrl) {
-            patientData.profileImage = profileImageUrl;
+            patientData.profileImage = profileImageUrl.secure_url;
         }
     }
 
@@ -99,6 +116,7 @@ export const createPatient = asyncHandler(async (req, res) => {
 
     // Generate and upload QR code
     const qrCodeUrl = await generateAndUploadQRCode(patient);
+    console.log(qrCodeUrl)
     if (qrCodeUrl) {
         patient.qrCode = qrCodeUrl;
         await patient.save();

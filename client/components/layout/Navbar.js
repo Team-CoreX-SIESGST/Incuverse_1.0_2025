@@ -128,8 +128,9 @@ export function Navbar() {
     { href: "/contact", label: "Contact" },
     ...(isAuthenticated
       ? [
-          { href: "/chat", label: "Agent", newTab: true }, // Added newTab property
+          { href: "/chat", label: "Chat", newTab: true }, // Added newTab property
           { href: "/dashboard", label: "Dashboard", newTab: true }, // Added newTab property
+          { href: "/ai-assistant", label: "AI Assistant", newTab: true }, // Added newTab property
           { href: "/subscriptions", label: "Subscriptions" },
         ]
       : []),
