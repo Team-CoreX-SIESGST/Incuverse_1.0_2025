@@ -5,9 +5,6 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import {
   Brain,
-  Search,
-  FileText,
-  Users,
   Heart,
   BookOpen,
   Zap,
@@ -22,6 +19,7 @@ import {
   Mic,
   Activity,
 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Animation variants for Framer Motion
 const FADE_IN_STAGGER_VARIANTS = {
@@ -40,6 +38,17 @@ const FADE_IN_UP_VARIANTS = {
 };
 
 export default function AboutPage() {
+  const { messages } = useLanguage();
+
+  const t = (key) => {
+    const keys = key.split(".");
+    let value = messages;
+    for (const k of keys) {
+      value = value?.[k];
+    }
+    return value || key;
+  };
+
   return (
     <div className="bg-slate-950 text-white">
       <Navbar />
@@ -59,16 +68,14 @@ export default function AboutPage() {
             <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-slate-100/5 ring-1 ring-inset ring-slate-100/10 mb-8 backdrop-blur-lg">
               <Heart className="w-4 h-4 text-emerald-400 mr-2" />
               <span className="text-sm font-medium text-slate-300">
-                AI-Powered Health Assistant
+                {t("About.aiPoweredHealthAssistant")}
               </span>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent mb-6">
-              Revolutionizing Community Healthcare
+              {t("About.revolutionizingCommunityHealthcare")}
             </h1>
             <p className="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto">
-              The world's first AI platform specifically designed for ASHA
-              workers. Manage patient data, schedule follow-ups, and access
-              health schemes with voice commands in local languages.
+              {t("About.description")}
             </p>
           </motion.div>
 
@@ -78,21 +85,18 @@ export default function AboutPage() {
               {[
                 {
                   icon: Mic,
-                  title: "Voice-Based Interface",
-                  description:
-                    "Register patients and update records using simple voice commands in vernacular languages.",
+                  title: t("About.voiceBasedInterface"),
+                  description: t("About.voiceBasedInterfaceDesc"),
                 },
                 {
                   icon: Brain,
-                  title: "Health Intelligence",
-                  description:
-                    "AI models that understand healthcare workflows and provide intelligent recommendations.",
+                  title: t("About.healthIntelligence"),
+                  description: t("About.healthIntelligenceDesc"),
                 },
                 {
                   icon: BarChart3,
-                  title: "Community Analytics",
-                  description:
-                    "Track health trends, vaccination rates, and community health outcomes automatically.",
+                  title: t("About.communityAnalytics"),
+                  description: t("About.communityAnalyticsDesc"),
                 },
               ].map((item) => (
                 <div
@@ -115,27 +119,24 @@ export default function AboutPage() {
             className="bg-slate-100/5 p-8 rounded-2xl ring-1 ring-inset ring-slate-100/10"
           >
             <h2 className="text-3xl font-bold text-white mb-8 text-center">
-              Built for Healthcare Excellence
+              {t("About.builtForHealthcareExcellence")}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
                 {
                   icon: Cpu,
-                  title: "Vernacular AI Models",
-                  description:
-                    "Specialized AI models trained on healthcare data and local languages for superior understanding.",
+                  title: t("About.vernacularAIModels"),
+                  description: t("About.vernacularAIModelsDesc"),
                 },
                 {
                   icon: Shield,
-                  title: "Healthcare Security",
-                  description:
-                    "Bank-level encryption and compliance with healthcare data protection standards and regulations.",
+                  title: t("About.healthcareSecurity"),
+                  description: t("About.healthcareSecurityDesc"),
                 },
                 {
                   icon: Database,
-                  title: "Health Database",
-                  description:
-                    "Comprehensive database of health schemes, protocols, and community health records.",
+                  title: t("About.healthDatabase"),
+                  description: t("About.healthDatabaseDesc"),
                 },
               ].map((tech) => (
                 <div key={tech.title} className="text-center">
@@ -152,33 +153,29 @@ export default function AboutPage() {
           {/* Use Cases */}
           <motion.div variants={FADE_IN_UP_VARIANTS}>
             <h2 className="text-3xl font-bold text-white mb-8 text-center">
-              Trusted by Healthcare Professionals
+              {t("About.trustedByHealthcareProfessionals")}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
                 {
                   emoji: "👩‍⚕️",
-                  title: "ASHA Workers",
-                  description:
-                    "Streamline patient registration, reduce paperwork, and improve healthcare delivery efficiency.",
+                  title: t("About.ashaWorkers"),
+                  description: t("About.ashaWorkersDesc"),
                 },
                 {
                   emoji: "🏥",
-                  title: "Health Centers",
-                  description:
-                    "Access comprehensive community health data and track public health programs effectively.",
+                  title: t("About.healthCenters"),
+                  description: t("About.healthCentersDesc"),
                 },
                 {
                   emoji: "🤰",
-                  title: "Maternal Healthcare",
-                  description:
-                    "Monitor pregnancy progress, schedule antenatal checks, and reduce maternal mortality.",
+                  title: t("About.maternalHealthcare"),
+                  description: t("About.maternalHealthcareDesc"),
                 },
                 {
                   emoji: "👶",
-                  title: "Child Healthcare",
-                  description:
-                    "Track immunization schedules, nutrition status, and child development milestones.",
+                  title: t("About.childHealthcare"),
+                  description: t("About.childHealthcareDesc"),
                 },
               ].map((useCase) => (
                 <div
@@ -204,25 +201,24 @@ export default function AboutPage() {
           >
             <Activity className="w-12 h-12 text-emerald-400 mx-auto mb-4" />
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              Ready to Transform Community Health?
+              {t("About.readyToTransformCommunityHealth")}
             </h2>
             <p className="text-lg text-slate-400 mb-8 max-w-2xl mx-auto">
-              Join thousands of ASHA workers and healthcare professionals who've
-              revolutionized their workflow with AI-powered health assistance.
+              {t("About.joinThousands")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="/demo"
                 className="group inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-slate-900 bg-white rounded-full hover:bg-slate-200 transition-all duration-300 transform hover:-translate-y-0.5"
               >
-                Start Free Trial
+                {t("About.startFreeTrial")}
                 <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform" />
               </a>
               <a
                 href="/contact"
                 className="group inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white bg-white/5 rounded-full ring-1 ring-inset ring-slate-100/20 hover:bg-white/10 transition-all duration-300"
               >
-                Get Health Demo
+                {t("About.getHealthDemo")}
               </a>
             </div>
           </motion.div>

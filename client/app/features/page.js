@@ -5,6 +5,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Features } from "@/components/home/Features";
 import { Sparkles } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Animation variants from the reference code
 const FADE_IN_STAGGER_VARIANTS = {
@@ -23,10 +24,21 @@ const FADE_IN_UP_VARIANTS = {
 };
 
 export default function FeaturesPage() {
+  const { messages } = useLanguage();
+
+  const t = (key) => {
+    const keys = key.split(".");
+    let value = messages;
+    for (const k of keys) {
+      value = value?.[k];
+    }
+    return value || key;
+  };
+
   return (
     <div className="bg-slate-950 text-white">
       <Navbar />
-      <main className="relative overflow-hidden py-16 sm:py-20">
+      <main className="relative overflow-hidden py-1 sm:py-20">
         <div
           className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_45rem_at_50%_50%,_theme(colors.indigo.950/40%),_theme(colors.slate.950))]"
           aria-hidden="true"
@@ -42,15 +54,14 @@ export default function FeaturesPage() {
             <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-slate-100/5 ring-1 ring-inset ring-slate-100/10 mb-8 backdrop-blur-lg">
               <Sparkles className="w-4 h-4 text-indigo-400 mr-2" />
               <span className="text-sm font-medium text-slate-300">
-                Powerful & Intuitive
+                {t("Features.comprehensiveTools")}
               </span>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent mb-6">
-              Our Core Features
+              {t("Navbar.features")}
             </h1>
             <p className="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto">
-              Everything you need to build amazing applications and streamline
-              your workflow with next-generation technology.
+              {t("Features.subtitle")}
             </p>
           </motion.div> */}
 

@@ -16,10 +16,24 @@ import {
   Scale,
   BookOpen,
   Shield,
+  Heart,
+  Mic,
+  BarChart3,
 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Footer() {
+  const { messages } = useLanguage();
   const currentYear = new Date().getFullYear();
+
+  const t = (key) => {
+    const keys = key.split(".");
+    let value = messages;
+    for (const k of keys) {
+      value = value?.[k];
+    }
+    return value || key;
+  };
 
   // Social media URLs from environment variables
   const githubUrl = process.env.NEXT_PUBLIC_GITHUB_URL || "https://github.com";
@@ -28,7 +42,7 @@ export function Footer() {
   const linkedinUrl =
     process.env.NEXT_PUBLIC_LINKEDIN_URL || "https://linkedin.com";
   const emailUrl =
-    process.env.NEXT_PUBLIC_EMAIL || "mailto:contact@ASHA सखी.com";
+    process.env.NEXT_PUBLIC_EMAIL || "mailto:contact@example.com";
 
   const socialLinks = [
     { href: githubUrl, icon: Github, label: "GitHub" },
@@ -37,11 +51,11 @@ export function Footer() {
     { href: emailUrl, icon: Mail, label: "Email" },
   ];
 
-  const legalFeatures = [
-    { icon: Gavel, label: "Case Law Research" },
-    { icon: BookOpen, label: "Legal Documents" },
-    { icon: Scale, label: "Case Analysis" },
-    { icon: Shield, label: "Client Security" },
+  const healthFeatures = [
+    { icon: Mic, label: t("Footer.voiceDataEntry") },
+    { icon: Heart, label: t("Footer.healthSchemes") },
+    { icon: BarChart3, label: t("Footer.communityAnalytics") },
+    { icon: Shield, label: t("Footer.clientSecurity") },
     { icon: Zap, label: "AI-Powered" },
   ];
 
@@ -53,21 +67,19 @@ export function Footer() {
           <div className="lg:col-span-5">
             <div className="flex items-center space-x-3 mb-4">
               <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-green-500 rounded-xl flex items-center justify-center">
-                <Scale className="w-6 h-6 text-white" />
+                <Heart className="w-6 h-6 text-white" />
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
-                  ASHA सखी Research
+                  ASHA सखी
                 </h3>
                 <p className="text-sm text-slate-500 dark:text-slate-400">
-                  Research. Analyze. Win.
+                  {t("Footer.tagline")}
                 </p>
               </div>
             </div>
             <p className="text-slate-600 dark:text-slate-400 text-base mb-6 max-w-md">
-              The next-generation AI-powered legal research platform that helps
-              attorneys find relevant case laws, analyze documents, and build
-              stronger legal arguments with unprecedented efficiency.
+              {t("Footer.description")}
             </p>
             <div className="flex space-x-5">
               {socialLinks.map((social) => (
@@ -89,81 +101,81 @@ export function Footer() {
           <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8">
             <div>
               <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">
-                Platform
+                {t("Footer.platform")}
               </h4>
               <ul className="space-y-3">
                 <li>
                   <Link href="/features" className="footer-link">
-                    Features
+                    {t("Footer.features")}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/research" className="footer-link">
-                    Legal Research
+                  <Link href="/health-records" className="footer-link">
+                    {t("Footer.healthRecords")}
                   </Link>
                 </li>
                 <li>
                   <Link href="/pricing" className="footer-link">
-                    Pricing
+                    {t("Footer.pricing")}
                   </Link>
                 </li>
                 <li>
                   <Link href="/demo" className="footer-link">
-                    Request Demo
+                    {t("Footer.requestDemo")}
                   </Link>
                 </li>
               </ul>
             </div>
             <div>
               <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">
-                Resources
+                {t("Footer.resources")}
               </h4>
               <ul className="space-y-3">
                 <li>
                   <a href="/docs" className="footer-link">
-                    Documentation
+                    {t("Footer.documentation")}
                   </a>
                 </li>
                 <li>
                   <a href="/blog" className="footer-link">
-                    Legal Insights
+                    {t("Footer.healthInsights")}
                   </a>
                 </li>
                 <li>
                   <a href="/tutorials" className="footer-link">
-                    Tutorials
+                    {t("Footer.tutorials")}
                   </a>
                 </li>
                 <li>
                   <a href="/api" className="footer-link">
-                    API Reference
+                    {t("Footer.apiReference")}
                   </a>
                 </li>
               </ul>
             </div>
             <div>
-              <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">
-                Legal
+              <h4 className="text-sm font-semabold text-slate-900 dark:text-white mb-4">
+                {t("Footer.legal")}
               </h4>
               <ul className="space-y-3">
                 <li>
                   <Link href="/privacy" className="footer-link">
-                    Privacy Policy
+                    {t("Footer.privacyPolicy")}
                   </Link>
                 </li>
                 <li>
                   <Link href="/terms" className="footer-link">
-                    Terms of Service
+                    {t("Footer.termsOfService")}
                   </Link>
                 </li>
                 <li>
                   <Link href="/compliance" className="footer-link">
-                    Compliance
+                    {t("Footer.compliance")}
                   </Link>
                 </li>
                 <li>
                   <Link href="/security" className="footer-link">
-                    Security
+                    {t("Footer.security")}
                   </Link>
                 </li>
               </ul>
@@ -171,13 +183,13 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Legal Features */}
+        {/* Health Features */}
         <div className="mt-16 pt-8 border-t border-slate-200 dark:border-slate-800">
           <h4 className="text-sm font-semibold text-center text-slate-900 dark:text-white mb-6">
-            AI-Powered Legal Features
+            {t("Footer.aiPoweredFeatures")}
           </h4>
           <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4">
-            {legalFeatures.map((feature) => (
+            {healthFeatures.map((feature) => (
               <div key={feature.label} className="flex items-center space-x-2">
                 <feature.icon className="w-4 h-4 text-emerald-500 dark:text-emerald-400" />
                 <span className="text-sm text-slate-600 dark:text-slate-300">
@@ -191,10 +203,10 @@ export function Footer() {
         {/* Bottom Section */}
         <div className="mt-16 pt-8 border-t border-slate-200 dark:border-slate-800">
           <div className="text-center text-sm text-slate-500 dark:text-slate-400">
-            <p>&copy; {currentYear} ASHA सखी Research. All rights reserved.</p>
-            <p className="mt-1 text-xs">
-              Trusted by attorneys and legal professionals worldwide
+            <p>
+              &copy; {currentYear} ASHA सखी. {t("Footer.copyright")}
             </p>
+            <p className="mt-1 text-xs">{t("Footer.trustedBy")}</p>
           </div>
         </div>
       </div>

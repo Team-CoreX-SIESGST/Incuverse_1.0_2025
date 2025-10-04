@@ -36,3 +36,11 @@ export const getUser = async (data) => {
   const response = await apiClient.get("/users/get_user");
   return response.data;
 };
+export const getUnverifiedUsers = async (data) => {
+  const response = await apiClient.get("/admin/unverified");
+  return response.data;
+};
+export const updateUserVerification = async (userId) => {
+  const response = await apiClient.post(`/admin/verify/${userId}`);
+  return response.data;
+};
