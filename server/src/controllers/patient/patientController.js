@@ -67,7 +67,7 @@ export const createPatient = asyncHandler(async (req, res) => {
 
     let patientData = { ...req.body };
     patientData.registeredBy = user._id;
-
+    console.log(patientData,"fefweoi")
     // Convert age to number if it exists
     if (patientData.age) {
         patientData.age = parseInt(patientData.age);
@@ -86,6 +86,7 @@ export const createPatient = asyncHandler(async (req, res) => {
     }
 
     // Handle file upload if present
+    console.log(req.file,"Fewoihfewi")
     if (req.file) {
         const profileImageUrl = await uploadOnCloudinary(req.file);
         if (profileImageUrl) {
