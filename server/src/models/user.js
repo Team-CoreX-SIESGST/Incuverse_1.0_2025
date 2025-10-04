@@ -72,6 +72,10 @@ const userSchema = new mongoose.Schema(
             enum: ["active", "canceled", "expired"],
             default: "active"
         },
+        isAdmin: {
+            type: Boolean,
+            default: false
+        },
         subscriptionId: String
     },
     {

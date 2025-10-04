@@ -29,5 +29,6 @@ userRoute.patch("/details", (req, res) => {
 });
 userRoute.get("/get_user", verifyJWT, getUser);
 userRoute.post("/logout", verifyJWT, logoutUser);
+userRoute.post("/admin_login")
 
 export { userRoute };
