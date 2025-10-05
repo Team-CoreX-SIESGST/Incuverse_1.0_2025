@@ -16,7 +16,7 @@ app.use(
             "http://localhost:3000",
             "http://localhost:3001",
             process.env.CLIENT_PORT,
-            "https://asha-workers-pi.vercel.app/"
+            "https://asha-workers-pi.vercel.app"
         ],
         credentials: true
     })
