@@ -116,14 +116,14 @@ export default function DashboardLayout({ children, activeTab, onTabChange }) {
                   ASHA Dashboard
                 </h1>
               </div>
-              <button
+              {/* <button
                 onClick={() => setSidebarOpen(false)}
                 className="p-2 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               >
                 <X className="w-5 h-5" />
-              </button>
+              </button> */}
             </div>
-            <nav className="mt-4 px-4">
+            <nav className="px-4">
               {menuItems.map((item) => (
                 <div key={item.id}>
                   <button
