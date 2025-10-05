@@ -97,7 +97,7 @@ export default function DashboardLayout({ children, activeTab, onTabChange }) {
   };
 
   return (
-    <div className="min-h-screen pt-20 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
+    <div className="min-h-screen pt-16 lg:pt-20 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
       {/* Mobile Sidebar */}
       <Navbar/>
       {sidebarOpen && (
@@ -116,12 +116,12 @@ export default function DashboardLayout({ children, activeTab, onTabChange }) {
                   ASHA Dashboard
                 </h1>
               </div>
-              {/* <button
+              <button
                 onClick={() => setSidebarOpen(false)}
                 className="p-2 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               >
                 <X className="w-5 h-5" />
-              </button> */}
+              </button>
             </div>
             <nav className="px-4">
               {menuItems.map((item) => (
@@ -258,12 +258,12 @@ export default function DashboardLayout({ children, activeTab, onTabChange }) {
                 </h1>
               </div>
               <div className="flex items-center">
-                <button
+                {/* <button
                   onClick={handleLogout}
                   className="p-2 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                 >
                   <LogOut className="w-5 h-5" />
-                </button>
+                </button> */}
               </div>
             </div>
           </div>
