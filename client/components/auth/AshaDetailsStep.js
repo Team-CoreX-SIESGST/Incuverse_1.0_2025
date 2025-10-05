@@ -131,13 +131,16 @@ export default function AshaDetailsStep({ onBack, initialData }) {
     try {
       const result = await completeAshaRegistration(formData);
       
-      if (result?.data) {
+      if (result?.data.status) {
         // Update user data in localStorage
         const existingUser = JSON.parse(localStorage.getItem("user") || "{}");
         const updatedUser = { ...existingUser, ...result.data };
         localStorage.setItem("user", JSON.stringify(updatedUser));
         
-        router.push("/dashboard");
+        router.push("/");
+      }
+      else{
+        setError(result.data.message || "Registration failed");
       }
     } catch (err) {
       setError(err.message || "Registration failed");
