@@ -106,7 +106,7 @@ export default function DashboardLayout({ children, activeTab, onTabChange }) {
             className="fixed inset-0 bg-slate-600 bg-opacity-75 backdrop-blur-sm"
             onClick={() => setSidebarOpen(false)}
           />
-          <div className="fixed inset-y-0 left-0  top-10 w-64 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg shadow-xl ring-1 ring-slate-900/10 dark:ring-slate-100/10">
+          <div className="fixed inset-y-0 left-0  top-0 w-64 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg shadow-xl ring-1 ring-slate-900/10 dark:ring-slate-100/10">
             <div className="flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700">
               <div className="flex items-center">
                 <div className="w-8 h-8  bg-gradient-to-r from-emerald-500 to-green-500 rounded-lg flex items-center justify-center shadow-lg mr-3">
