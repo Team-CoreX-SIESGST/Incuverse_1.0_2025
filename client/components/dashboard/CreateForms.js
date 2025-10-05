@@ -189,10 +189,16 @@ export default function CreateForms() {
       {showCreateModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white dark:bg-slate-800 rounded-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-slate-200 dark:border-slate-700">
+            <div className="flex justify-between p-6 border-b border-slate-200 dark:border-slate-700">
               <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
                 Create New Form
               </h3>
+              <button
+                onClick={() => setShowCreateModal(false)}
+                className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors flex items-center gap-2"
+              >
+                Close
+              </button>
             </div>
 
             <div className="p-6">
