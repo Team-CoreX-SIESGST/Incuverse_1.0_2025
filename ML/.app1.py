@@ -43,7 +43,7 @@ app = Flask(__name__)
 # Enhanced CORS configuration
 CORS(app, resources={
     r"/api/*": {
-        "origins": ["http://localhost:3000", "http://127.0.0.1:3000"],
+        "origins": ["http://localhost:3000","https://asha-workers-pi.vercel.app" "http://127.0.0.1:3000"],
         "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         "allow_headers": [
             "Content-Type", 
@@ -60,7 +60,7 @@ CORS(app, resources={
 @app.after_request
 def after_request(response):
     origin = request.headers.get('Origin')
-    allowed_origins = ['http://localhost:3000', 'http://127.0.0.1:3000']
+    allowed_origins = ['http://localhost:3000',"https://asha-workers-pi.vercel.app", 'http://127.0.0.1:3000']
     
     if origin in allowed_origins:
         response.headers.add('Access-Control-Allow-Origin', origin)
