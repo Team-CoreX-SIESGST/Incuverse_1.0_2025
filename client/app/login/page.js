@@ -13,6 +13,7 @@ import {
   ArrowRight,
   Sparkles,
   AlertCircle,
+  User,
 } from "lucide-react";
 import { loginUser } from "@/services/auth/authServices";
 import { useGoogleLogin } from "@react-oauth/google";
@@ -57,15 +58,29 @@ export default function LoginPage() {
         password: formData.password,
       });
       console.log('resonse',response)
-      localStorage.setItem("user", JSON.stringify(response.data));
-      localStorage.setItem("refresh_token", response.data.refresh_token);
-      console.log("response", response, "feoiwfhwoi");
-      router.push("/");
+      if (response.data) {
+        localStorage.setItem("user", JSON.stringify(response.data.data));
+        localStorage.setItem("refresh_token", response.data.refresh_token);
+        // console.log("response", response, "feoiwfhwoi");
+        router.push("/");
+      } else {
+        setError(response.error || "Login Failed");
+      }
     } catch (err) {
+      console.log(err)
       setError(err.message || "Login failed. Please try again.");
     } finally {
       setIsLoading(false);
     }
+  };
+
+  // Function to fill sample credentials
+  const fillSampleCredentials = () => {
+    setFormData({
+      email: "test@gmail.com",
+      password: "securepass",
+    });
+    if (error) setError("");
   };
 
   const handleGoogleSuccess = async (response) => {
@@ -209,6 +224,18 @@ export default function LoginPage() {
                   )}
                 </button>
               </div>
+            </div>
+
+            {/* Sample Credentials Button */}
+            <div className="text-center">
+              <button
+                type="button"
+                onClick={fillSampleCredentials}
+                className="inline-flex items-center text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 dark:hover:text-emerald-300 transition-colors duration-200 group"
+              >
+                <User className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform duration-200" />
+                Use Sample Credentials
+              </button>
             </div>
 
             {/* Submit Button */}
