@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import Sidebar from "./Sidebar.js";
+import Sidebar from "./sidebar";
 import ChatHeader from "./ChatHeader";
 import MessagesArea from "./MessagesArea";
 import InputArea from "./InputArea";
