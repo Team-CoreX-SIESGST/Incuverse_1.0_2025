@@ -136,6 +136,7 @@ export function Navbar() {
     { href: "/", label: t("Navbar.home") },
     { href: "/features", label: t("Navbar.features") },
     { href: "/about", label: t("Navbar.about") },
+    { href: "/asha-centers", label: t("Navbar.asha_centers") },
     // { href: "/contact", label: t("Navbar.contact") },
     ...(isAuthenticated
       ? [
@@ -146,7 +147,7 @@ export function Navbar() {
             label: t("Navbar.aiAssistant"),
             newTab: true,
           },
-          { href: "/subscriptions", label: t("Navbar.subscriptions") },
+          // { href: "/subscriptions", label: t("Navbar.subscriptions") },
         ]
       : []),
   ];

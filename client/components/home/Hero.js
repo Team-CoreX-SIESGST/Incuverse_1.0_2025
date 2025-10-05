@@ -14,6 +14,7 @@ import {
   Mic,
   Database,
   Rocket,
+  PlayCircle,
 } from "lucide-react";
 import DoctorCard from "./DoctorCard";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -98,6 +99,26 @@ export function Hero() {
           >
             <div className="relative w-full max-w-lg">
               <DoctorCard />
+
+              {/* YouTube Link Section */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="mt-8 text-center"
+              >
+                <a
+                  href={t("Hero.youtube_link")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center justify-center px-6 py-3 text-base font-medium text-slate-700 dark:text-slate-300 bg-white/80 dark:bg-slate-800/80 rounded-full hover:bg-white dark:hover:bg-slate-800 backdrop-blur-lg ring-1 ring-slate-900/10 dark:ring-slate-100/10 hover:ring-slate-900/20 dark:hover:ring-slate-100/20 transition-all duration-300 shadow-lg hover:shadow-xl"
+                >
+                  <PlayCircle className="w-5 h-5 mr-2 text-red-500 group-hover:text-red-600 transition-colors duration-300" />
+                  <span className="font-semibold">
+                    {t("Hero.youtube_text")}
+                  </span>
+                </a>
+              </motion.div>
             </div>
           </motion.div>
 

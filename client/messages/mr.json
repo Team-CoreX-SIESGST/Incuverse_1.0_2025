@@ -5,6 +5,7 @@
     "about": "आमच्याबद्दल",
     "contact": "संपर्क साधा",
     "chat": "चॅट",
+    "asha_centers": "आशा केंद्र",
     "dashboard": "डॅशबोर्ड",
     "aiAssistant": "AI सहाय्यक",
     "subscriptions": "सब्सक्रिप्शन",
@@ -32,7 +33,9 @@
     "ashaWorkersCount": "आशा वर्कर्स",
     "fasterDataEntry": "वेगवान डेटा एंट्री",
     "vernacular": "स्थानिक भाषा",
-    "available": "उपलब्ध"
+    "available": "उपलब्ध",
+    "youtube_text": "कसे वापरावे: शिकण्यासाठी येथे क्लिक करा",
+    "youtube_link": "https://www.youtube.com/watch?v=YOUR_MARATHI_VIDEO_ID"
   },
   "Features": {
     "comprehensiveTools": "साठी व्यापक साधने",
@@ -149,5 +152,47 @@
     "hindi": "हिंदी",
     "marathi": "मराठी",
     "tamil": "तमिळ"
+  },
+  "AshaCenters": {
+    "nationwideNetwork": "देशव्यापी नेटवर्क",
+    "title": "आशा केंद्रे संपूर्ण",
+    "india": "भारत",
+    "subtitle": "ग्रामीण समुदायांना आरोग्यसेवा आणि समर्थन देणाऱ्या आमच्या आशा केंद्रांच्या नेटवर्कची शोध घ्या.",
+    "centersList": "आशा केंद्रे",
+    "resetView": "दृश्य रीसेट करा",
+    "workers": "कार्यकर्ते",
+    "patients": "रुग्ण",
+    "loadingMap": "नकाशा लोड होत आहे...",
+    "ashaWorkers": "आशा कार्यकर्ते",
+    "patientsServed": "सेवा दिलेले रुग्ण",
+    "stats": {
+      "ashaWorkers": "आशा कार्यकर्ते",
+      "centers": "केंद्रे",
+      "statesCovered": "राज्ये कव्हर",
+      "patientsServed": "सेवा दिलेले रुग्ण"
+    }
+  },
+  "ChatBot": {
+    "headerTitle": "आशा सहाय्यक",
+    "headerSubtitle": "कोणत्याही भाषेत जवळच्या केंद्रांबद्दल विचारा",
+    "inputPlaceholder": "तुमचा संदेश टाइप करा किंवा व्हॉइस वापरा...",
+    "supportedLanguages": "हिंदी, तमिळ, मराठी, बंगाली यासहित अनेक भाषांचे समर्थन",
+    "welcomeMessage": "नमस्कार! मी तुम्हाला जवळची आशा केंद्रे शोधण्यात मदत करू शकतो.",
+    "tryExample": "प्रयत्न करा: 'जवळची केंद्रे शोधा'",
+    "errorMessage": "मी माफी मागतो, पण मला तुमची विनंती प्रक्रिया करण्यात अडचण येत आहे. कृपया पुन्हा प्रयत्न करा.",
+    "welcomeEnglish": "Hello! I'm your ASHA assistant. I can help you find the nearest ASHA centers, provide information about healthcare services, or answer your questions. How can I assist you today?",
+    "welcomeHindi": "नमस्ते! मैं आपकी ASHA सहायक हूं। मैं आपको नजदीकी ASHA केंद्र खोजने, स्वास्थ्य सेवाओं के बारे में जानकारी प्रदान करने, या आपके प्रश्नों के उत्तर देने में मदद कर सकती हूं। आज मैं आपकी कैसे सहायता कर सकती हूं?",
+    "welcomeTamil": "வணக்கம்! நான் உங்கள் ASHA உதவியாளன். அருகிலுள்ள ASHA மையங்களைக் கண்டுபிடிக்கும், சுகாதார சேவைகள் பற்றிய தகவல்களை வழங்கும், அல்லது உங்கள் கேள்விகளுக்கு பதிலளிக்கும் என்னை உதவும். இன்று நான் உங்களுக்கு எவ்வாறு உதவ முடியும்?",
+    "welcomeMarathi": "नमस्कार! मी तुमची ASHA सहाय्यक आहे. मी तुम्हाला जवळची ASHA केंद्रे शोधण्यात, आरोग्यसेवा माहिती पुरवण्यात किंवा तुमच्या प्रश्नांची उत्तरे देण्यात मदत करू शकते. आज मी तुमची कशी मदत करू शकते?",
+    "welcomeBengali": "হ্যালো! আমি আপনার ASHA সহায়ক। আমি আপনাকে নিকটতম ASHA কেন্দ্র খুঁজে পেতে, স্বাস্থ্য সেবা সম্পর্কে তথ্য প্রদান করতে, বা আপনার প্রশ্নের উত্তর দিতে সাহায্য করতে পারি। আজ আমি আপনাকে কিভাবে সাহায্য করতে পারি?",
+    "nearestCentersEnglish": "Here are the nearest ASHA centers to your location:",
+    "nearestCentersHindi": "आपके नजदीकी ASHA केंद्र:",
+    "nearestCentersTamil": "உங்களுக்கு அருகிலுள்ள ASHA மையங்கள்:",
+    "nearestCentersMarathi": "तुमच्या जवळची ASHA केंद्रे:",
+    "moreInfoQuestionEnglish": "Would you like more information about any of these centers?",
+    "moreInfoQuestionHindi": "क्या आप इनमें से किसी केंद्र के बारे में अधिक जानकारी चाहते हैं?",
+    "moreInfoQuestionTamil": "இந்த மையங்களில் ஏதேனும் ஒன்றைப் பற்றிய கூடுதல் தகவலை விரும்புகிறீர்களா?",
+    "moreInfoQuestionMarathi": "तुम्हाला यापैकी कोणत्याही केंद्राबद्दल अधिक माहिती हवी आहे का?",
+    "away": "दूर"
   }
 }
