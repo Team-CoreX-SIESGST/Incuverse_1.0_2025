@@ -72,15 +72,15 @@ export const createPatient = asyncHandler(async (req, res) => {
     const user = req.user;
 
     // Check if user is ASHA worker
-    if (user.role !== "asha_worker") {
-        return sendResponse(
-            res,
-            false,
-            null,
-            "Only ASHA workers can register patients",
-            statusType.FORBIDDEN
-        );
-    }
+    // if (user.role !== "asha_worker") {
+    //     return sendResponse(
+    //         res,
+    //         false,
+    //         null,
+    //         "Only ASHA workers can register patients",
+    //         statusType.FORBIDDEN
+    //     );
+    // }
 
     let patientData = { ...req.body };
     patientData.registeredBy = user._id;

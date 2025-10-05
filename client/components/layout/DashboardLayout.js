@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
   Users,
@@ -9,15 +9,33 @@ import {
   Menu,
   X,
   LogOut,
-  User,
   Mic,
   FileText,
   Home,
+  BarChart3,
 } from "lucide-react";
+import VerifyASHAWorkers from "../dashboard/VerifyASHAWorkers";
+import CreateForms from "../dashboard/CreateForms";
+import Stats from "../dashboard/Stats";
+import { Navbar } from "./Navbar";
 
-export function DashboardLayout({ children, activeTab, onTabChange }) {
+export default function DashboardLayout({ children, activeTab, onTabChange }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [user, setUser] = useState(null);
   const router = useRouter();
+
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+    if (userData) {
+      setUser(JSON.parse(userData));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    router.push("/login");
+  };
 
   const menuItems = [
     {
@@ -44,25 +62,54 @@ export function DashboardLayout({ children, activeTab, onTabChange }) {
     },
   ];
 
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
-    router.push("/login");
+  // Add admin menu items if user is admin
+  if (user?.isAdmin) {
+    menuItems.push(
+      {
+        id: "verify-asha",
+        label: "Verify ASHA Workers",
+        icon: Users,
+      },
+      {
+        id: "create-forms",
+        label: "Create Forms",
+        icon: FileText,
+      },
+      {
+        id: "stats",
+        label: "Statistics",
+        icon: BarChart3,
+      }
+    );
+  }
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case "verify-asha":
+        return <VerifyASHAWorkers />;
+      case "create-forms":
+        return <CreateForms />;
+      case "stats":
+        return <Stats />;
+      default:
+        return children;
+    }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
+    <div className="min-h-screen pt-20 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
       {/* Mobile Sidebar */}
+      <Navbar/>
       {sidebarOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div
             className="fixed inset-0 bg-slate-600 bg-opacity-75 backdrop-blur-sm"
             onClick={() => setSidebarOpen(false)}
           />
-          <div className="fixed inset-y-0 left-0 w-64 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg shadow-xl ring-1 ring-slate-900/10 dark:ring-slate-100/10">
+          <div className="fixed inset-y-0 left-0  top-10 w-64 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg shadow-xl ring-1 ring-slate-900/10 dark:ring-slate-100/10">
             <div className="flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700">
               <div className="flex items-center">
-                <div className="w-8 h-8 bg-gradient-to-r from-emerald-500 to-green-500 rounded-lg flex items-center justify-center shadow-lg mr-3">
+                <div className="w-8 h-8  bg-gradient-to-r from-emerald-500 to-green-500 rounded-lg flex items-center justify-center shadow-lg mr-3">
                   <Home className="w-4 h-4 text-white" />
                 </div>
                 <h1 className="text-lg font-bold text-slate-900 dark:text-white">
@@ -223,7 +270,7 @@ export function DashboardLayout({ children, activeTab, onTabChange }) {
 
           {/* Page Content */}
           <main className="flex-1 pb-8">
-            <div className="max-w-full">{children}</div>
+            <div className="max-w-full">{renderContent()}</div>
           </main>
         </div>
       </div>

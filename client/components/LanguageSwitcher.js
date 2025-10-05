@@ -30,8 +30,17 @@ export function LanguageSwitcher() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // ✅ Load language from localStorage on mount
+  useEffect(() => {
+    const storedLang = localStorage.getItem("current_language");
+    if (storedLang && storedLang !== locale) {
+      changeLanguage(storedLang);
+    }
+  }, []);
+
   const handleLanguageChange = (langCode) => {
     changeLanguage(langCode);
+    localStorage.setItem("current_language", langCode); // ✅ store in localStorage
     setIsOpen(false);
   };
 

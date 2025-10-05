@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/auth/AuthProvider";
-import { DashboardLayout } from "@/components/layout/DashboardLayout";
+import DashboardLayout  from "@/components/layout/DashboardLayout";
 import { ManualRegistration } from "@/components/dashboard/ManualRegistration";
 import { VoiceRegistration } from "@/components/dashboard/VoiceRegistration";
 import { PatientList } from "@/components/dashboard/PatientList";

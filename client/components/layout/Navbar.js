@@ -136,7 +136,7 @@ export function Navbar() {
     { href: "/", label: t("Navbar.home") },
     { href: "/features", label: t("Navbar.features") },
     { href: "/about", label: t("Navbar.about") },
-    { href: "/contact", label: t("Navbar.contact") },
+    // { href: "/contact", label: t("Navbar.contact") },
     ...(isAuthenticated
       ? [
           { href: "/chat", label: t("Navbar.chat"), newTab: true },
