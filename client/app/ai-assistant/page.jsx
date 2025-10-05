@@ -17,7 +17,7 @@ import { Navbar } from "@/components/layout/Navbar";
 
 export default function AIAssistant() {
   // const { user } = useAuth();
-  const user = localStorage.getItem("user");
+  const [ user , setUser ] = useState(null);
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("consultation");
   const [isRecording, setIsRecording] = useState(false);
@@ -28,7 +28,9 @@ export default function AIAssistant() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (!user) {
+    const data = localStorage.getItem("user");
+    setUser(data);
+    if (!data) {
       router.push("/login");
     }
   }, [user, router]);
