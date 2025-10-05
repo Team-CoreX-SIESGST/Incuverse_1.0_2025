@@ -24,6 +24,8 @@ export function Navbar() {
   const [hasToken, setHasToken] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const profileDropdownRef = useRef(null);
+  const mobileMenuRef = useRef(null);
+  const mobileMenuButtonRef = useRef(null);
 
   // Translation function
   const t = (key) => {
@@ -96,16 +98,28 @@ export function Navbar() {
   // Close mobile menu on route change
   useEffect(() => {
     if (isMobileMenuOpen) setIsMobileMenuOpen(false);
-  }, [pathname, isMobileMenuOpen]);
+  }, [pathname]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // Close profile dropdown when clicking outside
       if (
         profileDropdownRef.current &&
         !profileDropdownRef.current.contains(event.target)
       ) {
         setIsProfileDropdownOpen(false);
+      }
+
+      // Close mobile menu when clicking outside
+      if (
+        isMobileMenuOpen &&
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target) &&
+        mobileMenuButtonRef.current &&
+        !mobileMenuButtonRef.current.contains(event.target)
+      ) {
+        setIsMobileMenuOpen(false);
       }
     };
 
@@ -113,7 +127,7 @@ export function Navbar() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [isMobileMenuOpen]);
 
   // When auth context user changes, mirror to localStorage
   useEffect(() => {
@@ -131,6 +145,19 @@ export function Navbar() {
       setHasToken(!!localStorage.getItem("token"));
     }
   }, [user, isClient]);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMobileMenuOpen]);
 
   const navLinks = [
     { href: "/", label: t("Navbar.home") },
@@ -154,8 +181,22 @@ export function Navbar() {
 
   const mobileMenuVariants = {
     hidden: { opacity: 0, y: -20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.2 } },
-    exit: { opacity: 0, y: -20, transition: { duration: 0.2 } },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.3,
+        ease: "easeOut",
+      },
+    },
+    exit: {
+      opacity: 0,
+      y: -20,
+      transition: {
+        duration: 0.2,
+        ease: "easeIn",
+      },
+    },
   };
 
   const dropdownVariants = {
@@ -270,11 +311,15 @@ export function Navbar() {
     setIsProfileDropdownOpen(!isProfileDropdownOpen);
   };
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return React.createElement(
     "nav",
     {
       className: `fixed top-0 left-0 right-0 z-50 transition-all duration-300
-      bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-lg
+      bg-slate-50/95 dark:bg-slate-950/95 backdrop-blur-lg
       ${
         isScrolled || isMobileMenuOpen
           ? "border-b border-slate-200/50 dark:border-slate-800/50 shadow-sm"
@@ -293,7 +338,11 @@ export function Navbar() {
           { className: "flex items-center" },
           React.createElement(
             Link,
-            { href: "/", className: "flex items-center space-x-2.5 group" },
+            {
+              href: "/",
+              className: "flex items-center space-x-2.5 group",
+              onClick: () => setIsMobileMenuOpen(false),
+            },
             React.createElement(
               "div",
               {
@@ -456,7 +505,8 @@ export function Navbar() {
           React.createElement(
             "button",
             {
-              onClick: () => setIsMobileMenuOpen(!isMobileMenuOpen),
+              ref: mobileMenuButtonRef,
+              onClick: toggleMobileMenu,
               className:
                 "md:hidden p-2 rounded-md text-slate-600 dark:text-slate-300 hover:bg-slate-900/5 dark:hover:bg-slate-100/5 transition-colors",
               "aria-label": "Toggle mobile menu",
@@ -480,7 +530,8 @@ export function Navbar() {
               animate: "visible",
               exit: "exit",
               className:
-                "md:hidden absolute top-full left-0 w-full bg-slate-50 dark:bg-slate-950 border-t border-slate-200/80 dark:border-slate-800/80",
+                "md:hidden fixed top-16 left-0 w-full h-[calc(100vh-4rem)] bg-slate-50 dark:bg-slate-950 border-t border-slate-200/80 dark:border-slate-800/80 z-40 overflow-y-auto",
+              ref: mobileMenuRef,
             },
             React.createElement(
               "div",
@@ -570,6 +621,7 @@ export function Navbar() {
                             href: "/login",
                             className:
                               "block px-3 py-2 rounded-md text-base font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-900/5 dark:hover:bg-slate-100/5",
+                            onClick: () => setIsMobileMenuOpen(false),
                           },
                           t("Navbar.login")
                         ),
@@ -579,6 +631,7 @@ export function Navbar() {
                             href: "/register",
                             className:
                               "block w-full text-center px-3 py-3 rounded-md text-base font-semibold text-white bg-emerald-600 hover:bg-emerald-700 transition-colors",
+                            onClick: () => setIsMobileMenuOpen(false),
                           },
                           t("Navbar.getStarted")
                         )
