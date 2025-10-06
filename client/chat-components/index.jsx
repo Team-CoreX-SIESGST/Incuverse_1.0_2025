@@ -16,6 +16,7 @@ import {
 import { CreateChat } from "@/services/python_server/pythonServer";
 import { data } from "autoprefixer";
 import { sendMessage } from "@/services/chat/chatServices";
+import { useToast } from "@/components/ui/ToastProvider";
 
 // FastAPI base URL and helpers
 const BASE_URL = "http://localhost:8000";
@@ -82,7 +83,14 @@ async function apiSearch(query, options = {}) {
 
 export function ChatInterface({ isSidebarOpen, setIsSidebarOpen }) {
   const [sections, setSections] = useState([]);
-  const [currentSection, setCurrentSection] = useState(null);
+  const [currentSection, setCurrentSection] = useState({
+    _id: "68e1db48c9f44032e3acc7a9",
+    title: "New Chat",
+    user: "68e2bb06e98cb3c9e9479221",
+    createdAt: "2025-10-05T02:43:20.076Z",
+    updatedAt: "2025-10-05T02:45:36.954Z",
+    __v: 0,
+  });
   const [chats, setChats] = useState([]);
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -98,8 +106,16 @@ export function ChatInterface({ isSidebarOpen, setIsSidebarOpen }) {
   const silenceTimeoutRef = useRef(null);
   const router = useRouter();
 
+  const { showToast } = useToast();
+
   useEffect(() => {
-    loadSections();
+    const init = async () => {
+      await loadSections(); // Load all sections
+      if (currentSection?._id) {
+        await selectSection(currentSection); // Fetch chats for default section
+      }
+    };
+    init();
 
     // Initialize speech recognition if available
     if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
@@ -111,10 +127,7 @@ export function ChatInterface({ isSidebarOpen, setIsSidebarOpen }) {
       recognitionRef.current.lang = "en-US";
 
       recognitionRef.current.onresult = (event) => {
-        // Clear existing silence timeout
-        if (silenceTimeoutRef.current) {
-          clearTimeout(silenceTimeoutRef.current);
-        }
+        if (silenceTimeoutRef.current) clearTimeout(silenceTimeoutRef.current);
 
         const transcript = Array.from(event.results)
           .map((result) => result[0])
@@ -122,7 +135,6 @@ export function ChatInterface({ isSidebarOpen, setIsSidebarOpen }) {
           .join("");
         setMessage(transcript);
 
-        // Set new silence timeout - stop after 3 seconds of no speech
         silenceTimeoutRef.current = setTimeout(() => {
           if (isListening) {
             recognitionRef.current.stop();
@@ -132,22 +144,14 @@ export function ChatInterface({ isSidebarOpen, setIsSidebarOpen }) {
       };
 
       recognitionRef.current.onend = () => {
-        // Clear timeout when recognition ends
-        if (silenceTimeoutRef.current) {
-          clearTimeout(silenceTimeoutRef.current);
-        }
-
-        // Only restart if we're still in listening mode and didn't stop due to silence
+        if (silenceTimeoutRef.current) clearTimeout(silenceTimeoutRef.current);
         if (isListening) {
-          // Small delay before restarting to avoid immediate restart
           setTimeout(() => {
-            if (isListening) {
-              try {
-                recognitionRef.current.start();
-              } catch (error) {
-                console.error("Error restarting speech recognition:", error);
-                setIsListening(false);
-              }
+            try {
+              recognitionRef.current.start();
+            } catch (error) {
+              console.error("Error restarting speech recognition:", error);
+              setIsListening(false);
             }
           }, 100);
         }
@@ -155,22 +159,14 @@ export function ChatInterface({ isSidebarOpen, setIsSidebarOpen }) {
 
       recognitionRef.current.onerror = (event) => {
         console.error("Speech recognition error:", event.error);
-        // Clear timeout on error
-        if (silenceTimeoutRef.current) {
-          clearTimeout(silenceTimeoutRef.current);
-        }
+        if (silenceTimeoutRef.current) clearTimeout(silenceTimeoutRef.current);
         setIsListening(false);
       };
     }
 
     return () => {
-      // Cleanup timeouts and recognition
-      if (recognitionRef.current) {
-        recognitionRef.current.stop();
-      }
-      if (silenceTimeoutRef.current) {
-        clearTimeout(silenceTimeoutRef.current);
-      }
+      if (recognitionRef.current) recognitionRef.current.stop();
+      if (silenceTimeoutRef.current) clearTimeout(silenceTimeoutRef.current);
     };
   }, []);
 
@@ -200,6 +196,8 @@ export function ChatInterface({ isSidebarOpen, setIsSidebarOpen }) {
 
   const createNewSection = async () => {
     try {
+      showToast("This feature is not for public use!")
+      return;
       const response = await createSection();
       console.log(response, "foiewhofi");
       setSections((prev) => [response.data, ...prev]);
@@ -222,6 +220,8 @@ export function ChatInterface({ isSidebarOpen, setIsSidebarOpen }) {
   };
 
   const handleSendMessage = async () => {
+    showToast("This feature is not for public use!");
+    return;
     if ((!message.trim() && selectedFiles.length === 0) || isLoading) return;
 
     let sectionToUse = currentSection;
