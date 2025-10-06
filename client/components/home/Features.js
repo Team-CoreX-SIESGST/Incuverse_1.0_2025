@@ -107,6 +107,40 @@ export function Features() {
     },
   ];
 
+  // Additional features for the grid - all properly translated
+  const additionalFeatures = [
+    {
+      icon: Users,
+      title: t("About.ashaWorkers"),
+      description: t("About.ashaWorkersDesc"),
+    },
+    {
+      icon: Activity,
+      title: t("About.healthCenters"),
+      description: t("About.healthCentersDesc"),
+    },
+    {
+      icon: Heart,
+      title: t("About.maternalHealthcare"),
+      description: t("About.maternalHealthcareDesc"),
+    },
+    {
+      icon: Shield,
+      title: t("About.AdditionalFeatures.governmentAgencies"),
+      description: t("About.AdditionalFeatures.governmentAgenciesDesc"),
+    },
+    {
+      icon: Zap,
+      title: t("About.AdditionalFeatures.fastProcessing"),
+      description: t("About.AdditionalFeatures.fastProcessingDesc"),
+    },
+    {
+      icon: Database,
+      title: t("About.AdditionalFeatures.secureData"),
+      description: t("About.AdditionalFeatures.secureDataDesc"),
+    },
+  ];
+
   return (
     <section className="py-20 sm:py-24 bg-slate-50 dark:bg-slate-950">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -220,17 +254,10 @@ export function Features() {
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { icon: Users, title: t("Navbar.ashaWorkers") },
-              { icon: Activity, title: "Health Centers" },
-              { icon: Heart, title: "Maternal Care" },
-              { icon: Shield, title: "Government Agencies" },
-              { icon: Zap, title: "Fast Processing" },
-              { icon: Database, title: "Secure Data" },
-            ].map((feature) => {
+            {additionalFeatures.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <div key={feature.title} className="text-center">
+                <div key={index} className="text-center">
                   <div className="w-14 h-14 rounded-xl bg-white dark:bg-slate-900 ring-1 ring-slate-900/10 dark:ring-slate-100/10 shadow-md flex items-center justify-center mx-auto mb-4">
                     <Icon className="w-7 h-7 text-emerald-500" />
                   </div>
@@ -238,7 +265,7 @@ export function Features() {
                     {feature.title}
                   </h4>
                   <p className="text-slate-600 dark:text-slate-400">
-                    Comprehensive health solutions.
+                    {feature.description}
                   </p>
                 </div>
               );

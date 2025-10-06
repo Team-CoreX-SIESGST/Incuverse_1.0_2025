@@ -119,7 +119,15 @@
     "readyToTransformCommunityHealth": "சமூக சுகாதாரத்தை மாற்ற தயாரா?",
     "joinThousands": "AI-இயக்கும் சுகாதார உதவியுடன் தங்கள் பணிப்பாய்வை புரட்சிகரமாக மாற்றிய ஆயிரக்கணக்கான ஆசா தொழிலாளர்கள் மற்றும் சுகாதார வல்லுநர்களுடன் இணையுங்கள்.",
     "startFreeTrial": "இலவச சோதனையைத் தொடங்கவும்",
-    "getHealthDemo": "சுகாதார டெமோ பெறவும்"
+    "getHealthDemo": "சுகாதார டெமோ பெறவும்",
+    "AdditionalFeatures": {
+      "governmentAgencies": "அரசு நிறுவனங்கள்",
+      "governmentAgenciesDesc": "அரசு சுகாதார திட்டங்களுடன் கூட்டு co-oper",
+      "fastProcessing": "விரைவான செயலாக்கம்",
+      "fastProcessingDesc": "விரைவான தரவு நுழைவு மற்றும் செயலாக்கம்",
+      "secureData": "பாதுகாப்பான தரவு",
+      "secureDataDesc": "வங்கி-நிலை குறியாக்கம் மற்றும் தரவு பாதுகாப்பு"
+    }
   },
   "Footer": {
     "tagline": "சமூக சுகாதார அதிகாரமளித்தல்",

@@ -119,7 +119,15 @@
     "readyToTransformCommunityHealth": "Ready to Transform Community Health?",
     "joinThousands": "Join thousands of ASHA workers and healthcare professionals who've revolutionized their workflow with AI-powered health assistance.",
     "startFreeTrial": "Start Free Trial",
-    "getHealthDemo": "Get Health Demo"
+    "getHealthDemo": "Get Health Demo",
+    "AdditionalFeatures": {
+      "governmentAgencies": "Government Agencies",
+      "governmentAgenciesDesc": "Collaboration with government health programs",
+      "fastProcessing": "Fast Processing",
+      "fastProcessingDesc": "Quick data entry and processing",
+      "secureData": "Secure Data",
+      "secureDataDesc": "Bank-level encryption and data protection"
+    }
   },
   "Footer": {
     "tagline": "Empowering Community Health",
