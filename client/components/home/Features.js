@@ -235,7 +235,7 @@ export function Features() {
 
                 <div className="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800">
                   <Link
-                    href="/register"
+                    href="https://www.youtube.com/watch?v=62UewIJmRiI&feature=youtu.be"
                     className="group inline-flex items-center text-base font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 transition-colors"
                   >
                     <span>{t("Features.startFreeTrial")}</span>

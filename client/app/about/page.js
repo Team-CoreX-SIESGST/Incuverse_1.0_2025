@@ -208,7 +208,7 @@ export default function AboutPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="/demo"
+                href="https://www.youtube.com/watch?v=62UewIJmRiI&feature=youtu.be"
                 className="group inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-slate-900 bg-white rounded-full hover:bg-slate-200 transition-all duration-300 transform hover:-translate-y-0.5"
               >
                 {t("About.startFreeTrial")}

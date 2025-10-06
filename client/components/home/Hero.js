@@ -195,7 +195,7 @@ export function Hero() {
             {/* CTA Button */}
             <motion.div variants={FADE_IN_UP_VARIANTS} className="mb-8">
               <Link
-                href="/register"
+                href="https://www.youtube.com/watch?v=62UewIJmRiI&feature=youtu.be"
                 className="group relative inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white bg-emerald-600 rounded-full hover:bg-emerald-700 dark:bg-emerald-500 dark:text-white dark:hover:bg-emerald-600 transition-all duration-300 shadow-lg"
               >
                 <Rocket className="w-4 h-4 mr-2" />
