@@ -60,7 +60,7 @@ def initialize_chatbot():
         # Initialize embeddings
         embeddings = OpenAIEmbeddings(
             model="text-embedding-ada-002",
-            openai_api_key="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"
+            openai_api_key=""
         )
 
         # Initialize LLM
