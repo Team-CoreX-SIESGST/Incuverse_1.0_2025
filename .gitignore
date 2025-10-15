@@ -3,3 +3,4 @@ server_FastAPI/
 streamlit_frontend/
 ML/AI_MEDI_VOICE_BOT/.env
 ML/.env
+venv
